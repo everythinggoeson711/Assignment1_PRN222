@@ -1,0 +1,151 @@
+﻿using System.Windows;
+using System.Windows.Input;
+using System.Windows.Data;
+using System.Windows.Media;
+using System.Collections.ObjectModel;
+using System.Windows.Markup;
+using ChatClient.Services;
+using ChatClient.Models;
+
+namespace ChatClient.Views
+{
+    public partial class MainWindow : Window
+    {
+        private ChatService chatService;
+        private ObservableCollection<ChatMessage> messages = new ObservableCollection<ChatMessage>();
+        private string currentUser = "";
+
+        public MainWindow(ChatService service, string username)
+        {
+            InitializeComponent();
+            chatService = service;
+            currentUser = username;
+            lstMessages.ItemsSource = messages;
+
+            // Subscribe to events
+            chatService.MessageReceived += OnMessageReceived;
+            chatService.Disconnected += OnDisconnected;
+            chatService.ConnectionError += OnConnectionError;
+
+            // Focus message input
+            txtMessage.Focus();
+        }
+
+        private async void BtnSend_Click(object sender, RoutedEventArgs e)
+        {
+            await SendMessage();
+        }
+
+        private async void TxtMessage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                await SendMessage();
+            }
+        }
+
+        private async Task SendMessage()
+        {
+            string message = txtMessage.Text.Trim();
+            if (string.IsNullOrEmpty(message))
+            {
+                return;
+            }
+
+            try
+            {
+                await chatService.SendMessageAsync(message);
+                txtMessage.Clear();
+                txtMessage.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to send message: {ex.Message}", "Error", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void OnMessageReceived(string message)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                string username = "System";
+                string content = message;
+                bool isSystem = message.StartsWith("[Tin tự động]");
+
+                if (!isSystem && message.Contains("]: "))
+                {
+                    int colonIndex = message.IndexOf("]: ");
+                    username = message.Substring(1, colonIndex - 1);
+                    content = message.Substring(colonIndex + 3);
+                }
+
+                bool isOwn = username.Equals(currentUser, StringComparison.OrdinalIgnoreCase);
+                var chatMessage = new ChatMessage(username, content, isSystem, isOwn);
+                messages.Add(chatMessage);
+
+                if (messages.Count > 0)
+                {
+                    lstMessages.ScrollIntoView(messages[messages.Count - 1]);
+                }
+            });
+        }
+
+        private void OnDisconnected()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                lblStatus.Text = "Offline";
+                lblStatus.Foreground = Brushes.Red;
+                statusDot.Fill = Brushes.Red;
+
+                txtMessage.IsEnabled = false;
+                btnSend.IsEnabled = false;
+
+                AddSystemMessage("Disconnected from server.");
+            });
+        }
+
+        private void OnConnectionError(string error)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                MessageBox.Show(error, "Connection Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            });
+        }
+
+        private void AddSystemMessage(string message)
+        {
+            var systemMessage = new ChatMessage("System", message, true);
+            messages.Add(systemMessage);
+
+            if (messages.Count > 0)
+            {
+                lstMessages.ScrollIntoView(messages[messages.Count - 1]);
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            chatService.Disconnect();
+        }
+    }
+
+    public class ChatUiConverter : MarkupExtension, IValueConverter
+    {
+        public override object ProvideValue(IServiceProvider serviceProvider) => this;
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value is not bool isOwn) return null;
+            string p = parameter?.ToString() ?? "";
+
+            if (p == "Align") return isOwn ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+            if (p == "Color") return isOwn ? Application.Current.Resources["MyMessageBubble"] : Application.Current.Resources["OtherMessageBubble"];
+            if (p == "HideOwn") return isOwn ? Visibility.Collapsed : Visibility.Visible;
+
+            return null;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) => null;
+    }
+}

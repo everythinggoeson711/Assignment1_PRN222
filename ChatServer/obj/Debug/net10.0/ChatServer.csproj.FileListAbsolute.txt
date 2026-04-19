@@ -1,0 +1,14 @@
+C:\Users\doanv\source\repos\Assignment1\ChatServer\bin\Debug\net10.0\ChatServer.exe
+C:\Users\doanv\source\repos\Assignment1\ChatServer\bin\Debug\net10.0\ChatServer.deps.json
+C:\Users\doanv\source\repos\Assignment1\ChatServer\bin\Debug\net10.0\ChatServer.runtimeconfig.json
+C:\Users\doanv\source\repos\Assignment1\ChatServer\bin\Debug\net10.0\ChatServer.dll
+C:\Users\doanv\source\repos\Assignment1\ChatServer\bin\Debug\net10.0\ChatServer.pdb
+C:\Users\doanv\source\repos\Assignment1\ChatServer\obj\Debug\net10.0\ChatServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\doanv\source\repos\Assignment1\ChatServer\obj\Debug\net10.0\ChatServer.AssemblyInfoInputs.cache
+C:\Users\doanv\source\repos\Assignment1\ChatServer\obj\Debug\net10.0\ChatServer.AssemblyInfo.cs
+C:\Users\doanv\source\repos\Assignment1\ChatServer\obj\Debug\net10.0\ChatServer.csproj.CoreCompileInputs.cache
+C:\Users\doanv\source\repos\Assignment1\ChatServer\obj\Debug\net10.0\ChatServer.dll
+C:\Users\doanv\source\repos\Assignment1\ChatServer\obj\Debug\net10.0\refint\ChatServer.dll
+C:\Users\doanv\source\repos\Assignment1\ChatServer\obj\Debug\net10.0\ChatServer.pdb
+C:\Users\doanv\source\repos\Assignment1\ChatServer\obj\Debug\net10.0\ChatServer.genruntimeconfig.cache
+C:\Users\doanv\source\repos\Assignment1\ChatServer\obj\Debug\net10.0\ref\ChatServer.dll

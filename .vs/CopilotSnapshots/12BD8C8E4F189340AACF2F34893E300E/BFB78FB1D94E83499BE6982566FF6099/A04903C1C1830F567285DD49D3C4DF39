@@ -1,0 +1,119 @@
+﻿<Window x:Class="ChatClient.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChatClient.Views"
+        mc:Ignorable="d"
+        Title="Telegram Desktop" Height="700" Width="450"
+        Closing="Window_Closing"
+        Background="{StaticResource TelegramBackground}">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <local:MessageAlignmentConverter x:Key="AlignmentConverter" />
+        <local:MessageColorConverter x:Key="ColorConverter" />
+        <local:InverseBoolToVisibilityConverter x:Key="InverseBoolToVis" />
+
+        <DataTemplate x:Key="ChatMessageTemplate">
+            <Grid Margin="10,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Avatar for others -->
+                <Border Width="36" Height="36" CornerRadius="18" Background="{StaticResource TelegramPrimary}" 
+                        VerticalAlignment="Bottom" Margin="0,0,8,0"
+                        Visibility="{Binding IsOwnMessage, ConverterParameter=Inverse, Converter={StaticResource InverseBoolToVis}}">
+                    <TextBlock Text="{Binding AvatarInitial}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                </Border>
+
+                <!-- Message Bubble -->
+                <StackPanel Grid.Column="1" HorizontalAlignment="{Binding IsOwnMessage, Converter={StaticResource AlignmentConverter}}">
+                    <Border CornerRadius="10" Padding="10,5" 
+                            Background="{Binding IsOwnMessage, Converter={StaticResource ColorConverter}}"
+                            MaxWidth="300">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Username}" Foreground="{StaticResource TelegramPrimary}" FontWeight="Bold" FontSize="12" 
+                                       Visibility="{Binding IsOwnMessage, ConverterParameter=Inverse, Converter={StaticResource InverseBoolToVis}}"/>
+                            <TextBlock Text="{Binding Content}" TextWrapping="Wrap" FontSize="14" Foreground="{StaticResource TelegramText}"/>
+                            <TextBlock Text="{Binding Timestamp, StringFormat=HH:mm}" FontSize="10" Foreground="{StaticResource TelegramSubText}" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Connection Panel (Telegram Style Header) -->
+        <Border Grid.Row="0" Background="{StaticResource TelegramPrimary}" Padding="10">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Connection Settings" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBox x:Name="txtServerIp" Text="127.0.0.1" Width="100" Margin="0,0,5,0" Style="{StaticResource ModernTextBox}"/>
+                            <TextBox x:Name="txtPort" Text="8888" Width="50" Margin="0,0,5,0" Style="{StaticResource ModernTextBox}"/>
+                            <TextBox x:Name="txtUsername" Text="User" Width="100" Style="{StaticResource ModernTextBox}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button Grid.Column="1" x:Name="btnConnect" Content="Connect" Click="BtnConnect_Click" 
+                            Style="{StaticResource ModernButton}" VerticalAlignment="Bottom"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- Chat Display Area -->
+        <ListBox Grid.Row="1" x:Name="lstMessages" 
+                 Background="Transparent" BorderThickness="0"
+                 ItemTemplate="{StaticResource ChatMessageTemplate}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+
+        <!-- Message Input Panel -->
+        <Border Grid.Row="2" Background="White" Padding="10" BorderBrush="#ddd" BorderThickness="0,1,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Column="0" x:Name="txtMessage" 
+                         Margin="0,0,10,0" BorderThickness="0"
+                         VerticalAlignment="Center" Padding="0,5"
+                         IsEnabled="False"
+                         KeyDown="TxtMessage_KeyDown"
+                         FontSize="14"/>
+
+                <Button Grid.Column="1" x:Name="btnSend" 
+                        Content="SEND" Click="BtnSend_Click"
+                        IsEnabled="False" Foreground="{StaticResource TelegramPrimary}"
+                        Background="Transparent" FontWeight="Bold" Cursor="Hand"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

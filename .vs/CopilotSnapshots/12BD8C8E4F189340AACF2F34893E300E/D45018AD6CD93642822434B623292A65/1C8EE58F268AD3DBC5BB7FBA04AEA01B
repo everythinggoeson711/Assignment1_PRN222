@@ -1,0 +1,148 @@
+﻿using System.Net.Sockets;
+using System.IO;
+using System.Text;
+
+namespace ChatClient.Services
+{
+    public class ChatService
+    {
+        private TcpClient? client;
+        private StreamReader? reader;
+        private StreamWriter? writer;
+        private bool isConnected;
+        private Task? receiveTask;
+        private CancellationTokenSource? cancellationTokenSource;
+
+        public event Action<string>? MessageReceived;
+        public event Action? Disconnected;
+        public event Action<string>? ConnectionError;
+
+        public bool IsConnected => isConnected && client?.Connected == true;
+
+        public async Task<bool> ConnectAsync(string serverIp, int port, string username)
+        {
+            try
+            {
+                client = new TcpClient();
+                await client.ConnectAsync(serverIp, port);
+
+                NetworkStream stream = client.GetStream();
+                reader = new StreamReader(stream, Encoding.UTF8);
+                writer = new StreamWriter(stream, Encoding.UTF8) { AutoFlush = true };
+
+                // Send username as first message
+                await writer.WriteLineAsync(username);
+
+                isConnected = true;
+                cancellationTokenSource = new CancellationTokenSource();
+
+                // Start receiving messages in background
+                receiveTask = Task.Run(ReceiveMessages, cancellationTokenSource.Token);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ConnectionError?.Invoke($"Kết nối thất bại: {ex.Message}");
+                CleanupResources();
+                return false;
+            }
+        }
+
+        private async Task ReceiveMessages()
+        {
+            try
+            {
+                while (isConnected && reader != null && !cancellationTokenSource?.Token.IsCancellationRequested == true)
+                {
+                    string? message = await reader.ReadLineAsync();
+                    if (string.IsNullOrEmpty(message))
+                    {
+                        // Server closed connection
+                        break;
+                    }
+
+                    MessageReceived?.Invoke(message);
+                }
+            }
+            catch (IOException)
+            {
+                // Connection was closed, this is expected during disconnect
+                if (isConnected)
+                {
+                    // Only invoke error if we didn't initiate the disconnect
+                }
+            }
+            catch (Exception ex)
+            {
+                if (isConnected)
+                {
+                    ConnectionError?.Invoke($"Lỗi nhận tin: {ex.Message}");
+                }
+            }
+            finally
+            {
+                if (isConnected)
+                {
+                    Disconnect();
+                }
+            }
+        }
+
+        public async Task SendMessageAsync(string message)
+        {
+            try
+            {
+                if (writer != null && isConnected)
+                {
+                    await writer.WriteLineAsync(message);
+                }
+            }
+            catch (Exception ex)
+            {
+                ConnectionError?.Invoke($"Lỗi gửi tin: {ex.Message}");
+                Disconnect();
+            }
+        }
+
+        public void Disconnect()
+        {
+            if (!isConnected) return;
+
+            isConnected = false;
+            cancellationTokenSource?.Cancel();
+
+            CleanupResources();
+
+            Disconnected?.Invoke();
+        }
+
+        private void CleanupResources()
+        {
+            try
+            {
+                reader?.Close();
+                reader?.Dispose();
+            }
+            catch { }
+
+            try
+            {
+                writer?.Close();
+                writer?.Dispose();
+            }
+            catch { }
+
+            try
+            {
+                client?.Close();
+                client?.Dispose();
+            }
+            catch { }
+
+            reader = null;
+            writer = null;
+            client = null;
+        }
+    }
+}
