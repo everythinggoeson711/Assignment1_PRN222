@@ -1,0 +1,245 @@
+﻿using System.Windows;
+using System.Windows.Input;
+using System.Windows.Data;
+using System.Windows.Media;
+using System.Collections.ObjectModel;
+using System.Windows.Markup;
+using ChatClient.Services;
+using ChatClient.Models;
+
+namespace ChatClient.Views
+{
+    public partial class MainWindow : Window
+    {
+        private ChatService chatService;
+        private bool isConnected = false;
+        private ObservableCollection<ChatMessage> messages = new ObservableCollection<ChatMessage>();
+        private string currentUser = "";
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            chatService = new ChatService();
+            lstMessages.ItemsSource = messages;
+
+            // Subscribe to events
+            chatService.MessageReceived += OnMessageReceived;
+            chatService.Disconnected += OnDisconnected;
+            chatService.ConnectionError += OnConnectionError;
+        }
+
+        private async void BtnConnect_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isConnected)
+            {
+                // Validate inputs
+                if (string.IsNullOrWhiteSpace(txtServerIp.Text))
+                {
+                    MessageBox.Show("Please enter server IP address.", "Validation Error", 
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                if (!int.TryParse(txtPort.Text, out int port))
+                {
+                    MessageBox.Show("Please enter a valid port number.", "Validation Error", 
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtUsername.Text))
+                {
+                    MessageBox.Show("Please enter a username.", "Validation Error", 
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                currentUser = txtUsername.Text.Trim();
+
+                // Disable connection controls
+                btnConnect.IsEnabled = false;
+                btnConnect.Content = "Connecting...";
+
+                bool success = await chatService.ConnectAsync(txtServerIp.Text, port, txtUsername.Text);
+
+                if (success)
+                {
+                    isConnected = true;
+                    btnConnect.Content = "Disconnect";
+                    btnConnect.IsEnabled = true;
+
+                    // Enable message controls
+                    txtMessage.IsEnabled = true;
+                    btnSend.IsEnabled = true;
+
+                    // Disable connection settings
+                    txtServerIp.IsEnabled = false;
+                    txtPort.IsEnabled = false;
+                    txtUsername.IsEnabled = false;
+
+                    AddSystemMessage("Connected to server successfully!");
+                    txtMessage.Focus();
+                }
+                else
+                {
+                    btnConnect.IsEnabled = true;
+                    btnConnect.Content = "Connect";
+                }
+            }
+            else
+            {
+                // Disconnect
+                chatService.Disconnect();
+            }
+        }
+
+        private async void BtnSend_Click(object sender, RoutedEventArgs e)
+        {
+            await SendMessage();
+        }
+
+        private async void TxtMessage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                await SendMessage();
+            }
+        }
+
+        private async Task SendMessage()
+        {
+            string message = txtMessage.Text.Trim();
+            if (string.IsNullOrEmpty(message))
+            {
+                return;
+            }
+
+            try
+            {
+                await chatService.SendMessageAsync(message);
+                txtMessage.Clear();
+                txtMessage.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to send message: {ex.Message}", "Error", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void OnMessageReceived(string message)
+        {
+            // Use Dispatcher to update UI from background thread
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                // Simple parsing for format: "[Username]: Message" or system message
+                string username = "System";
+                string content = message;
+                bool isSystem = message.StartsWith("[System]");
+
+                if (!isSystem && message.Contains("]: "))
+                {
+                    int colonIndex = message.IndexOf("]: ");
+                    username = message.Substring(1, colonIndex - 1);
+                    content = message.Substring(colonIndex + 3);
+                }
+
+                bool isOwn = username.Equals(currentUser, StringComparison.OrdinalIgnoreCase);
+                var chatMessage = new ChatMessage(username, content, isSystem, isOwn);
+                messages.Add(chatMessage);
+
+                // Auto-scroll to bottom
+                if (messages.Count > 0)
+                {
+                    lstMessages.ScrollIntoView(messages[messages.Count - 1]);
+                }
+            });
+        }
+
+        private void OnDisconnected()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                isConnected = false;
+                btnConnect.Content = "Connect";
+                btnConnect.IsEnabled = true;
+
+                // Disable message controls
+                txtMessage.IsEnabled = false;
+                btnSend.IsEnabled = false;
+
+                // Enable connection settings
+                txtServerIp.IsEnabled = true;
+                txtPort.IsEnabled = true;
+                txtUsername.IsEnabled = true;
+
+                AddSystemMessage("Disconnected from server.");
+            });
+        }
+
+        private void OnConnectionError(string error)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                MessageBox.Show(error, "Connection Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            });
+        }
+
+        private void AddSystemMessage(string message)
+        {
+            var systemMessage = new ChatMessage("System", message, true);
+            messages.Add(systemMessage);
+
+            if (messages.Count > 0)
+            {
+                lstMessages.ScrollIntoView(messages[messages.Count - 1]);
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            chatService.Disconnect();
+        }
+    }
+
+    public class MessageColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            bool isOwn = (bool)value;
+            return isOwn ? Application.Current.Resources["MyMessageBubble"] : Application.Current.Resources["OtherMessageBubble"];
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) => throw new NotImplementedException();
+    }
+
+    public class MessageAlignmentConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            bool isOwn = (bool)value;
+            return isOwn ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) => throw new NotImplementedException();
+    }
+
+    public class InverseBoolToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            bool val = (bool)value;
+            if (parameter?.ToString() == "Inverse") val = !val;
+            return val ? Visibility.Visible : Visibility.Collapsed;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) => throw new NotImplementedException();
+    }
+
+    public class MessageAlignmentMarkupExtension : MarkupExtension
+    {
+        public override object ProvideValue(IServiceProvider serviceProvider) => new MessageAlignmentConverter();
+    }
+
+    public class MessageColorMarkupExtension : MarkupExtension
+    {
+        public override object ProvideValue(IServiceProvider serviceProvider) => new MessageColorConverter();
+    }
+}

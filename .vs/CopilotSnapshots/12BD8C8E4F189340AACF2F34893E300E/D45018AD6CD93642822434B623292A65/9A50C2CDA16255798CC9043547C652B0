@@ -1,0 +1,251 @@
+﻿using System.Windows;
+using System.Windows.Input;
+using System.Collections.ObjectModel;
+using System.Windows.Data;
+using System.Globalization;
+using ChatClient.Services;
+using ChatClient.Models;
+
+namespace ChatClient.Views
+{
+    // Converter for inverse boolean to visibility
+    public class InverseBoolToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool boolValue)
+            {
+                return boolValue ? Visibility.Collapsed : Visibility.Visible;
+            }
+            return Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public partial class MainWindow : Window
+    {
+        private ChatService chatService;
+        private bool isConnected = false;
+        private ObservableCollection<ChatMessage> messages;
+        private string currentUsername = "";
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            chatService = new ChatService();
+            messages = new ObservableCollection<ChatMessage>();
+
+            // Set ItemsSource for ListBox
+            lstMessages.ItemsSource = messages;
+
+            // Add converter to resources
+            this.Resources.Add("InverseBoolToVisibilityConverter", new InverseBoolToVisibilityConverter());
+
+            // Subscribe to events
+            chatService.MessageReceived += OnMessageReceived;
+            chatService.Disconnected += OnDisconnected;
+            chatService.ConnectionError += OnConnectionError;
+        }
+
+        private async void BtnConnect_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isConnected)
+            {
+                // Validate inputs
+                if (string.IsNullOrWhiteSpace(txtServerIp.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập địa chỉ IP server.", "Lỗi nhập liệu", 
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                if (!int.TryParse(txtPort.Text, out int port))
+                {
+                    MessageBox.Show("Vui lòng nhập số port hợp lệ.", "Lỗi nhập liệu", 
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtUsername.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập tên người dùng.", "Lỗi nhập liệu", 
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                currentUsername = txtUsername.Text.Trim();
+
+                // Disable connection controls
+                btnConnect.IsEnabled = false;
+                btnConnect.Content = "Đang kết nối...";
+
+                bool success = await chatService.ConnectAsync(txtServerIp.Text, port, currentUsername);
+
+                if (success)
+                {
+                    isConnected = true;
+                    btnConnect.Content = "Ngắt kết nối";
+                    btnConnect.Background = System.Windows.Media.Brushes.Crimson;
+                    btnConnect.IsEnabled = true;
+
+                    // Enable message controls
+                    txtMessage.IsEnabled = true;
+                    btnSend.IsEnabled = true;
+
+                    // Disable connection settings
+                    txtServerIp.IsEnabled = false;
+                    txtPort.IsEnabled = false;
+                    txtUsername.IsEnabled = false;
+
+                    AddSystemMessage("✅ Kết nối server thành công!");
+                    txtMessage.Focus();
+                }
+                else
+                {
+                    btnConnect.IsEnabled = true;
+                    btnConnect.Content = "Kết nối";
+                }
+            }
+            else
+            {
+                // Disconnect
+                chatService.Disconnect();
+            }
+        }
+
+        private async void BtnSend_Click(object sender, RoutedEventArgs e)
+        {
+            await SendMessage();
+        }
+
+        private async void TxtMessage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && !Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
+            {
+                e.Handled = true;
+                await SendMessage();
+            }
+        }
+
+        private async Task SendMessage()
+        {
+            string message = txtMessage.Text.Trim();
+            if (string.IsNullOrEmpty(message))
+            {
+                return;
+            }
+
+            try
+            {
+                await chatService.SendMessageAsync(message);
+
+                // Add own message to list
+                var chatMessage = new ChatMessage(currentUsername, message, false, true);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    messages.Add(chatMessage);
+                    ScrollToBottom();
+                });
+
+                txtMessage.Clear();
+                txtMessage.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Gửi tin nhắn thất bại: {ex.Message}", "Lỗi", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void OnMessageReceived(string message)
+        {
+            // Use Dispatcher to update UI from background thread
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                // Parse message format: [username]: message or [System] message
+                string username = "Unknown";
+                string content = message;
+                bool isSystemMsg = false;
+
+                // Check if it's a system message
+                if (message.StartsWith("[System]"))
+                {
+                    isSystemMsg = true;
+                    content = message.Substring(8).Trim();
+                    username = "System";
+                }
+                // Parse user message: [username]: content
+                else if (message.Contains("]:"))
+                {
+                    var colonIndex = message.IndexOf("]:");
+                    if (colonIndex > 0 && message.StartsWith("["))
+                    {
+                        username = message.Substring(1, colonIndex - 1).Trim();
+                        content = message.Substring(colonIndex + 2).Trim();
+                    }
+                }
+
+                // Check if it's our own message
+                bool isOwnMessage = username.Equals(currentUsername, StringComparison.OrdinalIgnoreCase) && !isSystemMsg;
+
+                var chatMessage = new ChatMessage(username, content, isSystemMsg, isOwnMessage);
+                messages.Add(chatMessage);
+                ScrollToBottom();
+            });
+        }
+
+        private void OnDisconnected()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                isConnected = false;
+                btnConnect.Content = "Kết nối";
+                btnConnect.Background = (System.Windows.Media.Brush)this.Resources["PrimaryColor"];
+                btnConnect.IsEnabled = true;
+
+                // Disable message controls
+                txtMessage.IsEnabled = false;
+                btnSend.IsEnabled = false;
+
+                // Enable connection settings
+                txtServerIp.IsEnabled = true;
+                txtPort.IsEnabled = true;
+                txtUsername.IsEnabled = true;
+
+                AddSystemMessage("⚠️ Đã ngắt kết nối khỏi server.");
+            });
+        }
+
+        private void OnConnectionError(string error)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                MessageBox.Show(error, "Lỗi kết nối", MessageBoxButton.OK, MessageBoxImage.Error);
+            });
+        }
+
+        private void AddSystemMessage(string message)
+        {
+            var systemMessage = new ChatMessage("System", message, true, false);
+            messages.Add(systemMessage);
+            ScrollToBottom();
+        }
+
+        private void ScrollToBottom()
+        {
+            if (messages.Count > 0)
+            {
+                lstMessages.ScrollIntoView(messages[messages.Count - 1]);
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            chatService.Disconnect();
+        }
+    }
+}
