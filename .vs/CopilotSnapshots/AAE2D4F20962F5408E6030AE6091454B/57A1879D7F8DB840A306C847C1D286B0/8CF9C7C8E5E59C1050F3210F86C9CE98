@@ -1,0 +1,113 @@
+﻿@model TherapistDashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-4">
+        <div class="stat-card" style="background:linear-gradient(135deg,#667eea,#764ba2)">
+            <div class="stat-icon">📅</div>
+            <div class="stat-value">@Model.TotalAssigned</div>
+            <div class="stat-label">Tổng lịch hẹn</div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="stat-card" style="background:linear-gradient(135deg,#f093fb,#f5576c)">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-value">@Model.PendingCount</div>
+            <div class="stat-label">Chờ xác nhận</div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="stat-card" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">
+            <div class="stat-icon">✅</div>
+            <div class="stat-value">@Model.CompletedCount</div>
+            <div class="stat-label">Đã hoàn tất</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-header">👤 Hồ sơ của tôi</div>
+            <div class="card-body text-center">
+                <div style="font-size:4rem">🧑‍⚕️</div>
+                <h5 class="fw-bold mt-2">@Model.Therapist?.Name</h5>
+                <span class="badge bg-info text-dark">@Model.Therapist?.Specialty</span>
+                <p class="text-muted small mt-3">@Model.Therapist?.Bio</p>
+                <hr />
+                <div class="d-flex justify-content-between text-muted small">
+                    <span>📞 Điện thoại</span>
+                    <span class="fw-semibold">@Model.Therapist?.Phone</span>
+                </div>
+                <div class="d-flex justify-content-between text-muted small mt-1">
+                    <span>📧 Email</span>
+                    <span class="fw-semibold">@Model.Therapist?.User?.Email</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>📅 Lịch hẹn hôm nay — @DateTime.Today.ToString("dd/MM/yyyy")</span>
+                <a asp-controller="Therapist" asp-action="Appointments" class="btn btn-sm btn-outline-primary">
+                    Xem tất cả
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Giờ</th>
+                            <th>Bệnh nhân</th>
+                            <th>Dịch vụ</th>
+                            <th>Trạng thái</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var a in Model.TodayAppointments)
+                        {
+                            var (cls, lbl) = a.Status switch
+                            {
+                                AppointmentStatus.Pending   => ("badge-pending",   "Chờ xác nhận"),
+                                AppointmentStatus.Confirmed => ("badge-confirmed", "Đã xác nhận"),
+                                AppointmentStatus.Completed => ("badge-completed", "Hoàn tất"),
+                                _                           => ("badge-cancelled", "Đã hủy")
+                            };
+                            <tr>
+                                <td><span class="badge bg-light text-dark border">@a.TimeSlot</span></td>
+                                <td>
+                                    <div class="fw-semibold">@a.PatientName</div>
+                                    <div class="text-muted small">@a.PatientPhone</div>
+                                </td>
+                                <td class="small">@a.Service?.Name</td>
+                                <td><span class="badge @cls">@lbl</span></td>
+                                <td>
+                                    <a asp-controller="Therapist" asp-action="AppointmentDetail"
+                                       asp-route-id="@a.Id" class="btn btn-sm btn-outline-primary">
+                                        Chi tiết
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        @if (!Model.TodayAppointments.Any())
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">
+                                    Hôm nay không có lịch hẹn nào. 🎉
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

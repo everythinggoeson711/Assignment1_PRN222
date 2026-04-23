@@ -1,0 +1,725 @@
+﻿@model Assigment2_therapy.Models.ViewModels.HomeReferralPageViewModel
+
+@{
+    ViewData["Title"] = "Functional Capacity Assessments";
+    var hasBookingInventory = Model.Services.Any() && Model.Therapists.Any();
+    var generatedTrackingType = TempData.Peek("GeneratedTrackingType") as string;
+    var generatedTrackingCode = TempData.Peek("GeneratedTrackingCode") as string;
+    var generatedTrackingStatus = TempData.Peek("GeneratedTrackingStatus") as string;
+}
+
+<div class="public-home-page">
+    @if (TempData["Success"] != null)
+    {
+        <div class="public-alert public-alert-success">@TempData["Success"]</div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="public-alert public-alert-error">@TempData["Error"]</div>
+    }
+
+    @if (!ViewData.ModelState.IsValid && ViewData.ModelState[string.Empty]?.Errors.Count > 0)
+    {
+        <div class="public-alert public-alert-error">@ViewData.ModelState[string.Empty]?.Errors.First().ErrorMessage</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(generatedTrackingCode))
+    {
+        <section class="public-receipt-panel">
+            <div>
+                <span class="public-pill public-pill-green">Tracking receipt</span>
+                <h2>@generatedTrackingType reference created</h2>
+                <p>Save this code to review status later or download a text receipt now.</p>
+            </div>
+            <div class="public-receipt-code-block">
+                <strong>@generatedTrackingCode</strong>
+                <span>Status: @generatedTrackingStatus</span>
+            </div>
+            <a class="public-secondary-btn" asp-action="DownloadTrackingReceipt" asp-route-trackingCode="@generatedTrackingCode">Download receipt</a>
+        </section>
+    }
+
+    <section class="public-hero" id="top">
+        <div class="public-hero-media">
+            <div class="public-hero-glow"></div>
+            <div class="public-hero-overlay"></div>
+        </div>
+
+        <div class="public-hero-copy">
+            <span class="public-pill">Clinical intake pathway</span>
+            <h1>Functional Capacity Assessments</h1>
+            <p>Clear, evidence-based assessments that support informed decisions and meaningful outcomes, precisely aligned with NDIS reporting expectations.</p>
+            <div class="public-hero-actions">
+                <a class="public-primary-btn" href="#referral">Make a Referral</a>
+                <a class="public-secondary-btn" href="#services">View FCA Services</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="public-overview-card" id="services">
+        <div class="public-overview-copy">
+            <span class="public-icon-square">+</span>
+            <h2>A comprehensive evaluation of independence.</h2>
+            <p>Functional Capacity Assessment is a detailed review of how disability affects daily life, mobility, cognition and participation across core life domains.</p>
+
+            <div class="public-stat-grid">
+                <div class="public-stat-card public-stat-card-blue">
+                    <strong>@Model.ActiveServiceCount</strong>
+                    <span>Active services currently available from SQL Server</span>
+                </div>
+                <div class="public-stat-card public-stat-card-green">
+                    <strong>@Model.ActiveTherapistCount</strong>
+                    <span>Active clinicians currently available for booking</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="public-domains-card">
+            <h3>Domains of Evaluation</h3>
+            <ul>
+                <li><strong>Daily Living Skills</strong><span>Self-care, nutrition, and home management.</span></li>
+                <li><strong>Mobility &amp; Access</strong><span>Transfers, community navigation, and physical capacity.</span></li>
+                <li><strong>Cognitive Capacity</strong><span>Decision making, social interactions, and memory.</span></li>
+                <li><strong>Environmental Factors</strong><span>Home modifications and assistive technology needs.</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="public-eligibility-band">
+        <div class="public-eligibility-copy">
+            <span class="public-pill public-pill-green">Eligibility</span>
+            <h2>Specialized for high-complexity needs.</h2>
+            <p>Our assessments are designed for individuals requiring clear clinical documentation to secure essential support services.</p>
+        </div>
+
+        <div class="public-eligibility-grid">
+            <article>
+                <h3>NDIS Participants</h3>
+                <p>Adults and adolescents seeking new or renewed plan funding.</p>
+            </article>
+            <article>
+                <h3>Neuro Conditions</h3>
+                <p>Evidence for daily functioning, therapy planning, and support transitions.</p>
+            </article>
+            <article>
+                <h3>Physical Disabilities</h3>
+                <p>Mobility impairments requiring complex assistive technology or home changes.</p>
+            </article>
+            <article>
+                <h3>Support Changes</h3>
+                <p>Referrals involving functional decline, discharge planning, or major life transitions.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="public-service-list">
+        @if (Model.Services.Count == 0)
+        {
+            <article class="public-service-card">
+                <span class="public-service-tag">Live data</span>
+                <h3>No active services in SQL Server yet</h3>
+                <p>Create active therapy services in the admin portal to publish bookable offerings on this page.</p>
+            </article>
+        }
+        else
+        {
+            @foreach (var service in Model.Services)
+            {
+                <article class="public-service-card">
+                    <span class="public-service-tag">Service</span>
+                    <h3>@service.Name</h3>
+                    <p>@service.Description</p>
+                    <div class="public-service-meta">
+                        <span>@service.DurationMinutes mins</span>
+                        <strong>@service.Price.ToString("N0") VND</strong>
+                    </div>
+                </article>
+            }
+        }
+    </section>
+
+    <section class="public-standards-section">
+        <div class="public-section-heading">
+            <h2>Precision Reporting Standards</h2>
+            <p>Every FCA includes an exhaustive clinical deep-dive and a defensible recommendation set.</p>
+        </div>
+
+        <div class="public-standards-grid">
+            <article class="public-standards-card">
+                <span class="public-icon-square">+</span>
+                <h3>The Evaluation Process</h3>
+                <ol>
+                    <li><strong>01</strong><span>Review of medical history and prior documentation.</span></li>
+                    <li><strong>02</strong><span>In-depth interview with participant and supports.</span></li>
+                    <li><strong>03</strong><span>Direct observation of real-world function.</span></li>
+                    <li><strong>04</strong><span>Standardized assessment tools and scoring.</span></li>
+                </ol>
+            </article>
+
+            <article class="public-standards-card">
+                <span class="public-icon-square">+</span>
+                <h3>The Final Report</h3>
+                <ul>
+                    <li>Detailed functional analysis against NDIS domains.</li>
+                    <li>Clinical reasoning for every recommendation.</li>
+                    <li>Funding justification for reasonable and necessary supports.</li>
+                    <li>Actionable therapy, equipment, and support hour recommendations.</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section class="public-strategy-panel">
+        <div class="public-strategy-media"></div>
+        <div class="public-strategy-copy">
+            <span class="public-pill public-pill-green">Strategic value</span>
+            <h2>Why precision matters in NDIS pathways.</h2>
+            <div class="public-feature-stack">
+                <article>
+                    <h3>Funding Approvals</h3>
+                    <p>Reports use language aligned with planner expectations, increasing the likelihood of approved supports.</p>
+                </article>
+                <article>
+                    <h3>Reduced Delays</h3>
+                    <p>Complete evidence upfront reduces repeated information requests and avoids unnecessary review cycles.</p>
+                </article>
+                <article>
+                    <h3>Direction for Therapy</h3>
+                    <p>Recommendations become a practical roadmap for therapy priorities, assistive technology and home setup.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="public-journey" id="journey">
+        <div class="public-section-heading public-section-heading-left">
+            <h2>The Assessment Journey</h2>
+            <p>Submission of details via our secure intake portal through to final clinical delivery.</p>
+        </div>
+
+        <div class="public-journey-steps">
+            <article><span>1</span><h3>Referral</h3><p>Submit referral details and context.</p></article>
+            <article><span>2</span><h3>Review</h3><p>Clinical triage and eligibility check.</p></article>
+            <article><span>3</span><h3>Schedule</h3><p>Book home visit or telehealth consult.</p></article>
+            <article><span>4</span><h3>Conduct</h3><p>Comprehensive functional assessment session.</p></article>
+            <article><span>5</span><h3>Prepare</h3><p>Draft, review and quality assure the report.</p></article>
+            <article class="public-step-active"><span>6</span><h3>Deliver</h3><p>Issue final report and recommendations.</p></article>
+        </div>
+    </section>
+
+    <section class="public-tracking-shell" id="tracking">
+        <div class="public-section-heading public-section-heading-left">
+            <h2>Track Your Referral Or Booking</h2>
+            <p>Enter the code you received after submission or checkout to review the latest status and download the receipt again.</p>
+        </div>
+
+        <div class="public-tracking-grid">
+            <form asp-action="TrackRequest" method="post" class="public-tracking-form">
+                @Html.AntiForgeryToken()
+                <label for="tracking-code" class="public-tracking-label">Tracking code</label>
+                <div class="public-tracking-form-row">
+                    <input id="tracking-code" name="trackingCode" value="@Model.TrackingCodeInput" class="public-input" placeholder="REF-250423-ABCDEFGH or CBK-250423-ABCDEFGH" />
+                    <button type="submit" class="public-primary-btn">Check status</button>
+                </div>
+                <p class="public-tracking-hint">Referral codes start with <strong>REF</strong>. Center booking codes start with <strong>CBK</strong>.</p>
+
+                @if (!string.IsNullOrWhiteSpace(Model.TrackingLookupError))
+                {
+                    <div class="public-alert public-alert-error mt-3">@Model.TrackingLookupError</div>
+                }
+            </form>
+
+            @if (Model.TrackingLookup != null)
+            {
+                <aside class="public-tracking-result-card">
+                    <span class="public-pill">@Model.TrackingLookup.TrackingType</span>
+                    <h3>@Model.TrackingLookup.TrackingCode</h3>
+                    <div class="public-tracking-status-grid">
+                        <article>
+                            <span>Primary status</span>
+                            <strong>@Model.TrackingLookup.PrimaryStatus</strong>
+                        </article>
+                        <article>
+                            <span>Secondary status</span>
+                            <strong>@Model.TrackingLookup.SecondaryStatus</strong>
+                        </article>
+                    </div>
+                    <ul class="public-tracking-detail-list">
+                        <li><strong>Participant:</strong> @Model.TrackingLookup.ParticipantName</li>
+                        <li><strong>Contact:</strong> @Model.TrackingLookup.ContactLine</li>
+                        <li><strong>Service:</strong> @Model.TrackingLookup.ServiceName</li>
+                        <li><strong>Clinician:</strong> @Model.TrackingLookup.ClinicianLine</li>
+                        <li><strong>Timeline:</strong> @Model.TrackingLookup.TimelineLine</li>
+                        <li><strong>Support info:</strong> @Model.TrackingLookup.SupportingLine</li>
+                        <li><strong>Notes:</strong> @Model.TrackingLookup.NotesLine</li>
+                    </ul>
+                    <a class="public-secondary-btn" asp-action="DownloadTrackingReceipt" asp-route-trackingCode="@Model.TrackingLookup.TrackingCode">Download receipt</a>
+                </aside>
+            }
+            else
+            {
+                <aside class="public-tracking-result-card public-tracking-result-card-empty">
+                    <span class="public-pill public-pill-green">Status lookup</span>
+                    <h3>No tracking result loaded yet</h3>
+                    <p>After submitting a referral or returning from checkout, your tracking code will let you reopen the request and see its current status.</p>
+                </aside>
+            }
+        </div>
+    </section>
+
+    <section class="public-booking-shell" id="booking">
+        <div class="public-booking-intro">
+            <span class="public-pill">Instant booking</span>
+            <h2>Book A Service At The Center</h2>
+            <p>Choose a clinician, lock a center-based session, and pay immediately online. Availability is checked in realtime before checkout.</p>
+        </div>
+
+        <div class="public-booking-grid">
+            <form asp-action="StartCenterBooking" method="post" class="public-booking-form" id="center-booking-form">
+                @Html.AntiForgeryToken()
+                @if (!hasBookingInventory)
+                {
+                    <div class="public-alert public-alert-error">Booking is unavailable until at least one active service and one active clinician exist in SQL Server.</div>
+                }
+                <div class="public-form-grid public-form-grid-two">
+                    <div>
+                        <label for="booking-participant-name">Participant name</label>
+                        <input id="booking-participant-name" name="ParticipantName" class="public-input" placeholder="Full name" />
+                    </div>
+                    <div>
+                        <label for="booking-email">Email</label>
+                        <input id="booking-email" name="ParticipantEmail" class="public-input" placeholder="Email" />
+                    </div>
+                    <div>
+                        <label for="booking-phone">Phone</label>
+                        <input id="booking-phone" name="ParticipantPhone" class="public-input" placeholder="Phone number" />
+                    </div>
+                    <div>
+                        <label for="booking-service">Service</label>
+                        <select id="booking-service" name="ServiceId" class="public-input" @(!hasBookingInventory ? "disabled" : null)>
+                            @foreach (var service in Model.Services)
+                            {
+                                <option value="@service.Id" data-price="@service.Price" data-duration="@service.DurationMinutes">@service.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <label for="booking-therapist">Clinician</label>
+                        <select id="booking-therapist" name="TherapistId" class="public-input" @(!hasBookingInventory ? "disabled" : null)>
+                            @foreach (var therapist in Model.Therapists)
+                            {
+                                <option value="@therapist.Id">@therapist.Name - @therapist.Specialty</option>
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <label for="booking-date">Appointment date</label>
+                        <input id="booking-date" name="AppointmentDate" type="date" value="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" class="public-input" @(!hasBookingInventory ? "disabled" : null) />
+                    </div>
+                    <div>
+                        <label for="booking-timeslot">Time slot</label>
+                        <select id="booking-timeslot" name="TimeSlot" class="public-input" @(!hasBookingInventory ? "disabled" : null)>
+                            @foreach (var slot in (IEnumerable<string>)ViewData["BookingTimeSlots"]!)
+                            {
+                                <option value="@slot">@slot</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="public-form-full">
+                        <label for="booking-notes">Notes for the clinician</label>
+                        <textarea id="booking-notes" name="Notes" class="public-input public-textarea" placeholder="Focus area, symptoms, or context for the center session." @(!hasBookingInventory ? "disabled" : null)></textarea>
+                    </div>
+                </div>
+
+                <div class="public-booking-status" id="booking-availability-status">@(hasBookingInventory ? "Checking availability..." : "Booking is disabled until live services and clinicians are configured.")</div>
+
+                <button type="submit" class="public-primary-btn public-primary-btn-wide" id="booking-submit-btn" @(!hasBookingInventory ? "disabled" : null)>Pay Now And Confirm Slot</button>
+            </form>
+
+            <aside class="public-booking-summary">
+                <span class="public-pill public-pill-green">Realtime summary</span>
+                <h3 id="booking-summary-title">@(Model.Services.FirstOrDefault()?.Name ?? "No live service configured")</h3>
+                <p>@(hasBookingInventory ? "Select a service and clinician to see live booking details before redirecting to secure checkout." : "This summary will populate automatically once the admin team adds live services and clinicians in SQL Server.")</p>
+
+                <div class="public-booking-metrics">
+                    <article>
+                        <span>Session fee</span>
+                        <strong id="booking-summary-price">@(Model.Services.FirstOrDefault() != null ? $"{Model.Services.First().Price:N0} VND" : "0 VND")</strong>
+                    </article>
+                    <article>
+                        <span>Duration</span>
+                        <strong id="booking-summary-duration">@(Model.Services.FirstOrDefault() != null ? $"{Model.Services.First().DurationMinutes} mins" : "0 mins")</strong>
+                    </article>
+                </div>
+
+                <div class="public-booking-summary-box">
+                    <h4>What happens next</h4>
+                    <ul>
+                        <li>Realtime slot validation before checkout.</li>
+                        <li>Immediate payment through Stripe Checkout.</li>
+                        <li>Webhook marks booking as paid and confirms appointment automatically.</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <div class="public-wave-divider"></div>
+
+    <section class="public-referral-shell" id="referral">
+        <form asp-action="SubmitReferral" method="post" class="public-referral-form">
+            @Html.AntiForgeryToken()
+
+            <header class="public-form-header">
+                <div>
+                    <h2>Submit a Referral.</h2>
+                    <p>Please complete the form below. Our clinical team will review your request and contact you within 1-2 business days to discuss next steps.</p>
+                </div>
+            </header>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+
+            <section class="public-form-section">
+                <div class="public-form-section-title">
+                    <span class="public-section-icon">1</span>
+                    <h3>Participant Information</h3>
+                </div>
+                <div class="public-form-grid public-form-grid-two">
+                    <div>
+                        <label asp-for="ParticipantName"></label>
+                        <input asp-for="ParticipantName" class="public-input" placeholder="Full name" />
+                        <span asp-validation-for="ParticipantName" class="text-danger small"></span>
+                    </div>
+                    <div>
+                        <label asp-for="DateOfBirth"></label>
+                        <input asp-for="DateOfBirth" type="date" class="public-input" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger small"></span>
+                    </div>
+                    <div>
+                        <label asp-for="NdisNumber"></label>
+                        <input asp-for="NdisNumber" class="public-input" placeholder="NDIS number" />
+                    </div>
+                    <div>
+                        <label asp-for="ParticipantPhone"></label>
+                        <input asp-for="ParticipantPhone" class="public-input" placeholder="Phone" />
+                    </div>
+                    <div>
+                        <label asp-for="ParticipantEmail"></label>
+                        <input asp-for="ParticipantEmail" class="public-input" placeholder="Email" />
+                        <span asp-validation-for="ParticipantEmail" class="text-danger small"></span>
+                    </div>
+                    <div>
+                        <label asp-for="ServiceId"></label>
+                        <select asp-for="ServiceId" class="public-input" asp-items="@(new SelectList(Model.Services, "Id", "Name"))"></select>
+                        <span asp-validation-for="ServiceId" class="text-danger small"></span>
+                    </div>
+                    <div class="public-form-full">
+                        <label asp-for="HomeAddress"></label>
+                        <input asp-for="HomeAddress" class="public-input" placeholder="Home address" />
+                    </div>
+                </div>
+            </section>
+
+            <section class="public-form-section">
+                <div class="public-form-section-title">
+                    <span class="public-section-icon">2</span>
+                    <h3>Referrer Information</h3>
+                </div>
+                <div class="public-form-grid public-form-grid-two">
+                    <div>
+                        <label asp-for="ReferrerName"></label>
+                        <input asp-for="ReferrerName" class="public-input" placeholder="Referrer name" />
+                        <span asp-validation-for="ReferrerName" class="text-danger small"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Organisation"></label>
+                        <input asp-for="Organisation" class="public-input" placeholder="Organisation" />
+                    </div>
+                    <div>
+                        <label asp-for="ReferrerEmail"></label>
+                        <input asp-for="ReferrerEmail" class="public-input" placeholder="Email address" />
+                        <span asp-validation-for="ReferrerEmail" class="text-danger small"></span>
+                    </div>
+                    <div>
+                        <label asp-for="ReferrerPhone"></label>
+                        <input asp-for="ReferrerPhone" class="public-input" placeholder="Contact phone" />
+                    </div>
+                </div>
+                <div class="public-choice-grid public-choice-grid-three">
+                    @foreach (var role in Model.ReferrerRoles)
+                    {
+                        <label class="public-choice-card">
+                            <input type="radio" asp-for="ReferrerRole" value="@role" />
+                            <span>@role</span>
+                        </label>
+                    }
+                </div>
+                <span asp-validation-for="ReferrerRole" class="text-danger small"></span>
+            </section>
+
+            <section class="public-form-section">
+                <div class="public-form-section-title">
+                    <span class="public-section-icon">3</span>
+                    <h3>Guided Clinical Questions</h3>
+                </div>
+
+                <div class="public-form-grid public-form-grid-two">
+                    <div>
+                        <label asp-for="PrimaryReason"></label>
+                        <select asp-for="PrimaryReason" class="public-input">
+                            <option value="">Select primary reason</option>
+                            @foreach (var item in Model.PrimaryReasons)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
+                        <span asp-validation-for="PrimaryReason" class="text-danger small"></span>
+                    </div>
+                    <div>
+                        <label asp-for="PreferredTherapistId"></label>
+                        <select asp-for="PreferredTherapistId" class="public-input">
+                            <option value="">Best matched clinician</option>
+                            @foreach (var therapist in Model.Therapists)
+                            {
+                                <option value="@therapist.Id">@therapist.Name - @therapist.Specialty</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="public-form-full">
+                        <label asp-for="MainReason"></label>
+                        <textarea asp-for="MainReason" class="public-input public-textarea" placeholder="Briefly describe what is driving the referral."></textarea>
+                    </div>
+                </div>
+
+                <div class="public-chip-group">
+                    <label>Key areas of concern</label>
+                    <div class="public-chip-list">
+                        @foreach (var option in Model.ConcernAreaOptions)
+                        {
+                            <label class="public-chip">
+                                <input type="checkbox" name="KeyConcerns" value="@option" @(Model.KeyConcerns.Contains(option) ? "checked" : null) />
+                                <span>@option</span>
+                            </label>
+                        }
+                    </div>
+                </div>
+
+                <div class="public-chip-group">
+                    <label>What outcome are you hoping to achieve?</label>
+                    <div class="public-choice-grid public-choice-grid-two">
+                        @foreach (var option in Model.OutcomeOptions)
+                        {
+                            <label class="public-choice-card">
+                                <input type="checkbox" name="DesiredOutcomes" value="@option" @(Model.DesiredOutcomes.Contains(option) ? "checked" : null) />
+                                <span>@option</span>
+                            </label>
+                        }
+                    </div>
+                </div>
+
+                <div class="public-form-grid public-form-grid-two">
+                    <div>
+                        <label asp-for="UrgencyLevel"></label>
+                        <select asp-for="UrgencyLevel" class="public-input">
+                            <option value="">Select urgency level</option>
+                            @foreach (var option in Model.UrgencyOptions)
+                            {
+                                <option value="@option">@option</option>
+                            }
+                        </select>
+                        <span asp-validation-for="UrgencyLevel" class="text-danger small"></span>
+                    </div>
+                    <div>
+                        <label asp-for="PreferredContactMethod"></label>
+                        <select asp-for="PreferredContactMethod" class="public-input">
+                            <option value="">Select contact method</option>
+                            @foreach (var option in Model.ContactMethodOptions)
+                            {
+                                <option value="@option">@option</option>
+                            }
+                        </select>
+                        <span asp-validation-for="PreferredContactMethod" class="text-danger small"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="public-form-section public-form-section-last">
+                <div class="public-form-section-title">
+                    <span class="public-section-icon">4</span>
+                    <h3>Optional Clinical Context</h3>
+                </div>
+                <div class="public-form-grid">
+                    <div class="public-form-full">
+                        <label asp-for="AdditionalNotes"></label>
+                        <textarea asp-for="AdditionalNotes" class="public-input public-textarea" placeholder="Additional notes, functional context, risks, equipment or reports available."></textarea>
+                    </div>
+                </div>
+
+                <label class="public-consent-card">
+                    <input asp-for="PrivacyConsent" />
+                    <span>
+                        <strong>Privacy Consent</strong>
+                        <small>I confirm that the participant or legal representative has provided consent for this referral and for Montra Therapy to review the submitted health information.</small>
+                    </span>
+                </label>
+                <span asp-validation-for="PrivacyConsent" class="text-danger small"></span>
+            </section>
+
+            <footer class="public-form-footer">
+                <button type="submit" class="public-primary-btn public-primary-btn-wide">Make a Referral</button>
+                <p>Clinical review response within 1-2 business days.</p>
+
+                <div class="public-form-assurance">
+                    <article>
+                        <h4>Privacy Compliant</h4>
+                        <p>Structured intake with secure handling of clinical information.</p>
+                    </article>
+                    <article>
+                        <h4>OT Precision</h4>
+                        <p>Professional referral portal built for evidence-based reporting.</p>
+                    </article>
+                    <article class="public-form-assurance-highlight">
+                        <h4>@Model.ReferralQueueCount</h4>
+                        <p>Live referrals currently waiting in the SQL Server intake queue.</p>
+                    </article>
+                </div>
+            </footer>
+        </form>
+    </section>
+
+    <section class="public-cta-banner" id="contact">
+        <div class="public-cta-overlay"></div>
+        <div class="public-cta-copy">
+            <h2>Need a Functional Capacity Assessment?</h2>
+            <p>Our SQL Server schedule currently shows @Model.ConfirmedAppointmentCount confirmed or completed appointments across the active care pathway.</p>
+        </div>
+        <div class="public-cta-actions">
+            <a class="public-cta-green" href="#referral">Make a Referral</a>
+            <a class="public-cta-light" asp-controller="Auth" asp-action="Login">Portal Login</a>
+        </div>
+    </section>
+
+    <footer class="public-footer">
+        <div class="public-footer-brand">
+            <a class="figma-brand" asp-controller="Home" asp-action="Index">Montra Therapy</a>
+            <p>Clear. Reliable. Evidence-based occupational therapy reporting and referral intake.</p>
+        </div>
+
+        <div class="public-footer-links">
+            <div>
+                <h3>Services</h3>
+                <a href="#services">Functional Assessments</a>
+                <a href="#services">NDIS Reporting</a>
+                <a href="#services">Home Modifications</a>
+                <a href="#services">Assistive Technology</a>
+            </div>
+            <div>
+                <h3>Practice</h3>
+                <a href="#journey">Clinical Governance</a>
+                <a href="#top">About Us</a>
+                <a href="#referral">Referral Portal</a>
+                <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <a href="#contact">Referral Enquiries</a>
+                <a href="#contact">Assessment Support</a>
+                <a asp-controller="Auth" asp-action="Login">Clinician Login</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="public-footer-bottom">
+        <span>© 2026 Montra Therapy. All rights reserved.</span>
+        <span>Evidence-based outcomes.</span>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        (function () {
+            const serviceSelect = document.getElementById('booking-service');
+            const therapistSelect = document.getElementById('booking-therapist');
+            const dateInput = document.getElementById('booking-date');
+            const slotSelect = document.getElementById('booking-timeslot');
+            const statusEl = document.getElementById('booking-availability-status');
+            const submitBtn = document.getElementById('booking-submit-btn');
+            const titleEl = document.getElementById('booking-summary-title');
+            const priceEl = document.getElementById('booking-summary-price');
+            const durationEl = document.getElementById('booking-summary-duration');
+
+            if (!serviceSelect || !therapistSelect || !dateInput || !slotSelect || !statusEl || !submitBtn) {
+                return;
+            }
+
+            function updateSummary() {
+                if (serviceSelect.options.length === 0) {
+                    titleEl.textContent = 'No live service configured';
+                    priceEl.textContent = '0 VND';
+                    durationEl.textContent = '0 mins';
+                    return;
+                }
+
+                const selected = serviceSelect.options[serviceSelect.selectedIndex];
+                titleEl.textContent = selected.textContent;
+                const price = Number(selected.dataset.price || '0');
+                const duration = selected.dataset.duration || '0';
+                priceEl.textContent = `${price.toLocaleString('vi-VN')} VND`;
+                durationEl.textContent = `${duration} mins`;
+            }
+
+            let controller;
+
+            async function checkAvailability() {
+                updateSummary();
+
+                if (!therapistSelect.value || !dateInput.value || !slotSelect.value) {
+                    statusEl.textContent = 'Choose clinician, date and time slot to validate availability.';
+                    statusEl.className = 'public-booking-status';
+                    submitBtn.disabled = true;
+                    return;
+                }
+
+                if (controller) {
+                    controller.abort();
+                }
+
+                controller = new AbortController();
+                statusEl.textContent = 'Checking availability in realtime...';
+                statusEl.className = 'public-booking-status';
+                submitBtn.disabled = true;
+
+                const params = new URLSearchParams({
+                    therapistId: therapistSelect.value,
+                    appointmentDate: dateInput.value,
+                    timeSlot: slotSelect.value
+                });
+
+                try {
+                    const response = await fetch(`/Home/CheckAvailability?${params.toString()}`, { signal: controller.signal });
+                    const data = await response.json();
+                    statusEl.textContent = data.message;
+                    statusEl.className = data.available ? 'public-booking-status is-available' : 'public-booking-status is-unavailable';
+                    submitBtn.disabled = !data.available;
+                } catch (error) {
+                    if (error.name === 'AbortError') {
+                        return;
+                    }
+
+                    statusEl.textContent = 'Could not validate availability right now. Please try again.';
+                    statusEl.className = 'public-booking-status is-unavailable';
+                    submitBtn.disabled = true;
+                }
+            }
+
+            [serviceSelect, therapistSelect, dateInput, slotSelect].forEach(element => {
+                element.addEventListener('change', checkAvailability);
+            });
+
+            updateSummary();
+            checkAvailability();
+        })();
+    </script>
+}

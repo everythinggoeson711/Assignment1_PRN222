@@ -1,0 +1,122 @@
+@model Appointment
+@{
+    ViewData["Title"] = "Chi tiết lịch hẹn";
+    var (badgeCls, badgeLbl) = Model.Status switch
+    {
+        AppointmentStatus.Pending   => ("badge-pending",   "Chờ xác nhận"),
+        AppointmentStatus.Confirmed => ("badge-confirmed", "Đã xác nhận"),
+        AppointmentStatus.Completed => ("badge-completed", "Hoàn tất"),
+        _                           => ("badge-cancelled", "Đã hủy")
+    };
+}
+
+<div class="row g-3">
+    
+    <div class="col-md-7">
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>📋 Thông tin lịch hẹn #@Model.Id</span>
+                <span class="badge @badgeCls fs-6">@badgeLbl</span>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <div class="text-muted small">👤 Bệnh nhân</div>
+                        <div class="fw-semibold">@Model.PatientName</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-muted small">📞 Điện thoại</div>
+                        <div class="fw-semibold">@Model.PatientPhone</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-muted small">📧 Email</div>
+                        <div class="fw-semibold">@Model.PatientEmail</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-muted small">🩺 Dịch vụ</div>
+                        <div class="fw-semibold">@Model.Service?.Name</div>
+                        <div class="text-muted small">@Model.Service?.Price.ToString("N0")đ — @Model.Service?.DurationMinutes phút</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-muted small">📅 Ngày hẹn</div>
+                        <div class="fw-semibold">@Model.AppointmentDate.ToString("dd/MM/yyyy")</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-muted small">🕐 Khung giờ</div>
+                        <div class="fw-semibold">@Model.TimeSlot</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-muted small">📝 Ngày tạo</div>
+                        <div class="fw-semibold">@Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</div>
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(Model.TherapyNotes))
+                {
+                    <hr />
+                    <div class="text-muted small mb-1">📓 Ghi chú trị liệu</div>
+                    <div class="p-3 bg-light rounded">@Model.TherapyNotes</div>
+                }
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-md-5">
+        @if (Model.Status != AppointmentStatus.Cancelled && Model.Status != AppointmentStatus.Completed)
+        {
+            <div class="card mb-3">
+                <div class="card-header">⚙️ Cập nhật trạng thái</div>
+                <div class="card-body">
+                    <form asp-controller="Therapist" asp-action="UpdateStatus" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="Id" value="@Model.Id" />
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Chuyển sang trạng thái</label>
+                            <select name="Status" class="form-select">
+                                @if (Model.Status == AppointmentStatus.Pending)
+                                {
+                                    <option value="1">✅ Xác nhận lịch hẹn</option>
+                                    <option value="3">❌ Hủy lịch hẹn</option>
+                                }
+                                @if (Model.Status == AppointmentStatus.Confirmed)
+                                {
+                                    <option value="2">🏁 Hoàn tất buổi trị liệu</option>
+                                    <option value="3">❌ Hủy lịch hẹn</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">📓 Ghi chú trị liệu</label>
+                            <textarea name="TherapyNotes" class="form-control" rows="4"
+                                      placeholder="Nhận xét sau buổi trị liệu...">@Model.TherapyNotes</textarea>
+                            <div class="form-text">Bắt buộc khi hoàn tất buổi trị liệu.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">💾 Cập nhật</button>
+                    </form>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                @if (Model.Status == AppointmentStatus.Completed)
+                {
+                    <strong>✅ Buổi trị liệu đã hoàn tất.</strong>
+                }
+                else
+                {
+                    <strong>❌ Lịch hẹn đã bị hủy.</strong>
+                }
+            </div>
+        }
+
+        <a asp-controller="Therapist" asp-action="Appointments" class="btn btn-outline-secondary w-100">
+            ← Quay lại danh sách
+        </a>
+    </div>
+</div>
+

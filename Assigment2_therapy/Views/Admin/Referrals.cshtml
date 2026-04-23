@@ -1,0 +1,158 @@
+@model Assigment2_therapy.Models.ViewModels.ReferralQueueManagementViewModel
+@{
+    ViewData["Title"] = "Referral Queue";
+
+    string StatusBadgeClass(string status) => status switch
+    {
+        "New" => "bg-warning text-dark",
+        "UnderReview" => "bg-info text-dark",
+        "Contacted" => "bg-primary",
+        "Scheduled" => "bg-success",
+        "Closed" => "bg-secondary",
+        _ => "bg-light text-dark"
+    };
+}
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#4338ca,#7c3aed)">
+            <div class="stat-value">@Model.TotalReferrals</div>
+            <div class="stat-label">Tổng referrals</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#f59e0b,#f97316)">
+            <div class="stat-value">@Model.NewCount</div>
+            <div class="stat-label">New</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#06b6d4,#0ea5e9)">
+            <div class="stat-value">@Model.UnderReviewCount</div>
+            <div class="stat-label">UnderReview</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#2563eb,#3b82f6)">
+            <div class="stat-value">@Model.ContactedCount</div>
+            <div class="stat-label">Contacted</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#16a34a,#22c55e)">
+            <div class="stat-value">@Model.ScheduledCount</div>
+            <div class="stat-label">Scheduled</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#64748b,#475569)">
+            <div class="stat-value">@Model.ClosedCount</div>
+            <div class="stat-label">Closed</div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form method="get" class="row g-2 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label small fw-semibold">🔎 Tìm kiếm</label>
+                <input type="text" name="search" value="@Model.Search" class="form-control" placeholder="Participant, email, referrer" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label small fw-semibold">🏷️ Referral status</label>
+                <select name="status" class="form-select">
+                    <option value="">-- Tất cả --</option>
+                    @foreach (var option in Model.StatusOptions)
+                    {
+                        <option value="@option" selected="@(Model.Status == option)">@option</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label small fw-semibold">📆 Ngày tạo</label>
+                <input type="date" name="createdDate" value="@Model.CreatedDate?.ToString("yyyy-MM-dd")" class="form-control" />
+            </div>
+            <div class="col-md-2 d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100">Lọc</button>
+                <a asp-action="Referrals" class="btn btn-outline-secondary">Reset</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>📝 Referral intake queue (@Model.Referrals.Count)</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Tracking code</th>
+                        <th>Participant</th>
+                        <th>Referrer</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var referral in Model.Referrals)
+                    {
+                        <tr>
+                            <td>@referral.Id</td>
+                            <td>
+                                <div class="fw-semibold">@referral.TrackingCode</div>
+                                <a asp-controller="Home" asp-action="DownloadTrackingReceipt" asp-route-trackingCode="@referral.TrackingCode" class="small">Download receipt</a>
+                            </td>
+                            <td>
+                                <div class="fw-semibold">@referral.ParticipantName</div>
+                                <div class="small text-muted">@referral.ParticipantEmail</div>
+                                <div class="small text-muted">@referral.ParticipantPhone</div>
+                            </td>
+                            <td>
+                                <div>@referral.ReferrerName</div>
+                                <div class="small text-muted">@referral.ReferrerEmail</div>
+                                <div class="small text-muted">@referral.ReferrerRole</div>
+                            </td>
+                            <td>
+                                <div>@referral.Service?.Name</div>
+                                <div class="small text-muted">@(referral.PreferredTherapist?.Name ?? "Best matched clinician")</div>
+                            </td>
+                            <td>
+                                <span class="badge @StatusBadgeClass(referral.Status)">@referral.Status</span>
+                            </td>
+                            <td>
+                                <div>@referral.CreatedAt.ToString("dd/MM/yyyy")</div>
+                                <div class="small text-muted">@referral.CreatedAt.ToString("HH:mm")</div>
+                            </td>
+                            <td class="text-end">
+                                <form asp-action="UpdateReferralStatus" method="post" class="d-inline-flex gap-2 align-items-center">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@referral.Id" />
+                                    <select name="status" class="form-select form-select-sm" style="min-width: 150px;">
+                                        @foreach (var option in Model.StatusOptions)
+                                        {
+                                            <option value="@option" selected="@(referral.Status == option)">@option</option>
+                                        }
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-outline-primary">Cập nhật</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                    @if (!Model.Referrals.Any())
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-4">Không có referral nào theo bộ lọc hiện tại.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

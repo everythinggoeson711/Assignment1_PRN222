@@ -1,0 +1,15 @@
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\bin\Debug\net10.0\Montra.BLL.deps.json
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\bin\Debug\net10.0\Montra.BLL.dll
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\bin\Debug\net10.0\Montra.BLL.pdb
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\bin\Debug\net10.0\Montra.DAL.dll
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\bin\Debug\net10.0\Montra.DAL.pdb
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\obj\Debug\net10.0\Montra.BLL.csproj.AssemblyReference.cache
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\obj\Debug\net10.0\Montra.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\obj\Debug\net10.0\Montra.BLL.AssemblyInfoInputs.cache
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\obj\Debug\net10.0\Montra.BLL.AssemblyInfo.cs
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\obj\Debug\net10.0\Montra.BLL.csproj.CoreCompileInputs.cache
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\obj\Debug\net10.0\Montra.BLL.csproj.Up2Date
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\obj\Debug\net10.0\Montra.BLL.dll
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\obj\Debug\net10.0\refint\Montra.BLL.dll
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\obj\Debug\net10.0\Montra.BLL.pdb
+C:\Users\doanv\source\repos\Assigment2_therapy\Montra.BLL\obj\Debug\net10.0\ref\Montra.BLL.dll

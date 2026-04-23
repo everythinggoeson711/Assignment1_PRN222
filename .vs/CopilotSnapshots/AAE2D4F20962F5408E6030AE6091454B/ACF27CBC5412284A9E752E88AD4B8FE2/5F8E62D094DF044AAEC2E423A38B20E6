@@ -1,0 +1,69 @@
+﻿using Assigment2_therapy.DAL.Entities;
+using System.ComponentModel.DataAnnotations;
+
+namespace Assigment2_therapy.Models.ViewModels
+{
+    public class AppointmentFormViewModel
+    {
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng nhập tên bệnh nhân.")]
+        [Display(Name = "Họ tên bệnh nhân")]
+        public string PatientName { get; set; } = string.Empty;
+
+        [Display(Name = "Số điện thoại")]
+        public string PatientPhone { get; set; } = string.Empty;
+
+        [Display(Name = "Email")]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ.")]
+        public string PatientEmail { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Vui lòng chọn chuyên gia.")]
+        [Display(Name = "Chuyên gia")]
+        public int TherapistId { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng chọn dịch vụ.")]
+        [Display(Name = "Dịch vụ")]
+        public int ServiceId { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng chọn ngày hẹn.")]
+        [Display(Name = "Ngày hẹn")]
+        [DataType(DataType.Date)]
+        public DateTime AppointmentDate { get; set; } = DateTime.Today.AddDays(1);
+
+        [Required(ErrorMessage = "Vui lòng chọn khung giờ.")]
+        [Display(Name = "Khung giờ")]
+        public string TimeSlot { get; set; } = string.Empty;
+
+        [Display(Name = "Ghi chú trị liệu")]
+        public string? TherapyNotes { get; set; }
+
+        // Dropdowns
+        public List<Therapist> Therapists { get; set; } = new();
+        public List<TherapyService> Services { get; set; } = new();
+
+        public static List<string> TimeSlots => new()
+        {
+            "08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00",
+            "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00",
+            "16:00 - 17:00", "17:00 - 18:00"
+        };
+    }
+
+    public class AppointmentListViewModel
+    {
+        public string? PatientName { get; set; }
+        public int? TherapistId { get; set; }
+        public AppointmentStatus? Status { get; set; }
+        public DateTime? Date { get; set; }
+        public List<Appointment> Appointments { get; set; } = new();
+        public List<Therapist> Therapists { get; set; } = new();
+    }
+
+    public class UpdateStatusViewModel
+    {
+        public int Id { get; set; }
+        public AppointmentStatus Status { get; set; }
+        public string? TherapyNotes { get; set; }
+    }
+}

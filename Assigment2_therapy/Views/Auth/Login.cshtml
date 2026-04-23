@@ -1,0 +1,38 @@
+@model Assigment2_therapy.Models.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Đăng nhập";
+    Layout = "_Layout";
+}
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="text-center mb-4">
+            <div style="font-size:3rem">🧠</div>
+            <h4 class="fw-bold" style="color:#1a2f4b">Montra Therapy</h4>
+            <p class="text-muted small">Hệ thống quản lý trị liệu tâm lý</p>
+        </div>
+
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="All" class="alert alert-danger py-2 small" style="display:@(ViewContext.ModelState.ErrorCount > 0 ? "block" : "none")"></div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label fw-semibold"></label>
+                <input asp-for="Email" class="form-control" placeholder="your@email.com" />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="Password" class="form-label fw-semibold"></label>
+                <input asp-for="Password" class="form-control" placeholder="••••••••" />
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+            <button type="submit" class="btn w-100 text-white fw-semibold" style="background:#2ecc71">
+                Đăng nhập →
+            </button>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

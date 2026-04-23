@@ -1,0 +1,91 @@
+@model AppointmentListViewModel
+@{
+    ViewData["Title"] = "Lịch hẹn của tôi";
+}
+
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form method="get" class="row g-2 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label small fw-semibold">📌 Trạng thái</label>
+                <select name="status" class="form-select">
+                    <option value="">-- Tất cả --</option>
+                    <option value="0" selected="@(Model.Status == AppointmentStatus.Pending)">⏳ Chờ xác nhận</option>
+                    <option value="1" selected="@(Model.Status == AppointmentStatus.Confirmed)">📋 Đã xác nhận</option>
+                    <option value="2" selected="@(Model.Status == AppointmentStatus.Completed)">✅ Hoàn tất</option>
+                    <option value="3" selected="@(Model.Status == AppointmentStatus.Cancelled)">❌ Đã hủy</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label small fw-semibold">📅 Ngày hẹn</label>
+                <input type="date" name="date" value="@Model.Date?.ToString("yyyy-MM-dd")" class="form-control" />
+            </div>
+            <div class="col-md-4 d-flex gap-1">
+                <button type="submit" class="btn btn-primary flex-fill">Lọc</button>
+                <a asp-action="Appointments" class="btn btn-outline-secondary">↺</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-header">
+        📅 Kết quả: <strong>@Model.Appointments.Count</strong> lịch hẹn
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Bệnh nhân</th>
+                        <th>Dịch vụ</th>
+                        <th>Ngày hẹn</th>
+                        <th>Khung giờ</th>
+                        <th>Trạng thái</th>
+                        <th class="text-end">Chi tiết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var a in Model.Appointments)
+                    {
+                        var (cls, lbl) = a.Status switch
+                        {
+                            AppointmentStatus.Pending   => ("badge-pending",   "Chờ xác nhận"),
+                            AppointmentStatus.Confirmed => ("badge-confirmed", "Đã xác nhận"),
+                            AppointmentStatus.Completed => ("badge-completed", "Hoàn tất"),
+                            _                           => ("badge-cancelled", "Đã hủy")
+                        };
+                        <tr>
+                            <td>
+                                <div class="fw-semibold">@a.PatientName</div>
+                                <div class="text-muted small">@a.PatientPhone</div>
+                            </td>
+                            <td>
+                                <div>@a.Service?.Name</div>
+                                <div class="text-muted small">@a.Service?.DurationMinutes phút</div>
+                            </td>
+                            <td>@a.AppointmentDate.ToString("dd/MM/yyyy")</td>
+                            <td><span class="badge bg-light text-dark border">@a.TimeSlot</span></td>
+                            <td><span class="badge @cls">@lbl</span></td>
+                            <td class="text-end">
+                                <a asp-action="AppointmentDetail" asp-route-id="@a.Id"
+                                   class="btn btn-sm btn-outline-primary">Xem →</a>
+                            </td>
+                        </tr>
+                    }
+                    @if (!Model.Appointments.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">
+                                Không tìm thấy lịch hẹn nào.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

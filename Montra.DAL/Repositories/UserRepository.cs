@@ -1,0 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using Montra.DAL.Context;
+using Montra.DAL.Entities;
+
+namespace Montra.DAL.Repositories
+{
+    public class UserRepository : IUserRepository
+    {
+        private readonly AppDbContext _db;
+        public UserRepository(AppDbContext db) => _db = db;
+
+        public async Task<User?> GetByIdAsync(int id)        => await _db.Users.FindAsync(id);
+        public async Task<User?> GetByEmailAsync(string email) => await _db.Users.FirstOrDefaultAsync(u => u.Email == email);
+        public async Task AddAsync(User user)                => await _db.Users.AddAsync(user);
+        public async Task SaveChangesAsync()                 => await _db.SaveChangesAsync();
+    }
+}

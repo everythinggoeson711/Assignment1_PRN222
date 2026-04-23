@@ -1,0 +1,83 @@
+@model Assigment2_therapy.Models.ViewModels.TherapistSearchViewModel
+@{
+    ViewData["Title"] = "Quản lý Chuyên gia";
+}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form method="get" class="row g-2 align-items-end">
+            <div class="col-md-5">
+                <label class="form-label small fw-semibold">🔍 Tìm kiếm</label>
+                <input type="text" name="search" value="@Model.Search" class="form-control" placeholder="Tên chuyên gia, chuyên môn..." />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label small fw-semibold">🏷️ Chuyên môn</label>
+                <select name="specialty" class="form-select">
+                    <option value="">-- Tất cả --</option>
+                    @foreach (var s in Model.Specialties)
+                    {
+                        <option value="@s" selected="@(Model.Specialty == s)">@s</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary w-100">Lọc</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>👥 Danh sách chuyên gia (@Model.Therapists.Count)</span>
+        <a asp-action="CreateTherapist" class="btn btn-success btn-sm">+ Thêm mới</a>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Họ tên</th>
+                        <th>Chuyên môn</th>
+                        <th>Điện thoại</th>
+                        <th>Email</th>
+                        <th>Trạng thái</th>
+                        <th class="text-end">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in Model.Therapists)
+                    {
+                        <tr>
+                            <td>@t.Id</td>
+                            <td class="fw-semibold">@t.Name</td>
+                            <td><span class="badge bg-info text-dark">@t.Specialty</span></td>
+                            <td>@t.Phone</td>
+                            <td>@t.User?.Email</td>
+                            <td>
+                                @if (t.IsActive)
+                                { <span class="badge bg-success">Hoạt động</span> }
+                                else
+                                { <span class="badge bg-secondary">Tạm dừng</span> }
+                            </td>
+                            <td class="text-end">
+                                <a asp-action="EditTherapist" asp-route-id="@t.Id" class="btn btn-sm btn-outline-primary">Sửa</a>
+                                <form asp-action="DeleteTherapist" method="post" class="d-inline"
+                                      onsubmit="return confirm('Xác nhận xóa chuyên gia @t.Name?')">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@t.Id" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                    @if (!Model.Therapists.Any())
+                    {
+                        <tr><td colspan="7" class="text-center text-muted py-4">Không tìm thấy chuyên gia nào.</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

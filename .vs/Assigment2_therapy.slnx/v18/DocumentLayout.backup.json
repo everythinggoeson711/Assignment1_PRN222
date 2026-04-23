@@ -1,0 +1,862 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\admin\\services.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\admin\\services.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\admin\\edittherapist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\admin\\edittherapist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\admin\\createtherapist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\admin\\createtherapist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\admin\\therapists.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\admin\\therapists.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\admin\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\admin\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\models\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\models\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\models\\viewmodels\\serviceviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\models\\viewmodels\\serviceviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\models\\viewmodels\\appointmentviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\models\\viewmodels\\appointmentviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\models\\viewmodels\\therapistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\models\\viewmodels\\therapistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\models\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\models\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\entities\\therapist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\entities\\therapist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\entities\\therapyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\entities\\therapyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\entities\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\entities\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\repositories\\itherapistrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\repositories\\itherapistrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\repositories\\therapistrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\repositories\\therapistrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\repositories\\iservicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\repositories\\iservicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\repositories\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\repositories\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\repositories\\iappointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\repositories\\iappointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.dal\\repositories\\appointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23830192-C6AD-2514-2144-5457E5A01E50}|Montra.DAL\\Montra.DAL.csproj|solutionrelative:montra.dal\\repositories\\appointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.bll\\services\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|solutionrelative:montra.bll\\services\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.bll\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|solutionrelative:montra.bll\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.bll\\services\\itherapistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|solutionrelative:montra.bll\\services\\itherapistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.bll\\services\\therapistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|solutionrelative:montra.bll\\services\\therapistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.bll\\services\\itherapyservicebll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|solutionrelative:montra.bll\\services\\itherapyservicebll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.bll\\services\\therapyservicebll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|solutionrelative:montra.bll\\services\\therapyservicebll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.bll\\services\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|solutionrelative:montra.bll\\services\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\montra.bll\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEA8473F-C19D-C928-F40E-37ECC82EFC6B}|Montra.BLL\\Montra.BLL.csproj|solutionrelative:montra.bll\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\controllers\\therapistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\controllers\\therapistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\admin\\createservice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\admin\\createservice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\admin\\editservice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\admin\\editservice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\admin\\appointments.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\admin\\appointments.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\admin\\createappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\admin\\createappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\admin\\reports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\admin\\reports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\therapist\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\therapist\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\therapist\\appointments.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\therapist\\appointments.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|c:\\users\\doanv\\source\\repos\\assigment2_therapy\\assigment2_therapy\\views\\therapist\\appointmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C12796AE-36B9-45FC-99B1-BEB7017337DD}|Assigment2_therapy\\Assigment2_therapy.csproj|solutionrelative:assigment2_therapy\\views\\therapist\\appointmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 282,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "CreateAppointment.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\CreateAppointment.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Admin\\CreateAppointment.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\CreateAppointment.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Admin\\CreateAppointment.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T14:24:39.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Services.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\Services.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Admin\\Services.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\Services.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Admin\\Services.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T14:22:44.43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Reports.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\Reports.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Admin\\Reports.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\Reports.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Admin\\Reports.cshtml",
+              "ViewState": "AgIAAIgAAAAAAAAAAABBwKEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T14:25:05.964Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Therapist\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Therapist\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Therapist\\Dashboard.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Therapist\\Dashboard.cshtml",
+              "ViewState": "AgIAAFEAAAAAAAAAAABBwHEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T14:26:38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Appointments.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\Appointments.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Admin\\Appointments.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\Appointments.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Admin\\Appointments.cshtml",
+              "ViewState": "AgIAAEwAAAAAAAAAAABBwHMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T14:23:50.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "AppointmentDetail.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Therapist\\AppointmentDetail.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Therapist\\AppointmentDetail.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Therapist\\AppointmentDetail.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Therapist\\AppointmentDetail.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T14:27:28.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Entities\\User.cs",
+              "RelativeToolTip": "Montra.DAL\\Entities\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:06:51.981Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "Appointments.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Therapist\\Appointments.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Therapist\\Appointments.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Therapist\\Appointments.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Therapist\\Appointments.cshtml",
+              "ViewState": "AgIAADoAAAAAAAAAAABBwFsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T14:27:06.97Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Program.cs",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Program.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Program.cs",
+              "RelativeToolTip": "Assigment2_therapy\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T13:20:23.157Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Assigment2_therapy\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:14:08.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Assigment2_therapy\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:16:45.659Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "EditService.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\EditService.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Admin\\EditService.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\EditService.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Admin\\EditService.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T14:20:34.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "CreateService.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\CreateService.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Admin\\CreateService.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\CreateService.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Admin\\CreateService.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T14:19:39.254Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T14:19:10.034Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "TherapistController.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Controllers\\TherapistController.cs",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Controllers\\TherapistController.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Controllers\\TherapistController.cs",
+              "RelativeToolTip": "Assigment2_therapy\\Controllers\\TherapistController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:18:01.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ITherapyServiceBLL.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\ITherapyServiceBLL.cs",
+              "RelativeDocumentMoniker": "Montra.BLL\\Services\\ITherapyServiceBLL.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\ITherapyServiceBLL.cs",
+              "RelativeToolTip": "Montra.BLL\\Services\\ITherapyServiceBLL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:12:03.314Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "TherapyServiceBLL.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\TherapyServiceBLL.cs",
+              "RelativeDocumentMoniker": "Montra.BLL\\Services\\TherapyServiceBLL.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\TherapyServiceBLL.cs",
+              "RelativeToolTip": "Montra.BLL\\Services\\TherapyServiceBLL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:12:10.011Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "AppointmentService.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\AppointmentService.cs",
+              "RelativeDocumentMoniker": "Montra.BLL\\Services\\AppointmentService.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\AppointmentService.cs",
+              "RelativeToolTip": "Montra.BLL\\Services\\AppointmentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:12:44.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "IAppointmentService.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\IAppointmentService.cs",
+              "RelativeDocumentMoniker": "Montra.BLL\\Services\\IAppointmentService.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\IAppointmentService.cs",
+              "RelativeToolTip": "Montra.BLL\\Services\\IAppointmentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:12:26.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\IAuthService.cs",
+              "RelativeDocumentMoniker": "Montra.BLL\\Services\\IAuthService.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\IAuthService.cs",
+              "RelativeToolTip": "Montra.BLL\\Services\\IAuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:11:16.796Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ServiceRepository.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\ServiceRepository.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Repositories\\ServiceRepository.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\ServiceRepository.cs",
+              "RelativeToolTip": "Montra.DAL\\Repositories\\ServiceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:10:24.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "IServiceRepository.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\IServiceRepository.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Repositories\\IServiceRepository.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\IServiceRepository.cs",
+              "RelativeToolTip": "Montra.DAL\\Repositories\\IServiceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:10:10.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "TherapistService.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\TherapistService.cs",
+              "RelativeDocumentMoniker": "Montra.BLL\\Services\\TherapistService.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\TherapistService.cs",
+              "RelativeToolTip": "Montra.BLL\\Services\\TherapistService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:11:54.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ITherapistService.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\ITherapistService.cs",
+              "RelativeDocumentMoniker": "Montra.BLL\\Services\\ITherapistService.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\ITherapistService.cs",
+              "RelativeToolTip": "Montra.BLL\\Services\\ITherapistService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:11:36.028Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "Montra.BLL\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.BLL\\Services\\AuthService.cs",
+              "RelativeToolTip": "Montra.BLL\\Services\\AuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:11:30.324Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "AppointmentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\AppointmentRepository.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Repositories\\AppointmentRepository.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\AppointmentRepository.cs",
+              "RelativeToolTip": "Montra.DAL\\Repositories\\AppointmentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:11:06.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "IAppointmentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\IAppointmentRepository.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Repositories\\IAppointmentRepository.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\IAppointmentRepository.cs",
+              "RelativeToolTip": "Montra.DAL\\Repositories\\IAppointmentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:10:32.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "TherapistRepository.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\TherapistRepository.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Repositories\\TherapistRepository.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\TherapistRepository.cs",
+              "RelativeToolTip": "Montra.DAL\\Repositories\\TherapistRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:09:57.293Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Context\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Context\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Context\\AppDbContext.cs",
+              "RelativeToolTip": "Montra.DAL\\Context\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:08:41.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T13:09:14.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Auth\\Login.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Auth\\Login.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Auth\\Login.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Auth\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T13:23:25.545Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Admin\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\Dashboard.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Admin\\Dashboard.cshtml",
+              "ViewState": "AgIAAEUAAAAAAAAAAABBwFQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T13:23:42.058Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Therapists.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\Therapists.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Admin\\Therapists.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\Therapists.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Admin\\Therapists.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T13:24:24.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ITherapistRepository.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\ITherapistRepository.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Repositories\\ITherapistRepository.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\ITherapistRepository.cs",
+              "RelativeToolTip": "Montra.DAL\\Repositories\\ITherapistRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:09:30.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "Montra.DAL\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:09:12.839Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Repositories\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Repositories\\IUserRepository.cs",
+              "RelativeToolTip": "Montra.DAL\\Repositories\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:08:57.231Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Appointment.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Entities\\Appointment.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Entities\\Appointment.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Entities\\Appointment.cs",
+              "RelativeToolTip": "Montra.DAL\\Entities\\Appointment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:07:24.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "TherapyService.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Entities\\TherapyService.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Entities\\TherapyService.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Entities\\TherapyService.cs",
+              "RelativeToolTip": "Montra.DAL\\Entities\\TherapyService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:07:15.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Therapist.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Entities\\Therapist.cs",
+              "RelativeDocumentMoniker": "Montra.DAL\\Entities\\Therapist.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Entities\\Therapist.cs",
+              "RelativeToolTip": "Montra.DAL\\Entities\\Therapist.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T14:07:04.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CreateTherapist.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\CreateTherapist.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Admin\\CreateTherapist.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\CreateTherapist.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Admin\\CreateTherapist.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T13:24:44.153Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EditTherapist.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\EditTherapist.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Admin\\EditTherapist.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Admin\\EditTherapist.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Admin\\EditTherapist.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T13:25:09.981Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T13:23:12.524Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\appsettings.json",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\appsettings.json",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\appsettings.json",
+              "RelativeToolTip": "Assigment2_therapy\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-22T13:19:51.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DashboardViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Models\\ViewModels\\DashboardViewModel.cs",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Models\\ViewModels\\DashboardViewModel.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Models\\ViewModels\\DashboardViewModel.cs",
+              "RelativeToolTip": "Assigment2_therapy\\Models\\ViewModels\\DashboardViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAxwBcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T13:17:00.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ServiceViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Models\\ViewModels\\ServiceViewModel.cs",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Models\\ViewModels\\ServiceViewModel.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Models\\ViewModels\\ServiceViewModel.cs",
+              "RelativeToolTip": "Assigment2_therapy\\Models\\ViewModels\\ServiceViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T13:16:49.12Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AppointmentViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Models\\ViewModels\\AppointmentViewModel.cs",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Models\\ViewModels\\AppointmentViewModel.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Models\\ViewModels\\AppointmentViewModel.cs",
+              "RelativeToolTip": "Assigment2_therapy\\Models\\ViewModels\\AppointmentViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAABBwEUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T13:16:41.452Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "TherapistViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Models\\ViewModels\\TherapistViewModel.cs",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Models\\ViewModels\\TherapistViewModel.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Models\\ViewModels\\TherapistViewModel.cs",
+              "RelativeToolTip": "Assigment2_therapy\\Models\\ViewModels\\TherapistViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAABBwCwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T13:16:30.652Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Models\\ViewModels\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Models\\ViewModels\\LoginViewModel.cs",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Models\\ViewModels\\LoginViewModel.cs",
+              "RelativeToolTip": "Assigment2_therapy\\Models\\ViewModels\\LoginViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T13:16:12.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "Assigment2_therapy\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Assigment2_therapy\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "Assigment2_therapy\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-22T13:09:15.232Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

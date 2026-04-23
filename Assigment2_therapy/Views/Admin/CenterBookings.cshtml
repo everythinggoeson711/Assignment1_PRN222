@@ -1,0 +1,171 @@
+@model Assigment2_therapy.Models.ViewModels.CenterBookingManagementViewModel
+@{
+    ViewData["Title"] = "Center Bookings";
+
+    string BookingBadgeClass(string status) => status switch
+    {
+        "PendingPayment" => "bg-warning text-dark",
+        "Confirmed" => "bg-success",
+        "Expired" => "bg-secondary",
+        "PaymentFailed" => "bg-danger",
+        "ManualReview" => "bg-info text-dark",
+        "Canceled" => "bg-dark",
+        _ => "bg-light text-dark"
+    };
+
+    string PaymentBadgeClass(string status) => status switch
+    {
+        "Pending" => "bg-warning text-dark",
+        "Paid" => "bg-success",
+        "Expired" => "bg-secondary",
+        "Failed" => "bg-danger",
+        "Canceled" => "bg-dark",
+        _ => "bg-light text-dark"
+    };
+}
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#4f46e5,#7c3aed)">
+            <div class="stat-value">@Model.TotalBookings</div>
+            <div class="stat-label">Tổng bookings</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#f59e0b,#f97316)">
+            <div class="stat-value">@Model.PendingPaymentCount</div>
+            <div class="stat-label">PendingPayment</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#10b981,#22c55e)">
+            <div class="stat-value">@Model.ConfirmedCount</div>
+            <div class="stat-label">Confirmed</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#64748b,#475569)">
+            <div class="stat-value">@Model.ExpiredCount</div>
+            <div class="stat-label">Expired</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#ef4444,#dc2626)">
+            <div class="stat-value">@Model.PaymentFailedCount</div>
+            <div class="stat-label">PaymentFailed</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+        <div class="stat-card" style="background:linear-gradient(135deg,#06b6d4,#0ea5e9)">
+            <div class="stat-value">@Model.ManualReviewCount</div>
+            <div class="stat-label">ManualReview</div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form method="get" class="row g-2 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label small fw-semibold">🔎 Tìm kiếm</label>
+                <input type="text" name="search" value="@Model.Search" class="form-control" placeholder="Tên, email, số điện thoại" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label small fw-semibold">🏷️ Booking status</label>
+                <select name="bookingStatus" class="form-select">
+                    <option value="">-- Tất cả --</option>
+                    @foreach (var option in Model.StatusOptions)
+                    {
+                        <option value="@option" selected="@(Model.BookingStatus == option)">@option</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label small fw-semibold">📆 Ngày hẹn</label>
+                <input type="date" name="appointmentDate" value="@Model.AppointmentDate?.ToString("yyyy-MM-dd")" class="form-control" />
+            </div>
+            <div class="col-md-2 d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100">Lọc</button>
+                <a asp-action="CenterBookings" class="btn btn-outline-secondary">Reset</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>💳 Center booking queue (@Model.Bookings.Count)</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Participant</th>
+                        <th>Service</th>
+                        <th>Clinician</th>
+                        <th>Schedule</th>
+                        <th>Booking</th>
+                        <th>Payment</th>
+                        <th>Checkout</th>
+                        <th>Appointment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var booking in Model.Bookings)
+                    {
+                        <tr>
+                            <td>@booking.Id</td>
+                            <td>
+                                <div class="fw-semibold">@booking.ParticipantName</div>
+                                <div class="small text-muted">@booking.ParticipantEmail</div>
+                                <div class="small text-muted">@booking.ParticipantPhone</div>
+                            </td>
+                            <td>
+                                <div class="fw-semibold">@booking.Service?.Name</div>
+                                <div class="small text-success">@booking.Amount.ToString("N0")đ</div>
+                            </td>
+                            <td>
+                                <div>@booking.Therapist?.Name</div>
+                                <div class="small text-muted">@booking.Therapist?.Specialty</div>
+                            </td>
+                            <td>
+                                <div>@booking.AppointmentDate.ToString("dd/MM/yyyy")</div>
+                                <div class="small text-muted">@booking.TimeSlot</div>
+                            </td>
+                            <td>
+                                <span class="badge @BookingBadgeClass(booking.BookingStatus)">@booking.BookingStatus</span>
+                                <div class="small text-muted mt-1">@booking.CreatedAt.ToString("dd/MM/yyyy HH:mm")</div>
+                            </td>
+                            <td>
+                                <span class="badge @PaymentBadgeClass(booking.PaymentStatus)">@booking.PaymentStatus</span>
+                                <div class="small text-muted mt-1">@(booking.PaidAt?.ToString("dd/MM/yyyy HH:mm") ?? "Chưa thanh toán")</div>
+                            </td>
+                            <td>
+                                <div class="small text-muted">Session: @(string.IsNullOrWhiteSpace(booking.StripeSessionId) ? "N/A" : booking.StripeSessionId)</div>
+                                <div class="small text-muted">Expires: @(booking.ExpiresAt?.ToString("dd/MM/yyyy HH:mm") ?? "N/A")</div>
+                            </td>
+                            <td>
+                                @if (booking.AppointmentId.HasValue)
+                                {
+                                    <span class="badge bg-success">#@booking.AppointmentId</span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted small">Chưa tạo lịch hẹn</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                    @if (!Model.Bookings.Any())
+                    {
+                        <tr>
+                            <td colspan="9" class="text-center text-muted py-4">Không có center booking nào theo bộ lọc hiện tại.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

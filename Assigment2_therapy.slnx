@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Assigment2_therapy/Assigment2_therapy.csproj" />
+  <Project Path="Montra.BLL/Montra.BLL.csproj" />
+  <Project Path="Montra.DAL/Montra.DAL.csproj" />
+</Solution>

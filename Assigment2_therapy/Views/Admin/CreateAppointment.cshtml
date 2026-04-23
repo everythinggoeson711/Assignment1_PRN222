@@ -1,0 +1,86 @@
+@model AppointmentFormViewModel
+@{
+    ViewData["Title"] = "Đặt lịch hẹn mới";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">📅 Thông tin lịch hẹn</div>
+            <div class="card-body">
+                <form asp-action="CreateAppointment" method="post">
+                    <div asp-validation-summary="All" class="alert alert-danger py-2 small"></div>
+
+                    <h6 class="text-muted mb-3">👤 Thông tin bệnh nhân</h6>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="PatientName" class="form-label fw-semibold"></label>
+                            <input asp-for="PatientName" class="form-control" placeholder="Họ và tên..." />
+                            <span asp-validation-for="PatientName" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="PatientPhone" class="form-label fw-semibold"></label>
+                            <input asp-for="PatientPhone" class="form-control" placeholder="09xxxxxxxx" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="PatientEmail" class="form-label fw-semibold"></label>
+                            <input asp-for="PatientEmail" class="form-control" placeholder="patient@email.com" />
+                            <span asp-validation-for="PatientEmail" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <h6 class="text-muted mb-3">🩺 Thông tin buổi trị liệu</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="TherapistId" class="form-label fw-semibold"></label>
+                            <select asp-for="TherapistId" class="form-select">
+                                <option value="">-- Chọn chuyên gia --</option>
+                                @foreach (var t in Model.Therapists.Where(t => t.IsActive))
+                                {
+                                    <option value="@t.Id">@t.Name — @t.Specialty</option>
+                                }
+                            </select>
+                            <span asp-validation-for="TherapistId" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="ServiceId" class="form-label fw-semibold"></label>
+                            <select asp-for="ServiceId" class="form-select">
+                                <option value="">-- Chọn dịch vụ --</option>
+                                @foreach (var s in Model.Services.Where(s => s.IsActive))
+                                {
+                                    <option value="@s.Id">@s.Name — @s.Price.ToString("N0")đ</option>
+                                }
+                            </select>
+                            <span asp-validation-for="ServiceId" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="AppointmentDate" class="form-label fw-semibold"></label>
+                            <input asp-for="AppointmentDate" type="date" class="form-control"
+                                   min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" />
+                            <span asp-validation-for="AppointmentDate" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="TimeSlot" class="form-label fw-semibold"></label>
+                            <select asp-for="TimeSlot" class="form-select">
+                                <option value="">-- Chọn khung giờ --</option>
+                                @foreach (var slot in AppointmentFormViewModel.TimeSlots)
+                                {
+                                    <option value="@slot">@slot</option>
+                                }
+                            </select>
+                            <span asp-validation-for="TimeSlot" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2 mt-4">
+                        <button type="submit" class="btn btn-success">💾 Đặt lịch</button>
+                        <a asp-action="Appointments" class="btn btn-outline-secondary">Hủy</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts { @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} }
+

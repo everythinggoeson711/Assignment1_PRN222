@@ -1,0 +1,84 @@
+﻿@model Assigment2_therapy.Models.ViewModels.AdminDashboardViewModel
+@using Montra.DAL.Entities
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-3">
+        <div class="stat-card" style="background:linear-gradient(135deg,#667eea,#764ba2)">
+            <div class="stat-icon">👥</div>
+            <div class="stat-value">@Model.TotalTherapists</div>
+            <div class="stat-label">Chuyên gia</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="stat-card" style="background:linear-gradient(135deg,#f093fb,#f5576c)">
+            <div class="stat-icon">📅</div>
+            <div class="stat-value">@Model.TotalAppointments</div>
+            <div class="stat-label">Tổng lịch hẹn</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="stat-card" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-value">@Model.PendingAppointments</div>
+            <div class="stat-label">Chờ xác nhận</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="stat-card" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">
+            <div class="stat-icon">💰</div>
+            <div class="stat-value">@Model.TotalRevenue.ToString("N0")đ</div>
+            <div class="stat-label">Doanh thu</div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <span>📋 Lịch hẹn gần đây</span>
+        <a asp-controller="Admin" asp-action="Appointments" class="btn btn-sm btn-outline-primary">Xem tất cả</a>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Bệnh nhân</th>
+                        <th>Chuyên gia</th>
+                        <th>Dịch vụ</th>
+                        <th>Ngày hẹn</th>
+                        <th>Khung giờ</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var a in Model.RecentAppointments)
+                    {
+                        <tr>
+                            <td>@a.PatientName</td>
+                            <td>@a.Therapist?.Name</td>
+                            <td>@a.Service?.Name</td>
+                            <td>@a.AppointmentDate.ToString("dd/MM/yyyy")</td>
+                            <td>@a.TimeSlot</td>
+                            <td>
+                                <span class="badge @(a.Status == Assigment2_therapy.DAL.Entities.AppointmentStatus.Pending ? "badge-pending" :
+                                    a.Status == Assigment2_therapy.DAL.Entities.AppointmentStatus.Confirmed ? "badge-confirmed" :
+                                    a.Status == Assigment2_therapy.DAL.Entities.AppointmentStatus.Completed ? "badge-completed" : "badge-cancelled")">
+                                    @(a.Status == Assigment2_therapy.DAL.Entities.AppointmentStatus.Pending ? "Chờ xác nhận" :
+                                      a.Status == Assigment2_therapy.DAL.Entities.AppointmentStatus.Confirmed ? "Đã xác nhận" :
+                                      a.Status == Assigment2_therapy.DAL.Entities.AppointmentStatus.Completed ? "Hoàn tất" : "Đã hủy")
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                    @if (!Model.RecentAppointments.Any())
+                    {
+                        <tr><td colspan="6" class="text-center text-muted py-4">Chưa có lịch hẹn nào.</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Montra.DAL.Entities;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace Montra.DAL.Context
+{
+    public class AppDbContext : DbContext
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+        public DbSet<User> Users => Set<User>();
+        public DbSet<Therapist> Therapists => Set<Therapist>();
+        public DbSet<TherapyService> TherapyServices => Set<TherapyService>();
+        public DbSet<Appointment> Appointments => Set<Appointment>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<TherapyService>()
+                .Property(s => s.Price)
+                .HasColumnType("decimal(18,2)");
+
+            // ── Seed Users ──────────────────────────────────────────
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = 1, FullName = "Quản Trị Viên",   Email = "admin@montra.com",     PasswordHash = Hash("Admin@123"),      Role = "Admin",     CreatedAt = new DateTime(2024, 1, 1) },
+                new User { Id = 2, FullName = "Nguyễn Minh Khoa", Email = "khoa@montra.com",      PasswordHash = Hash("Therapist@123"),  Role = "Therapist", CreatedAt = new DateTime(2024, 1, 1) },
+                new User { Id = 3, FullName = "Trần Thị Lan",     Email = "lan@montra.com",       PasswordHash = Hash("Therapist@123"),  Role = "Therapist", CreatedAt = new DateTime(2024, 1, 1) }
+            );
+
+            // ── Seed Therapists ────────────────────────────────────
+            modelBuilder.Entity<Therapist>().HasData(
+                new Therapist { Id = 1, UserId = 2, Name = "Nguyễn Minh Khoa", Specialty = "Trầm cảm",       Bio = "Chuyên gia tâm lý hơn 8 năm kinh nghiệm điều trị trầm cảm và rối loạn tâm trạng.", Phone = "0901234567", IsActive = true },
+                new Therapist { Id = 2, UserId = 3, Name = "Trần Thị Lan",     Specialty = "Rối loạn lo âu", Bio = "Tiến sĩ tâm lý lâm sàng, chuyên điều trị lo âu và stress mạn tính.",             Phone = "0907654321", IsActive = true }
+            );
+
+            // ── Seed TherapyServices ───────────────────────────────
+            modelBuilder.Entity<TherapyService>().HasData(
+                new TherapyService { Id = 1, Name = "Tư vấn cá nhân",             Description = "Phiên tư vấn 1-1 với chuyên gia.",               Price = 500000, DurationMinutes = 60,  IsActive = true },
+                new TherapyService { Id = 2, Name = "Trị liệu nhóm",              Description = "Trị liệu theo nhóm nhỏ 4-6 người.",              Price = 250000, DurationMinutes = 90,  IsActive = true },
+                new TherapyService { Id = 3, Name = "Tư vấn hôn nhân & gia đình", Description = "Tư vấn các vấn đề hôn nhân và quan hệ gia đình.", Price = 700000, DurationMinutes = 90,  IsActive = true }
+            );
+
+            // ── Seed Appointments ──────────────────────────────────
+            modelBuilder.Entity<Appointment>().HasData(
+                new Appointment { Id = 1, PatientName = "Lê Văn An",       PatientPhone = "0912000001", PatientEmail = "an@email.com",    TherapistId = 1, ServiceId = 1, AppointmentDate = new DateTime(2024, 6, 20), TimeSlot = "09:00 - 10:00", Status = AppointmentStatus.Confirmed, CreatedAt = new DateTime(2024, 6, 1) },
+                new Appointment { Id = 2, PatientName = "Phạm Thị Bình",   PatientPhone = "0912000002", PatientEmail = "binh@email.com",  TherapistId = 2, ServiceId = 2, AppointmentDate = new DateTime(2024, 6, 21), TimeSlot = "10:00 - 11:30", Status = AppointmentStatus.Pending,   CreatedAt = new DateTime(2024, 6, 2) },
+                new Appointment { Id = 3, PatientName = "Hoàng Văn Cường", PatientPhone = "0912000003", PatientEmail = "cuong@email.com", TherapistId = 1, ServiceId = 3, AppointmentDate = new DateTime(2024, 6, 19), TimeSlot = "14:00 - 15:30", Status = AppointmentStatus.Completed, TherapyNotes = "Bệnh nhân tiến triển tốt, giảm lo âu rõ rệt.", CreatedAt = new DateTime(2024, 6, 3) }
+            );
+        }
+
+        /// <summary>SHA-256 password hashing — used by both DbContext seed and AuthService.</summary>
+        public static string Hash(string password)
+        {
+            var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
+            return Convert.ToHexString(bytes).ToLower();
+        }
+    }
+}
