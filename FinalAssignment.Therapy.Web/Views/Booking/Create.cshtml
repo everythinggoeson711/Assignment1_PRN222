@@ -1,72 +1,203 @@
-@model BookingFormViewModel
+﻿@model BookingFormViewModel
 @{
     ViewData["Title"] = "Create Booking";
 }
 
-<section class="glass-panel">
-    <div class="section-heading mb-4">
-        <span class="eyebrow">Public Booking</span>
-        <h1>Create a therapy appointment</h1>
-        <p>The booking is stored asynchronously through the service layer and starts in <strong>PendingPayment</strong> so the background worker can expire stale unpaid records after 24 hours.</p>
-    </div>
-
-    <form asp-action="Create" method="post">
-        @Html.AntiForgeryToken()
-        <div asp-validation-summary="ModelOnly" class="text-warning mb-3"></div>
-        <div class="row g-3">
-            <div class="col-md-6">
-                <label asp-for="PatientName" class="form-label"></label>
-                <input asp-for="PatientName" class="form-control" />
-                <span asp-validation-for="PatientName" class="text-warning"></span>
-            </div>
-            <div class="col-md-6">
-                <label asp-for="PatientEmail" class="form-label"></label>
-                <input asp-for="PatientEmail" class="form-control" />
-                <span asp-validation-for="PatientEmail" class="text-warning"></span>
-            </div>
-            <div class="col-md-6">
-                <label asp-for="PatientPhone" class="form-label"></label>
-                <input asp-for="PatientPhone" class="form-control" />
-                <span asp-validation-for="PatientPhone" class="text-warning"></span>
-            </div>
-            <div class="col-md-6">
-                <label asp-for="AppointmentStartLocal" class="form-label"></label>
-                <input asp-for="AppointmentStartLocal" type="datetime-local" class="form-control" />
-                <span asp-validation-for="AppointmentStartLocal" class="text-warning"></span>
-            </div>
-            <div class="col-md-6">
-                <label asp-for="TherapistProfileId" class="form-label">Therapist</label>
-                <select asp-for="TherapistProfileId" class="form-select">
-                    <option value="">Choose therapist</option>
-                    @foreach (var therapist in Model.AvailableTherapists)
-                    {
-                        <option value="@therapist.Id">@therapist.Name - @therapist.Specialty</option>
-                    }
-                </select>
-                <span asp-validation-for="TherapistProfileId" class="text-warning"></span>
-            </div>
-            <div class="col-md-6">
-                <label asp-for="TherapyServiceId" class="form-label">Service</label>
-                <select asp-for="TherapyServiceId" class="form-select">
-                    <option value="">Choose service</option>
-                    @foreach (var service in Model.AvailableServices)
-                    {
-                        <option value="@service.Id">@service.Name - @service.Price.ToString("N0") VND</option>
-                    }
-                </select>
-                <span asp-validation-for="TherapyServiceId" class="text-warning"></span>
-            </div>
-            <div class="col-12">
-                <label asp-for="Notes" class="form-label"></label>
-                <textarea asp-for="Notes" rows="4" class="form-control"></textarea>
-                <span asp-validation-for="Notes" class="text-warning"></span>
+<div class="row">
+    <div class="col-lg-4 mb-4">
+        <div class="glass-panel h-100 bg-primary text-white" style="background: linear-gradient(135deg, #1a2f4b 0%, #2ecc71 100%) !important;">
+            <div class="p-2">
+                <span class="badge bg-white text-primary mb-3 px-3 py-2 rounded-pill fw-bold">Therapy Booking</span>
+                <h2 class="text-white fw-bold mb-4">Your journey to wellness starts here.</h2>
+                <p class="text-white-50 mb-4">
+                    Booking a therapy session is the first step towards better mental health. Our experts are here to guide you through a safe, confidential, and professional process.
+                </p>
+                <hr class="border-light opacity-25 mb-4" />
+                <ul class="list-unstyled">
+                    <li class="mb-3 d-flex align-items-center gap-3">
+                        <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 40px; height: 40px;">
+                            <i class="bi bi-shield-check fs-5"></i>
+                        </div>
+                        <span>100% Confidential & Secure</span>
+                    </li>
+                    <li class="mb-3 d-flex align-items-center gap-3">
+                        <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 40px; height: 40px;">
+                            <i class="bi bi-person-heart fs-5"></i>
+                        </div>
+                        <span>Verified & Experienced Therapists</span>
+                    </li>
+                    <li class="mb-3 d-flex align-items-center gap-3">
+                        <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 40px; height: 40px;">
+                            <i class="bi bi-credit-card fs-5"></i>
+                        </div>
+                        <span>Easy Online Payment</span>
+                    </li>
+                </ul>
+                
+                <div class="mt-5 p-3 bg-white bg-opacity-10 rounded-3 border border-light border-opacity-25">
+                    <p class="small text-white mb-0">
+                        <strong>Need help choosing?</strong> Use the Live Chat widget in the bottom right corner to consult with our support team before booking.
+                    </p>
+                </div>
             </div>
         </div>
+    </div>
+    
+    <div class="col-lg-8">
+        <section class="glass-panel">
+            <div class="section-heading mb-4">
+                <span class="eyebrow">Appointment Details</span>
+                <h2>Schedule Your Session</h2>
+            </div>
 
-        <button type="submit" class="btn btn-primary mt-4">Submit Booking</button>
-    </form>
-</section>
+            <form asp-action="Create" method="post" class="needs-validation">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4"></div>
+                
+                <h5 class="mb-3 text-primary fw-bold border-bottom pb-2">1. Personal Information</h5>
+                <div class="row g-4 mb-4">
+                    <div class="col-md-12">
+                        <label asp-for="PatientName" class="form-label fw-bold text-dark">Full Name <span class="text-danger">*</span></label>
+                        <input asp-for="PatientName" class="form-control form-control-lg bg-light" placeholder="e.g., Nguyen Van A" />
+                        <span asp-validation-for="PatientName" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="PatientEmail" class="form-label fw-bold text-dark">Email Address <span class="text-danger">*</span></label>
+                        <input asp-for="PatientEmail" class="form-control form-control-lg bg-light" placeholder="email@example.com" />
+                        <span asp-validation-for="PatientEmail" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="PatientPhone" class="form-label fw-bold text-dark">Phone Number <span class="text-danger">*</span></label>
+                        <input asp-for="PatientPhone" class="form-control form-control-lg bg-light" placeholder="0901234567" />
+                        <span asp-validation-for="PatientPhone" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <h5 class="mb-3 text-primary fw-bold border-bottom pb-2 mt-2">2. Service & Therapist</h5>
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <label asp-for="TherapyServiceId" class="form-label fw-bold text-dark">Select Service <span class="text-danger">*</span></label>
+                        <select asp-for="TherapyServiceId" class="form-select form-select-lg bg-light" id="serviceSelect">
+                            <option value="">-- Choose a service --</option>
+                            @foreach (var service in Model.AvailableServices)
+                            {
+                                <option value="@service.Id">@service.Name - @service.Price.ToString("N0") VND</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TherapyServiceId" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="TherapistProfileId" class="form-label fw-bold text-dark">Select Therapist <span class="text-danger">*</span></label>
+                        <select asp-for="TherapistProfileId" class="form-select form-select-lg bg-light" id="therapistSelect">
+                            <option value="">-- Choose a therapist --</option>
+                            @foreach (var therapist in Model.AvailableTherapists)
+                            {
+                                <option value="@therapist.Id">@therapist.Name - @therapist.Specialty</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TherapistProfileId" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <h5 class="mb-3 text-primary fw-bold border-bottom pb-2 mt-2">3. Date & Time</h5>
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold text-dark">Select Date <span class="text-danger">*</span></label>
+                        <input type="date" id="bookingDate" class="form-control form-control-lg bg-light" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold text-dark">Available Time Slots <span class="text-danger">*</span></label>
+                        <div class="d-flex align-items-center">
+                            <select id="timeSlotSelect" class="form-select form-select-lg bg-light flex-grow-1" disabled>
+                                <option value="">Select date, therapist, and service first</option>
+                            </select>
+                            <div id="loadingSlots" class="spinner-border text-primary ms-3" role="status" style="display: none;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-12">
+                        <label asp-for="Notes" class="form-label fw-bold text-dark">Additional Notes (Optional)</label>
+                        <textarea asp-for="Notes" rows="3" class="form-control bg-light" placeholder="Is there anything specific you would like the therapist to know before the session?"></textarea>
+                        <span asp-validation-for="Notes" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <input type="hidden" asp-for="AppointmentStartLocal" id="appointmentStartLocal" />
+
+                <div class="d-grid mt-4 pt-3 border-top">
+                    <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm" style="background: #2ecc71; border-color: #2ecc71;">
+                        Confirm Booking & Proceed to Payment
+                    </button>
+                    <p class="text-center text-muted small mt-3">
+                        By confirming, you agree to our Terms of Service and Cancellation Policy.
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            const $therapistSelect = $('#therapistSelect');
+            const $serviceSelect = $('#serviceSelect');
+            const $bookingDate = $('#bookingDate');
+            const $timeSlotSelect = $('#timeSlotSelect');
+            const $hiddenInput = $('#appointmentStartLocal');
+            const $loading = $('#loadingSlots');
+
+            function loadSlots() {
+                const therapistId = $therapistSelect.val();
+                const serviceId = $serviceSelect.val();
+                const date = $bookingDate.val();
+
+                if (!therapistId || !serviceId || !date) {
+                    $timeSlotSelect.empty().append('<option value="">Select date, therapist, and service first</option>').prop('disabled', true);
+                    return;
+                }
+
+                $timeSlotSelect.prop('disabled', true);
+                $loading.show();
+
+                $.get(`/Schedule/GetAvailableSlots?therapistId=${therapistId}&serviceId=${serviceId}&date=${date}`, function (data) {
+                    $loading.hide();
+                    $timeSlotSelect.empty();
+                    
+                    if (data.success && data.slots && data.slots.length > 0) {
+                        $timeSlotSelect.append('<option value="">-- Choose an available time slot --</option>');
+                        data.slots.forEach(slot => {
+                            $timeSlotSelect.append(`<option value="${slot.dateTime}">${slot.startTime} - ${slot.endTime}</option>`);
+                        });
+                        $timeSlotSelect.prop('disabled', false);
+                    } else {
+                        $timeSlotSelect.append('<option value="">No slots available for this date</option>');
+                    }
+                }).fail(function() {
+                    $loading.hide();
+                    $timeSlotSelect.empty().append('<option value="">Error loading slots. Please try again.</option>');
+                });
+            }
+
+            $therapistSelect.change(loadSlots);
+            $serviceSelect.change(loadSlots);
+            $bookingDate.change(loadSlots);
+
+            $timeSlotSelect.change(function () {
+                $hiddenInput.val($(this).val());
+            });
+
+            $('form').submit(function (e) {
+                if (!$hiddenInput.val()) {
+                    e.preventDefault();
+                    alert('Vui lòng chọn một khung giờ còn trống trước khi đặt lịch (Please select an available time slot).');
+                }
+            });
+        });
+    </script>
 }

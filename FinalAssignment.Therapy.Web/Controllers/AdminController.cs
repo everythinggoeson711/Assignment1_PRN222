@@ -217,6 +217,12 @@ public class AdminController(
     }
 
     [HttpGet]
+    public IActionResult ChatSessions()
+    {
+        return View();
+    }
+
+    [HttpGet]
     public async Task<IActionResult> Metrics(CancellationToken cancellationToken)
         => Json(await dashboardService.GetMetricsAsync(cancellationToken));
 

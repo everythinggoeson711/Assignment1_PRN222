@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "Doctor Schedule";
+}
+
+<section class="section-heading mb-4">
+    <span class="eyebrow">Schedule Management</span>
+    <h1>📅 Doctor Schedule</h1>
+    <p>View the available working time slots of therapists for specific dates and services.</p>
+</section>
+
+<div class="glass-panel">
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <label for="therapistSelect" class="form-label fw-bold">Select Therapist:</label>
+            <select id="therapistSelect" class="form-select shadow-sm">
+                <option value="">-- Choose Therapist --</option>
+                @if (ViewBag.Therapists is List<FinalAssignment.Therapy.Application.Models.TherapistSummaryDto> therapists)
+                {
+                    @foreach (var therapist in therapists)
+                    {
+                        <option value="@therapist.Id" selected="@(ViewBag.SelectedTherapistId == therapist.Id)">@therapist.Name - @therapist.Specialty</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="serviceSelect" class="form-label fw-bold">Select Service (For Duration):</label>
+            <select id="serviceSelect" class="form-select shadow-sm">
+                <option value="">-- Choose Service --</option>
+                @if (ViewBag.Services is List<FinalAssignment.Therapy.Application.Models.TherapyServiceSummaryDto> services)
+                {
+                    @foreach (var service in services)
+                    {
+                        <option value="@service.Id">@service.Name (@service.DurationMinutes mins)</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="datePicker" class="form-label fw-bold">Date:</label>
+            <input type="date" id="datePicker" class="form-control shadow-sm" value="@(ViewBag.SelectedDate != null ? ((DateTime)ViewBag.SelectedDate).ToString("yyyy-MM-dd") : DateTime.Today.ToString("yyyy-MM-dd"))" />
+        </div>
+    </div>
+
+    <div class="text-center mt-4" id="loadingIndicator" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2 text-muted">Fetching available slots...</p>
+    </div>
+
+    <div id="scheduleContainer" class="mt-4" style="display: none;">
+        <h5 class="mb-3 text-success fw-bold"><i class="bi bi-clock-history"></i> Available Time Slots</h5>
+        <div class="row" id="slotsList">
+            <!-- Slots will be rendered here -->
+        </div>
+    </div>
+
+    <div id="emptyState" class="text-center py-5 bg-light rounded-3 mt-4 border border-dashed">
+        <h5 class="text-muted">No slots available</h5>
+        <p class="text-muted small mb-0" id="emptyMessage">Please select a therapist, service, and date to view available time slots.</p>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            function loadSlots() {
+                var therapistId = $('#therapistSelect').val();
+                var serviceId = $('#serviceSelect').val();
+                var date = $('#datePicker').val();
+
+                if (!therapistId || !serviceId || !date) {
+                    $('#scheduleContainer').hide();
+                    $('#emptyState').show();
+                    $('#emptyMessage').text('Please select a therapist, service, and date to view available time slots.');
+                    return;
+                }
+
+                $('#scheduleContainer').hide();
+                $('#emptyState').hide();
+                $('#loadingIndicator').show();
+
+                $.get(`/Schedule/GetAvailableSlots?therapistId=${therapistId}&serviceId=${serviceId}&date=${date}`, function (data) {
+                    $('#loadingIndicator').hide();
+                    
+                    if (data.success && data.slots && data.slots.length > 0) {
+                        renderAvailableSlots(data.slots);
+                        $('#scheduleContainer').show();
+                    } else {
+                        $('#emptyState').show();
+                        $('#emptyMessage').text('No available slots for the selected date. The therapist might be fully booked or off-duty.');
+                    }
+                }).fail(function() {
+                    $('#loadingIndicator').hide();
+                    $('#emptyState').show();
+                    $('#emptyMessage').text('Error loading schedule. Please try again.');
+                });
+            }
+
+            function renderAvailableSlots(slots) {
+                var html = '';
+                slots.forEach(function(slot) {
+                    html += `
+                        <div class="col-auto mb-3">
+                            <span class="badge bg-success bg-gradient fs-6 px-3 py-2 shadow-sm">
+                                ${slot.startTime} - ${slot.endTime}
+                            </span>
+                        </div>
+                    `;
+                });
+                $('#slotsList').html(html);
+            }
+
+            $('#therapistSelect, #serviceSelect, #datePicker').change(loadSlots);
+            
+            // Initial load if all are selected
+            if ($('#therapistSelect').val() && $('#serviceSelect').val() && $('#datePicker').val()) {
+                loadSlots();
+            }
+        });
+    </script>
+}

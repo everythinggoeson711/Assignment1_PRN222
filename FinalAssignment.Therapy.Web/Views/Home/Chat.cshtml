@@ -1,0 +1,231 @@
+@{
+    ViewData["Title"] = "Real-time Support Chat";
+}
+
+<section class="glass-panel">
+    <div class="section-heading mb-4">
+        <span class="eyebrow">SignalR Real-time</span>
+        <h1>Support Chat</h1>
+        <p>Chat trực tiếp với đội ngũ hỗ trợ của chúng tôi bằng SignalR.</p>
+    </div>
+
+    <div id="chatSetup" class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="customerNameInput" class="form-label">Tên của bạn</label>
+                <input type="text" id="customerNameInput" class="form-control" placeholder="Nhập tên..." value="@(User.Identity?.IsAuthenticated == true ? User.Identity.Name : "Khách")" />
+            </div>
+            <div class="mb-3">
+                <label for="customerEmailInput" class="form-label">Email (tùy chọn)</label>
+                <input type="email" id="customerEmailInput" class="form-control" placeholder="your@email.com" value="@(User.Identity?.IsAuthenticated == true ? User.Claims.FirstOrDefault(c => c.Type == "email")?.Value : "")" />
+            </div>
+            <button id="startChatButton" class="btn btn-primary">Bắt đầu chat với hỗ trợ</button>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info">
+                <h5>💬 Hỗ trợ trực tuyến</h5>
+                <p class="mb-1">• Nhắn tin trực tiếp với nhân viên hỗ trợ</p>
+                <p class="mb-1">• Phản hồi trong vòng vài phút</p>
+                <p class="mb-0">• Hoàn toàn miễn phí</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="chatInterface" style="display: none;">
+        <div class="alert alert-success">
+            <strong>🟢 Đã kết nối!</strong>
+            <span id="sessionStatus">Đang chờ nhân viên hỗ trợ...</span>
+        </div>
+
+        <div class="chat-container border rounded p-3 bg-light mb-3" style="height: 400px; overflow-y: scroll;">
+            <ul id="messagesList" class="list-unstyled"></ul>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="messageInput" class="form-control" placeholder="Nhập tin nhắn..." disabled />
+            <button class="btn btn-primary" id="sendButton" disabled>Gửi</button>
+        </div>
+        
+        <div class="mt-2">
+            <button id="endChatButton" class="btn btn-outline-danger btn-sm">Kết thúc cuộc trò chuyện</button>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script>
+        let connection;
+        let currentSessionId = null;
+
+        document.getElementById("startChatButton").addEventListener("click", startChat);
+        
+        async function startChat() {
+            const customerName = document.getElementById("customerNameInput").value.trim();
+            const customerEmail = document.getElementById("customerEmailInput").value.trim();
+            
+            if (!customerName) {
+                alert("Vui lòng nhập tên của bạn");
+                return;
+            }
+
+            try {
+                connection = new signalR.HubConnectionBuilder()
+                    .withUrl("/hubs/chat")
+                    .configureLogging(signalR.LogLevel.Information)
+                    .withAutomaticReconnect()
+                    .build();
+
+                connection.on("SessionCreated", (sessionData) => {
+                    console.log("Session created:", sessionData);
+                    currentSessionId = sessionData.sessionId;
+                    document.getElementById("chatSetup").style.display = "none";
+                    document.getElementById("chatInterface").style.display = "block";
+                    document.getElementById("sessionStatus").textContent = sessionData.message;
+                });
+
+                connection.on("GroupTest", (message) => {
+                    console.log("Group test received:", message);
+                    // This confirms we're in the SignalR group
+                });
+
+                connection.on("StaffJoined", (staffData) => {
+                    console.log("Staff joined:", staffData);
+                    document.getElementById("sessionStatus").textContent = staffData.message;
+                    document.getElementById("messageInput").disabled = false;
+                    document.getElementById("sendButton").disabled = false;
+                    
+                    // Add system message
+                    addSystemMessage(`${staffData.staffName} đã tham gia cuộc trò chuyện`);
+                    
+                    // Make sure we can send messages now
+                    console.log("Customer input enabled - ready to chat");
+                });
+
+                connection.on("ReceiveMessage", (messageData) => {
+                    console.log("Message received:", messageData);
+                    try {
+                        addMessage(messageData.sender, messageData.message, messageData.isFromStaff, messageData.timestamp);
+                        console.log("Message added to UI successfully");
+                    } catch (err) {
+                        console.error("Error adding message to UI:", err);
+                    }
+                });
+
+                connection.on("SessionEnded", (message) => {
+                    console.log("Session ended:", message);
+                    addSystemMessage(message);
+                    document.getElementById("messageInput").disabled = true;
+                    document.getElementById("sendButton").disabled = true;
+                    document.getElementById("endChatButton").disabled = true;
+                });
+
+                await connection.start();
+                console.log("Connected to ChatHub");
+                
+                // Handle reconnection
+                connection.onreconnected(() => {
+                    console.log("Customer reconnected, rejoining session...");
+                    if (currentSessionId) {
+                        // Customer will be automatically added back to group via connection ID
+                        console.log(`Customer reconnected to session: ${currentSessionId}`);
+                    }
+                });
+                
+                await connection.invoke("JoinCustomerSupport", customerName, customerEmail || null);
+            } catch (err) {
+                console.error("Error starting chat:", err);
+                alert("Không thể kết nối đến server chat. Vui lòng thử lại.");
+            }
+        }
+
+        function addMessage(sender, message, isFromStaff, timestamp) {
+            console.log('addMessage called:', { sender, message, isFromStaff, timestamp });
+            
+            // Defensive programming - check for undefined/null values
+            if (!sender) sender = 'Unknown';
+            if (!message) message = '[Empty message]';
+            if (!timestamp) timestamp = new Date().toLocaleTimeString();
+            
+            const li = document.createElement("li");
+            li.className = "mb-3 p-3 border-bottom bg-white rounded";
+            
+            const senderClass = isFromStaff ? "text-primary fw-bold" : "text-success fw-bold";
+            const senderRole = isFromStaff ? " (Hỗ trợ)" : " (Bạn)";
+            
+            try {
+                li.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="flex-grow-1">
+                            <div class="${senderClass}">${sender}${senderRole}</div>
+                            <div class="mt-2 text-dark" style="font-size: 14px; line-height: 1.4;">${message}</div>
+                        </div>
+                        <small class="text-muted ms-2">${timestamp}</small>
+                    </div>
+                `;
+                
+                const messagesList = document.getElementById("messagesList");
+                if (messagesList) {
+                    messagesList.appendChild(li);
+                    console.log('Message added to DOM successfully');
+                } else {
+                    console.error('messagesList element not found');
+                }
+                
+                scrollToBottom();
+            } catch (err) {
+                console.error('Error in addMessage:', err);
+            }
+        }
+
+        function addSystemMessage(message) {
+            const li = document.createElement("li");
+            li.className = "mb-2 pb-2 border-bottom";
+            li.innerHTML = `<div class="text-center"><small class="text-info fst-italic">🔔 ${message}</small></div>`;
+            document.getElementById("messagesList").appendChild(li);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            const container = document.querySelector('.chat-container');
+            if (container) {
+                container.scrollTop = container.scrollHeight;
+            }
+        }
+
+        // Send message functionality
+        document.getElementById("sendButton").addEventListener("click", sendMessage);
+        document.getElementById("messageInput").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                sendMessage();
+            }
+        });
+
+        async function sendMessage() {
+            const messageInput = document.getElementById("messageInput");
+            const message = messageInput.value.trim();
+            if (message && currentSessionId && connection) {
+                try {
+                    await connection.invoke("SendMessageToSession", currentSessionId, message);
+                    messageInput.value = "";
+                } catch (err) {
+                    console.error("Error sending message:", err);
+                    alert("Không thể gửi tin nhắn. Vui lòng thử lại.");
+                }
+            }
+        }
+
+        // End chat functionality
+        document.getElementById("endChatButton").addEventListener("click", async () => {
+            if (confirm("Bạn có chắc muốn kết thúc cuộc trò chuyện này?")) {
+                try {
+                    if (connection && currentSessionId) {
+                        await connection.invoke("EndSession", currentSessionId);
+                    }
+                } catch (err) {
+                    console.error("Error ending session:", err);
+                }
+            }
+        });
+    </script>
+}

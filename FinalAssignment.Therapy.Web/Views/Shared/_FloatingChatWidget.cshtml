@@ -1,0 +1,341 @@
+﻿<div id="floating-chat-widget" class="floating-chat-widget">
+    <!-- Chat Bubble -->
+    <button id="fc-bubble" class="fc-bubble shadow-lg">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </button>
+
+    <!-- Chat Box -->
+    <div id="fc-box" class="fc-box shadow-lg" style="display: none;">
+        <div class="fc-header bg-primary text-white p-3 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <div class="fc-avatar bg-white text-primary fw-bold rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">M</div>
+                <div>
+                    <h6 class="mb-0 text-white fw-bold">Hỗ trợ Montra</h6>
+                    <small class="text-white-50" id="fc-status-text">Sẵn sàng hỗ trợ</small>
+                </div>
+            </div>
+            <button id="fc-close" class="btn-close btn-close-white" aria-label="Close"></button>
+        </div>
+        
+        <div class="fc-body p-3" id="fc-body">
+            <!-- Setup Form -->
+            <div id="fc-setup" class="h-100 d-flex flex-column justify-content-center">
+                <div class="text-center mb-4">
+                    <h5 class="fw-bold text-dark mb-2">Xin chào! 👋</h5>
+                    <p class="text-muted small">Vui lòng cung cấp thông tin để chuyên gia của chúng tôi hỗ trợ bạn tốt nhất.</p>
+                </div>
+                <div class="mb-3">
+                    <input type="text" id="fc-name" class="form-control fc-input-field" placeholder="Tên của bạn *" value="@(User.Identity?.IsAuthenticated == true ? User.Identity.Name : "")" required>
+                </div>
+                <div class="mb-4">
+                    <input type="email" id="fc-email" class="form-control fc-input-field" placeholder="Email (Tuỳ chọn)">
+                </div>
+                <button id="fc-start" class="btn btn-primary fw-bold py-2 w-100 shadow-sm">Bắt đầu trò chuyện</button>
+            </div>
+            
+            <!-- Chat Interface -->
+            <div id="fc-interface" style="display: none; height: 100%; flex-direction: column;">
+                <div id="fc-messages" class="fc-messages flex-grow-1 overflow-auto pe-2">
+                    <div class="text-center my-3">
+                        <small class="text-muted bg-light px-2 py-1 rounded-pill" id="fc-system-status">Đang kết nối...</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Input Area -->
+        <div id="fc-input-area" class="fc-footer p-3 border-top bg-white" style="display: none;">
+            <div class="input-group fc-input-group shadow-sm">
+                <input type="text" id="fc-input" class="form-control border-0" placeholder="Nhập tin nhắn..." disabled>
+                <button class="btn btn-primary px-3" id="fc-send" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+            <div class="text-center mt-2">
+                <button id="fc-end-chat" class="btn btn-link text-danger p-0 text-decoration-none small" style="font-size: 0.75rem;">Kết thúc cuộc trò chuyện</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .floating-chat-widget {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 1050;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .fc-bubble {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #2ecc71; /* Primary color matching Montra */
+        color: white;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .fc-bubble:hover {
+        transform: scale(1.1);
+    }
+    .fc-box {
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        width: 360px;
+        height: 550px;
+        max-height: calc(100vh - 120px);
+        background: #f8f9fa;
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.15) !important;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .fc-box.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .fc-header {
+        background: linear-gradient(135deg, #1a2f4b 0%, #2c4c77 100%) !important;
+    }
+    .fc-body {
+        flex: 1;
+        overflow-y: auto;
+        background: #f0f4f8;
+    }
+    .fc-messages {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .fc-msg {
+        max-width: 85%;
+        padding: 10px 14px;
+        border-radius: 14px;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        position: relative;
+    }
+    .fc-msg-customer {
+        align-self: flex-end;
+        background: #2ecc71;
+        color: white;
+        border-bottom-right-radius: 4px;
+    }
+    .fc-msg-staff {
+        align-self: flex-start;
+        background: white;
+        color: #1a2f4b;
+        border-bottom-left-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .fc-msg-time {
+        font-size: 0.7rem;
+        opacity: 0.7;
+        margin-top: 4px;
+        display: block;
+        text-align: right;
+    }
+    .fc-input-group {
+        border-radius: 24px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+    }
+    .fc-input-group input:focus {
+        box-shadow: none;
+    }
+    .fc-input-field {
+        border-radius: 8px;
+        padding: 12px 16px;
+        border: 1px solid #e0e0e0;
+    }
+    .fc-input-field:focus {
+        border-color: #2ecc71;
+        box-shadow: 0 0 0 0.2rem rgba(46, 204, 113, 0.15);
+    }
+    
+    @@media (max-width: 480px) {
+        .fc-box {
+            width: calc(100vw - 48px);
+            height: 500px;
+        }
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const fcBubble = document.getElementById("fc-bubble");
+        const fcBox = document.getElementById("fc-box");
+        const fcClose = document.getElementById("fc-close");
+        const fcStart = document.getElementById("fc-start");
+        
+        let fcConnection;
+        let fcSessionId = null;
+
+        // Toggle chat box
+        fcBubble.addEventListener("click", () => {
+            if (fcBox.style.display === "none") {
+                fcBox.style.display = "flex";
+                // Small delay to allow display:flex to apply before adding class for transition
+                setTimeout(() => fcBox.classList.add("show"), 10);
+            } else {
+                fcBox.classList.remove("show");
+                setTimeout(() => fcBox.style.display = "none", 300);
+            }
+        });
+
+        fcClose.addEventListener("click", () => {
+            fcBox.classList.remove("show");
+            setTimeout(() => fcBox.style.display = "none", 300);
+        });
+
+        // Start Chat
+        fcStart.addEventListener("click", async () => {
+            const name = document.getElementById("fc-name").value.trim();
+            const email = document.getElementById("fc-email").value.trim();
+            
+            if (!name) {
+                alert("Vui lòng nhập tên của bạn");
+                return;
+            }
+
+            fcStart.disabled = true;
+            fcStart.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang kết nối...';
+
+            try {
+                if (!fcConnection) {
+                    fcConnection = new signalR.HubConnectionBuilder()
+                        .withUrl("/hubs/chat")
+                        .configureLogging(signalR.LogLevel.Warning)
+                        .withAutomaticReconnect()
+                        .build();
+
+                    setupSignalRHandlers();
+                    await fcConnection.start();
+                }
+
+                await fcConnection.invoke("JoinCustomerSupport", name, email || null);
+            } catch (err) {
+                console.error("Error starting chat:", err);
+                alert("Không thể kết nối đến máy chủ. Vui lòng thử lại sau.");
+                fcStart.disabled = false;
+                fcStart.textContent = "Bắt đầu trò chuyện";
+            }
+        });
+
+        function setupSignalRHandlers() {
+            fcConnection.on("SessionCreated", (data) => {
+                fcSessionId = data.sessionId;
+                document.getElementById("fc-setup").style.display = "none";
+                document.getElementById("fc-interface").style.display = "flex";
+                document.getElementById("fc-input-area").style.display = "block";
+                
+                updateSystemStatus(data.message);
+                document.getElementById("fc-status-text").textContent = "Đang tìm chuyên gia...";
+            });
+
+            fcConnection.on("StaffJoined", (data) => {
+                updateSystemStatus(`${data.staffName} đã tham gia cuộc trò chuyện`);
+                document.getElementById("fc-status-text").textContent = `Đang chat với ${data.staffName}`;
+                
+                document.getElementById("fc-input").disabled = false;
+                document.getElementById("fc-send").disabled = false;
+                document.getElementById("fc-input").focus();
+            });
+
+            fcConnection.on("ReceiveMessage", (data) => {
+                appendMessage(data.sender, data.message, data.isFromStaff, data.timestamp);
+            });
+
+            fcConnection.on("SessionEnded", (msg) => {
+                updateSystemStatus(msg);
+                document.getElementById("fc-status-text").textContent = "Cuộc trò chuyện đã kết thúc";
+                document.getElementById("fc-input").disabled = true;
+                document.getElementById("fc-send").disabled = true;
+            });
+            
+            fcConnection.onreconnected(() => {
+                if (fcSessionId) {
+                    updateSystemStatus("Đã kết nối lại thành công");
+                }
+            });
+            
+            fcConnection.onreconnecting(() => {
+                updateSystemStatus("Đang mất kết nối, đang thử lại...");
+            });
+        }
+
+        // Send Message
+        const fcInput = document.getElementById("fc-input");
+        const fcSend = document.getElementById("fc-send");
+
+        fcSend.addEventListener("click", sendFcMessage);
+        fcInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendFcMessage();
+        });
+
+        async function sendFcMessage() {
+            const msg = fcInput.value.trim();
+            if (msg && fcSessionId && fcConnection) {
+                fcInput.value = "";
+                try {
+                    await fcConnection.invoke("SendMessageToSession", fcSessionId, msg);
+                } catch (err) {
+                    console.error("Failed to send message", err);
+                }
+            }
+        }
+
+        // End Chat
+        document.getElementById("fc-end-chat").addEventListener("click", async () => {
+            if (confirm("Bạn có chắc muốn kết thúc cuộc trò chuyện này?")) {
+                try {
+                    if (fcConnection && fcSessionId) {
+                        await fcConnection.invoke("EndSession", fcSessionId);
+                    }
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+        });
+
+        function appendMessage(sender, text, isStaff, time) {
+            const container = document.getElementById("fc-messages");
+            const div = document.createElement("div");
+            div.className = `fc-msg ${isStaff ? 'fc-msg-staff' : 'fc-msg-customer'}`;
+            
+            // Safe rendering text to prevent XSS
+            const safeText = document.createTextNode(text);
+            div.appendChild(safeText);
+            
+            const timeSpan = document.createElement("span");
+            timeSpan.className = "fc-msg-time";
+            timeSpan.textContent = time;
+            div.appendChild(timeSpan);
+            
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function updateSystemStatus(text) {
+            const statusEl = document.getElementById("fc-system-status");
+            if (statusEl) {
+                statusEl.textContent = text;
+            }
+        }
+    });
+</script>

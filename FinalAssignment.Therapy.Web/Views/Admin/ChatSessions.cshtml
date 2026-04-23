@@ -1,0 +1,145 @@
+@model List<FinalAssignment.Therapy.Core.Entities.ChatSession>
+@{
+    ViewData["Title"] = "Chat Sessions Management";
+}
+
+<section class="section-heading mb-4">
+    <span class="eyebrow">Admin / Chat Support</span>
+    <h1>Live Chat Sessions</h1>
+    <p>Quản lý tất cả các phiên chat hỗ trợ khách hàng đang hoạt động.</p>
+</section>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="stats-card">
+            <span class="eyebrow">Active Sessions</span>
+            <span class="metric-value">@Model.Count</span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="stats-card">
+            <span class="eyebrow">Waiting for Staff</span>
+            <span class="metric-value">@Model.Count(s => s.AssignedStaffId == null)</span>
+        </div>
+    </div>
+</div>
+
+<section class="glass-panel">
+    <div class="section-heading mb-3 d-flex justify-content-between align-items-center">
+        <div>
+            <span class="eyebrow">Chat Management</span>
+            <h2>Active Sessions</h2>
+        </div>
+        <div>
+            @if (Model.Any())
+            {
+                <form method="post" asp-action="ClearAllSessions" onsubmit="return confirm('🚨 Xóa tất cả sessions? Dùng để test 2 tab ẩn danh riêng biệt.');" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-outline-warning btn-sm">
+                        🧪 Clear All Sessions (Testing)
+                    </button>
+                </form>
+            }
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <h5 class="text-secondary">Không có phiên chat nào đang hoạt động</h5>
+            <p class="text-secondary">Các phiên chat sẽ hiển thị ở đây khi khách hàng bắt đầu trò chuyện.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Started At</th>
+                        <th>Status</th>
+                        <th>Assigned Staff</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var session in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@(session.CustomerName ?? "Unknown")</strong>
+                                @if (!string.IsNullOrEmpty(session.CustomerEmail))
+                                {
+                                    <div class="small text-secondary">@session.CustomerEmail</div>
+                                }
+                            </td>
+                            <td>@session.StartedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                <span class="status-badge @(session.Status == FinalAssignment.Therapy.Core.Entities.ChatSessionStatus.WaitingForStaff ? "status-warning" : "status-success")">
+                                    @(session.Status == FinalAssignment.Therapy.Core.Entities.ChatSessionStatus.WaitingForStaff ? "Waiting" : 
+                                      session.Status == FinalAssignment.Therapy.Core.Entities.ChatSessionStatus.Active ? "Active" : "Ended")
+                                </span>
+                            </td>
+                            <td>
+                                @if (session.AssignedStaff != null)
+                                {
+                                    <span class="text-success">@session.AssignedStaff.FullName</span>
+                                }
+                                else
+                                {
+                                    <span class="text-warning">Unassigned</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="@Url.Action("ChatSession", new { sessionId = session.SessionId })" 
+                                       class="btn btn-sm btn-primary">
+                                        View Chat
+                                    </a>
+                                    @if (session.IsActive)
+                                    {
+                                        <form asp-action="EndChatSession" method="post" style="display: inline;">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="sessionId" value="@session.SessionId" />
+                                            <button type="submit" class="btn btn-sm btn-danger" 
+                                                    onclick="return confirm('Are you sure you want to end this chat session?')">
+                                                End Session
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/hubs/chat")
+            .build();
+
+        connection.start().then(() => {
+            console.log("Connected to ChatHub");
+            connection.invoke("JoinAsStaff");
+        });
+
+        // Listen for new chat sessions
+        connection.on("NewChatSession", (sessionInfo) => {
+            // Refresh page to show new session
+            location.reload();
+        });
+
+        // Listen for assigned sessions
+        connection.on("SessionAssigned", (sessionId) => {
+            // Refresh page to update status
+            location.reload();
+        });
+    </script>
+}

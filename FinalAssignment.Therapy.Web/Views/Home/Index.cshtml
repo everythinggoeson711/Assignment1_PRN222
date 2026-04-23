@@ -3,83 +3,93 @@
     ViewData["Title"] = "Therapy Final Assignment";
 }
 
-<section class="hero-panel">
-    <div class="hero-copy">
-        <span class="eyebrow">Final Assignment Architecture</span>
-        <h1>Therapy booking platform with async business flows, role-based security, SignalR and background cleanup.</h1>
-        <p>
-            Public users can create appointments, admins monitor live metrics, and therapists complete assigned sessions.
-            The codebase is structured around Repository and Unit of Work patterns over EF Core.
-        </p>
-        <div class="hero-actions">
-            <a class="btn btn-primary btn-lg" asp-controller="Booking" asp-action="Create">Create Booking</a>
-            <a class="btn btn-outline-light btn-lg" asp-controller="Auth" asp-action="Login">Staff Login</a>
+<div class="public-home-page">
+    <section class="public-hero" id="top">
+        <div class="public-hero-media">
+            <div class="public-hero-glow"></div>
+            <div class="public-hero-overlay"></div>
         </div>
-    </div>
-    <div class="hero-card-stack">
-        <article class="feature-card accent-orange">
-            <h2>Repository + UoW</h2>
-            <p>No controller touches <strong>DbContext</strong> directly. All data access flows through async repositories and a single unit of work.</p>
-        </article>
-        <article class="feature-card accent-green">
-            <h2>Real-time Dashboard</h2>
-            <p>Admin metrics refresh instantly when bookings are created, confirmed, completed, or expired.</p>
-        </article>
-    </div>
-</section>
 
-<section class="content-grid mt-5">
-    <div class="glass-panel">
-        <div class="section-heading">
-            <span class="eyebrow">Active Therapists</span>
-            <h2>Seeded staff accounts for demo</h2>
+        <div class="public-hero-copy">
+            <span class="public-pill">Clinical intake pathway</span>
+            <h1>Therapy Booking Platform</h1>
+            <p>Clear, evidence-based assessments and therapy that support informed decisions and meaningful outcomes, tailored for your well-being.</p>
+            <div class="public-hero-actions">
+                <a class="public-primary-btn" asp-controller="Booking" asp-action="Create">Make a Booking</a>
+                <a class="public-secondary-btn" href="#services">View Services</a>
+            </div>
         </div>
-        <div class="stack-list">
-            @foreach (var therapist in Model.Therapists)
-            {
-                <article class="stack-item">
-                    <div>
-                        <h3>@therapist.Name</h3>
-                        <p>@therapist.Specialty</p>
-                    </div>
-                </article>
-            }
-        </div>
-    </div>
+    </section>
 
-    <div class="glass-panel">
-        <div class="section-heading">
-            <span class="eyebrow">Therapy Services</span>
-            <h2>Pricing and durations</h2>
+    <section class="public-overview-card" id="services">
+        <div class="public-overview-copy">
+            <span class="public-icon-square">+</span>
+            <h2>A comprehensive evaluation of independence.</h2>
+            <p>Our platform handles async business flows, role-based security, SignalR real-time monitoring, and background tasks seamlessly.</p>
+
+            <div class="public-stat-grid">
+                <div class="public-stat-card public-stat-card-blue">
+                    <strong>@Model.Services.Count</strong>
+                    <span>Active therapy services currently available</span>
+                </div>
+                <div class="public-stat-card public-stat-card-green">
+                    <strong>@Model.Therapists.Count</strong>
+                    <span>Active clinicians ready for booking</span>
+                </div>
+            </div>
         </div>
-        <div class="stack-list">
+
+        <div class="public-domains-card">
+            <h3>Domains of Evaluation</h3>
+            <ul>
+                <li><strong>Daily Living Skills</strong><span>Self-care, nutrition, and home management.</span></li>
+                <li><strong>Mobility &amp; Access</strong><span>Transfers, community navigation, and physical capacity.</span></li>
+                <li><strong>Cognitive Capacity</strong><span>Decision making, social interactions, and memory.</span></li>
+                <li><strong>Environmental Factors</strong><span>Home modifications and assistive technology needs.</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="public-service-list">
+        @if (Model.Services.Count == 0)
+        {
+            <article class="public-service-card">
+                <span class="public-service-tag">Live data</span>
+                <h3>No active services yet</h3>
+                <p>Create active therapy services in the admin portal to publish bookable offerings on this page.</p>
+            </article>
+        }
+        else
+        {
             @foreach (var service in Model.Services)
             {
-                <article class="stack-item price-item">
-                    <div>
-                        <h3>@service.Name</h3>
-                        <p>@service.DurationMinutes minutes</p>
+                <article class="public-service-card">
+                    <span class="public-service-tag">Service</span>
+                    <h3>@service.Name</h3>
+                    <div class="public-service-meta">
+                        <span>@service.DurationMinutes mins</span>
+                        <strong>@service.Price.ToString("N0") VND</strong>
                     </div>
-                    <strong>@service.Price.ToString("N0") VND</strong>
+                </article>
+            }
+        }
+    </section>
+
+    <section class="public-standards-section">
+        <div class="public-section-heading">
+            <h2>Our Dedicated Clinicians</h2>
+            <p>Every therapy session is conducted by experts with exhaustive clinical experience.</p>
+        </div>
+
+        <div class="public-standards-grid">
+            @foreach (var therapist in Model.Therapists)
+            {
+                <article class="public-standards-card">
+                    <span class="public-icon-square">👤</span>
+                    <h3>@therapist.Name</h3>
+                    <p class="text-muted mt-2">@therapist.Specialty</p>
                 </article>
             }
         </div>
-    </div>
-</section>
-
-<section class="demo-logins mt-5">
-    <div class="glass-panel">
-        <span class="eyebrow">Demo Credentials</span>
-        <h2>Use these accounts after seeding</h2>
-        <div class="credential-grid">
-            <div>
-                <strong>Admin</strong>
-                <p>admin@therapy.local / Admin@123</p>
-            </div>
-            <div>
-                <strong>Therapist</strong>
-                <p>anna@therapy.local / Therapist@123</p>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
+</div>

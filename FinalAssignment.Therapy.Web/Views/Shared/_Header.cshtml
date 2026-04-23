@@ -1,0 +1,65 @@
+<header class="topbar-wrap">
+    <nav class="navbar navbar-expand-lg navbar-dark topbar">
+        <div class="container-xl">
+            <a class="navbar-brand brand-mark" asp-controller="Home" asp-action="Index">
+                <span class="brand-dot"></span>
+                Montra Final
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Booking" asp-action="Create">Book Session</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Chat">Live Support</a>
+                    </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Admin" asp-action="Dashboard">Admin Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Admin" asp-action="Therapists">Therapists</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Admin" asp-action="Services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Schedule" asp-action="Calendar">Doctor Schedule</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Admin" asp-action="ChatSessions">Chat Support</a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Therapist"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Therapist" asp-action="MyAppointments">My Appointments</a>
+                        </li>
+                    }
+                </ul>
+                <div class="d-flex align-items-center">
+                    @if (User.Identity is { IsAuthenticated: true })
+                    {
+                        <div class="user-pill me-3">
+                            @User.Identity.Name
+                        </div>
+                        <form asp-controller="Auth" asp-action="Logout" method="post">
+                            <button type="submit" class="btn btn-sm btn-outline-light">Logout</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a class="btn btn-sm btn-outline-light" asp-controller="Auth" asp-action="Login">Staff Login</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
