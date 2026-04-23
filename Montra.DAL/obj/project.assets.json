@@ -3666,36 +3666,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\doanv\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/linvg/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Montra.DAL.csproj",
+      "projectUniqueName": "/Users/linvg/Documents/Workspace/Assignment1_PRN222/Montra.DAL/Montra.DAL.csproj",
       "projectName": "Montra.DAL",
-      "projectPath": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\Montra.DAL.csproj",
-      "packagesPath": "C:\\Users\\doanv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\doanv\\source\\repos\\Assigment2_therapy\\Montra.DAL\\obj\\",
+      "projectPath": "/Users/linvg/Documents/Workspace/Assignment1_PRN222/Montra.DAL/Montra.DAL.csproj",
+      "packagesPath": "/Users/linvg/.nuget/packages/",
+      "outputPath": "/Users/linvg/Documents/Workspace/Assignment1_PRN222/Montra.DAL/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\doanv\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/linvg/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {}
         }
@@ -3714,7 +3706,6 @@
     },
     "frameworks": {
       "net10.0": {
-        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Design": {
@@ -3750,7 +3741,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.202/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

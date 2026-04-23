@@ -19,105 +19,105 @@ build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v10.0
 build_property.RootNamespace = Assigment2_therapy
 build_property.RootNamespace = Assigment2_therapy
-build_property.ProjectDir = C:\Users\doanv\source\repos\Assigment2_therapy\Assigment2_therapy\
+build_property.ProjectDir = /Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\doanv\source\repos\Assigment2_therapy\Assigment2_therapy
+build_property.MSBuildProjectDirectory = /Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/Appointments.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXBwb2ludG1lbnRzLmNzaHRtbA==
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/Appointments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vQXBwb2ludG1lbnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/CenterBookings.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2VudGVyQm9va2luZ3MuY3NodG1s
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/CenterBookings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vQ2VudGVyQm9va2luZ3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/CreateAppointment.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlQXBwb2ludG1lbnQuY3NodG1s
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/CreateAppointment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vQ3JlYXRlQXBwb2ludG1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/CreateService.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlU2VydmljZS5jc2h0bWw=
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/CreateService.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vQ3JlYXRlU2VydmljZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/CreateTherapist.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlVGhlcmFwaXN0LmNzaHRtbA==
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/CreateTherapist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vQ3JlYXRlVGhlcmFwaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/Dashboard.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vRGFzaGJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/EditService.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFNlcnZpY2UuY3NodG1s
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/EditService.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vRWRpdFNlcnZpY2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/EditTherapist.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFRoZXJhcGlzdC5jc2h0bWw=
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/EditTherapist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vRWRpdFRoZXJhcGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/Referrals.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUmVmZXJyYWxzLmNzaHRtbA==
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/Referrals.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vUmVmZXJyYWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/Reports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUmVwb3J0cy5jc2h0bWw=
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/Reports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vUmVwb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/Services.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU2VydmljZXMuY3NodG1s
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/Services.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vU2VydmljZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Admin/Therapists.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVGhlcmFwaXN0cy5jc2h0bWw=
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Admin/Therapists.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vVGhlcmFwaXN0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Auth/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Auth/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Therapist/AppointmentDetail.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEFwcG9pbnRtZW50RGV0YWlsLmNzaHRtbA==
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Therapist/AppointmentDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGhlcmFwaXN0L0FwcG9pbnRtZW50RGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Therapist/Appointments.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XEFwcG9pbnRtZW50cy5jc2h0bWw=
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Therapist/Appointments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGhlcmFwaXN0L0FwcG9pbnRtZW50cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Therapist/Dashboard.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhlcmFwaXN0XERhc2hib2FyZC5jc2h0bWw=
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Therapist/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGhlcmFwaXN0L0Rhc2hib2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/doanv/source/repos/Assigment2_therapy/Assigment2_therapy/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-i1pknko3ni
+[/Users/linvg/Documents/Workspace/Assignment1_PRN222/Assigment2_therapy/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-44jl566bp8
