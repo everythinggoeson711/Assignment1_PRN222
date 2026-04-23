@@ -1,0 +1,56 @@
+@model IReadOnlyList<FinalAssignment.Therapy.Application.Models.AdminTherapistDto>
+@{
+    ViewData["Title"] = "Manage Therapists";
+}
+
+<section class="section-heading mb-4 d-flex justify-content-between align-items-end gap-3 flex-wrap">
+    <div>
+        <span class="eyebrow">Admin / Therapists</span>
+        <h1>Therapist management</h1>
+        <p>Create therapist accounts, update profile information, and deactivate access when needed.</p>
+    </div>
+    <a class="btn btn-primary" asp-action="CreateTherapist">Add Therapist</a>
+</section>
+
+<section class="glass-panel dashboard-table">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Specialty</th>
+                    <th>Contact</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var therapist in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@therapist.Name</strong>
+                            <div class="small text-secondary">@therapist.Email</div>
+                        </td>
+                        <td>@therapist.Specialty</td>
+                        <td>@therapist.PhoneNumber</td>
+                        <td>
+                            <span class="status-badge">@(therapist.IsActive ? "Active" : "Inactive")</span>
+                        </td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-light" asp-action="EditTherapist" asp-route-id="@therapist.Id">Edit</a>
+                            @if (therapist.IsActive)
+                            {
+                                <form asp-action="DeactivateTherapist" method="post" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@therapist.Id" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Deactivate</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

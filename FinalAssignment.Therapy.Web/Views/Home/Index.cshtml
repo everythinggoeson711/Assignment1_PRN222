@@ -1,0 +1,85 @@
+﻿@model LandingPageViewModel
+@{
+    ViewData["Title"] = "Therapy Final Assignment";
+}
+
+<section class="hero-panel">
+    <div class="hero-copy">
+        <span class="eyebrow">Final Assignment Architecture</span>
+        <h1>Therapy booking platform with async business flows, role-based security, SignalR and background cleanup.</h1>
+        <p>
+            Public users can create appointments, admins monitor live metrics, and therapists complete assigned sessions.
+            The codebase is structured around Repository and Unit of Work patterns over EF Core.
+        </p>
+        <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" asp-controller="Booking" asp-action="Create">Create Booking</a>
+            <a class="btn btn-outline-light btn-lg" asp-controller="Auth" asp-action="Login">Staff Login</a>
+        </div>
+    </div>
+    <div class="hero-card-stack">
+        <article class="feature-card accent-orange">
+            <h2>Repository + UoW</h2>
+            <p>No controller touches <strong>DbContext</strong> directly. All data access flows through async repositories and a single unit of work.</p>
+        </article>
+        <article class="feature-card accent-green">
+            <h2>Real-time Dashboard</h2>
+            <p>Admin metrics refresh instantly when bookings are created, confirmed, completed, or expired.</p>
+        </article>
+    </div>
+</section>
+
+<section class="content-grid mt-5">
+    <div class="glass-panel">
+        <div class="section-heading">
+            <span class="eyebrow">Active Therapists</span>
+            <h2>Seeded staff accounts for demo</h2>
+        </div>
+        <div class="stack-list">
+            @foreach (var therapist in Model.Therapists)
+            {
+                <article class="stack-item">
+                    <div>
+                        <h3>@therapist.Name</h3>
+                        <p>@therapist.Specialty</p>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+
+    <div class="glass-panel">
+        <div class="section-heading">
+            <span class="eyebrow">Therapy Services</span>
+            <h2>Pricing and durations</h2>
+        </div>
+        <div class="stack-list">
+            @foreach (var service in Model.Services)
+            {
+                <article class="stack-item price-item">
+                    <div>
+                        <h3>@service.Name</h3>
+                        <p>@service.DurationMinutes minutes</p>
+                    </div>
+                    <strong>@service.Price.ToString("N0") VND</strong>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="demo-logins mt-5">
+    <div class="glass-panel">
+        <span class="eyebrow">Demo Credentials</span>
+        <h2>Use these accounts after seeding</h2>
+        <div class="credential-grid">
+            <div>
+                <strong>Admin</strong>
+                <p>admin@therapy.local / Admin@123</p>
+            </div>
+            <div>
+                <strong>Therapist</strong>
+                <p>anna@therapy.local / Therapist@123</p>
+            </div>
+        </div>
+    </div>
+</section>

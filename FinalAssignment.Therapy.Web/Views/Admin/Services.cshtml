@@ -1,0 +1,54 @@
+@model IReadOnlyList<FinalAssignment.Therapy.Application.Models.AdminTherapyServiceDto>
+@{
+    ViewData["Title"] = "Manage Services";
+}
+
+<section class="section-heading mb-4 d-flex justify-content-between align-items-end gap-3 flex-wrap">
+    <div>
+        <span class="eyebrow">Admin / Services</span>
+        <h1>Therapy service catalog</h1>
+        <p>Maintain the service list used by the public booking flow and therapist operations.</p>
+    </div>
+    <a class="btn btn-primary" asp-action="CreateService">Add Service</a>
+</section>
+
+<section class="glass-panel dashboard-table">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var service in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@service.Name</strong>
+                            <div class="small text-secondary">@service.Description</div>
+                        </td>
+                        <td>@service.Price.ToString("N0") VND</td>
+                        <td>@service.DurationMinutes min</td>
+                        <td><span class="status-badge">@(service.IsActive ? "Active" : "Inactive")</span></td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-light" asp-action="EditService" asp-route-id="@service.Id">Edit</a>
+                            @if (service.IsActive)
+                            {
+                                <form asp-action="DeactivateService" method="post" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@service.Id" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Deactivate</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

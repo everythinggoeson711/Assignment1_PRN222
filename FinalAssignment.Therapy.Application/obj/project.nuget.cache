@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Bb5cU1TKtmk=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Application\\FinalAssignment.Therapy.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\doanv\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.7\\microsoft.extensions.dependencyinjection.abstractions.10.0.7.nupkg.sha512",
+    "C:\\Users\\doanv\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.7\\microsoft.extensions.logging.abstractions.10.0.7.nupkg.sha512"
+  ],
+  "logs": []
+}

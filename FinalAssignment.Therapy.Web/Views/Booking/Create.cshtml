@@ -1,0 +1,72 @@
+@model BookingFormViewModel
+@{
+    ViewData["Title"] = "Create Booking";
+}
+
+<section class="glass-panel">
+    <div class="section-heading mb-4">
+        <span class="eyebrow">Public Booking</span>
+        <h1>Create a therapy appointment</h1>
+        <p>The booking is stored asynchronously through the service layer and starts in <strong>PendingPayment</strong> so the background worker can expire stale unpaid records after 24 hours.</p>
+    </div>
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-warning mb-3"></div>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="PatientName" class="form-label"></label>
+                <input asp-for="PatientName" class="form-control" />
+                <span asp-validation-for="PatientName" class="text-warning"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="PatientEmail" class="form-label"></label>
+                <input asp-for="PatientEmail" class="form-control" />
+                <span asp-validation-for="PatientEmail" class="text-warning"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="PatientPhone" class="form-label"></label>
+                <input asp-for="PatientPhone" class="form-control" />
+                <span asp-validation-for="PatientPhone" class="text-warning"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="AppointmentStartLocal" class="form-label"></label>
+                <input asp-for="AppointmentStartLocal" type="datetime-local" class="form-control" />
+                <span asp-validation-for="AppointmentStartLocal" class="text-warning"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="TherapistProfileId" class="form-label">Therapist</label>
+                <select asp-for="TherapistProfileId" class="form-select">
+                    <option value="">Choose therapist</option>
+                    @foreach (var therapist in Model.AvailableTherapists)
+                    {
+                        <option value="@therapist.Id">@therapist.Name - @therapist.Specialty</option>
+                    }
+                </select>
+                <span asp-validation-for="TherapistProfileId" class="text-warning"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="TherapyServiceId" class="form-label">Service</label>
+                <select asp-for="TherapyServiceId" class="form-select">
+                    <option value="">Choose service</option>
+                    @foreach (var service in Model.AvailableServices)
+                    {
+                        <option value="@service.Id">@service.Name - @service.Price.ToString("N0") VND</option>
+                    }
+                </select>
+                <span asp-validation-for="TherapyServiceId" class="text-warning"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Notes" class="form-label"></label>
+                <textarea asp-for="Notes" rows="4" class="form-control"></textarea>
+                <span asp-validation-for="Notes" class="text-warning"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Submit Booking</button>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

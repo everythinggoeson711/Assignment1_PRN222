@@ -1,0 +1,17 @@
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\bin\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.deps.json
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\bin\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.runtimeconfig.json
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\bin\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.dll
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\bin\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.pdb
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\bin\Debug\net10.0\FinalAssignment.Therapy.Core.dll
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\bin\Debug\net10.0\FinalAssignment.Therapy.Core.pdb
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\obj\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\obj\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\obj\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\obj\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.AssemblyInfo.cs
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\obj\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\obj\Debug\net10.0\FinalAss.A6CE007B.Up2Date
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\obj\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.dll
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\obj\Debug\net10.0\refint\FinalAssignment.Therapy.Infrastructure.dll
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\obj\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.pdb
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\obj\Debug\net10.0\FinalAssignment.Therapy.Infrastructure.genruntimeconfig.cache
+C:\Users\doanv\source\repos\FinalAssignment.Therapy.Infrastructure\obj\Debug\net10.0\ref\FinalAssignment.Therapy.Infrastructure.dll

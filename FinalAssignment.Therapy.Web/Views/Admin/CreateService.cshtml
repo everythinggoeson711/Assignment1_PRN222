@@ -1,0 +1,53 @@
+@model TherapyServiceFormViewModel
+@{
+    ViewData["Title"] = "Create Service";
+}
+
+<section class="glass-panel">
+    <div class="section-heading mb-4">
+        <span class="eyebrow">Admin / Create</span>
+        <h1>Create therapy service</h1>
+        <p>New services appear automatically in the public booking page if marked active.</p>
+    </div>
+
+    <form asp-action="CreateService" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-warning mb-3"></div>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-warning"></span>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-warning"></span>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="DurationMinutes" class="form-label"></label>
+                <input asp-for="DurationMinutes" class="form-control" />
+                <span asp-validation-for="DurationMinutes" class="text-warning"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" rows="4" class="form-control"></textarea>
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input asp-for="IsActive" class="form-check-input" />
+                    <label asp-for="IsActive" class="form-check-label"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Create Service</button>
+            <a class="btn btn-outline-light" asp-action="Services">Back</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

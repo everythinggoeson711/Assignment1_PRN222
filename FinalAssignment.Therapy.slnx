@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="FinalAssignment.Therapy.Application/FinalAssignment.Therapy.Application.csproj" />
+  <Project Path="FinalAssignment.Therapy.Core/FinalAssignment.Therapy.Core.csproj" />
+  <Project Path="FinalAssignment.Therapy.Infrastructure/FinalAssignment.Therapy.Infrastructure.csproj" />
+  <Project Path="FinalAssignment.Therapy.Tests/FinalAssignment.Therapy.Tests.csproj" />
+  <Project Path="FinalAssignment.Therapy.Web/FinalAssignment.Therapy.Web.csproj" />
+</Solution>

@@ -1,0 +1,54 @@
+@model TherapyServiceFormViewModel
+@{
+    ViewData["Title"] = "Edit Service";
+}
+
+<section class="glass-panel">
+    <div class="section-heading mb-4">
+        <span class="eyebrow">Admin / Edit</span>
+        <h1>Edit therapy service</h1>
+        <p>Updating price or duration only affects future bookings because appointments store a price snapshot.</p>
+    </div>
+
+    <form asp-action="EditService" method="post">
+        @Html.AntiForgeryToken()
+        <input asp-for="Id" type="hidden" />
+        <div asp-validation-summary="ModelOnly" class="text-warning mb-3"></div>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-warning"></span>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-warning"></span>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="DurationMinutes" class="form-label"></label>
+                <input asp-for="DurationMinutes" class="form-control" />
+                <span asp-validation-for="DurationMinutes" class="text-warning"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" rows="4" class="form-control"></textarea>
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input asp-for="IsActive" class="form-check-input" />
+                    <label asp-for="IsActive" class="form-check-label"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a class="btn btn-outline-light" asp-action="Services">Back</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

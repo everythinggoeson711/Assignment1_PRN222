@@ -1,0 +1,140 @@
+@model FinalAssignment.Therapy.Application.Models.DashboardMetricsDto
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<section class="section-heading mb-4">
+    <span class="eyebrow">Admin / SignalR</span>
+    <h1>Live operational dashboard</h1>
+    <p>Metrics on this page refresh in real time whenever a booking is created, confirmed, completed, or expired by the background worker.</p>
+</section>
+
+<section class="metrics-grid mb-4">
+    <article class="stats-card">
+        <span class="eyebrow">Pending Payment</span>
+        <span id="pendingCount" class="metric-value">@Model.PendingPaymentCount</span>
+    </article>
+    <article class="stats-card">
+        <span class="eyebrow">Confirmed</span>
+        <span id="confirmedCount" class="metric-value">@Model.ConfirmedCount</span>
+    </article>
+    <article class="stats-card">
+        <span class="eyebrow">Completed</span>
+        <span id="completedCount" class="metric-value">@Model.CompletedCount</span>
+    </article>
+    <article class="stats-card">
+        <span class="eyebrow">Expired by Worker</span>
+        <span id="expiredCount" class="metric-value">@Model.ExpiredCount</span>
+    </article>
+    <article class="stats-card">
+        <span class="eyebrow">Revenue</span>
+        <span id="revenueTotal" class="metric-value">@Model.TotalRevenue.ToString("N0") VND</span>
+    </article>
+</section>
+
+<section class="glass-panel dashboard-table">
+    <div class="section-heading mb-3">
+        <span class="eyebrow">Recent Appointments</span>
+        <h2>Operations queue</h2>
+    </div>
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Therapist</th>
+                    <th>Service</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="recentAppointmentsBody">
+                @foreach (var appointment in Model.RecentAppointments)
+                {
+                    <tr>
+                        <td>
+                            <strong>@appointment.PatientName</strong>
+                            <div class="small text-secondary">@appointment.PatientEmail</div>
+                        </td>
+                        <td>@appointment.TherapistName</td>
+                        <td>@appointment.ServiceName</td>
+                        <td>@appointment.AppointmentStartUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>
+                            <span class="status-badge">@appointment.Status / @appointment.PaymentStatus</span>
+                        </td>
+                        <td>
+                            @if (appointment.Status == FinalAssignment.Therapy.Core.Enums.AppointmentStatus.PendingPayment)
+                            {
+                                <form asp-action="ConfirmPayment" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@appointment.Id" />
+                                    <button type="submit" class="btn btn-sm btn-primary">Mark Paid</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="text-secondary small">No action</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+    <script>
+        const pendingCount = document.getElementById("pendingCount");
+        const confirmedCount = document.getElementById("confirmedCount");
+        const completedCount = document.getElementById("completedCount");
+        const expiredCount = document.getElementById("expiredCount");
+        const revenueTotal = document.getElementById("revenueTotal");
+        const recentAppointmentsBody = document.getElementById("recentAppointmentsBody");
+
+        async function refreshMetrics() {
+            const response = await fetch('@Url.Action("Metrics", "Admin")');
+            if (!response.ok) {
+                return;
+            }
+
+            const metrics = await response.json();
+            pendingCount.textContent = metrics.pendingPaymentCount;
+            confirmedCount.textContent = metrics.confirmedCount;
+            completedCount.textContent = metrics.completedCount;
+            expiredCount.textContent = metrics.expiredCount;
+            revenueTotal.textContent = `${Number(metrics.totalRevenue).toLocaleString()} VND`;
+
+            recentAppointmentsBody.innerHTML = metrics.recentAppointments.map(appointment => {
+                const canConfirm = appointment.status === 'PendingPayment';
+                const actionHtml = canConfirm
+                    ? `<form method="post" action="@Url.Action("ConfirmPayment", "Admin")">
+                            <input name="__RequestVerificationToken" type="hidden" value="@Antiforgery.GetAndStoreTokens(Context).RequestToken" />
+                            <input type="hidden" name="id" value="${appointment.id}" />
+                            <button type="submit" class="btn btn-sm btn-primary">Mark Paid</button>
+                       </form>`
+                    : '<span class="text-secondary small">No action</span>';
+
+                return `<tr>
+                    <td><strong>${appointment.patientName}</strong><div class="small text-secondary">${appointment.patientEmail}</div></td>
+                    <td>${appointment.therapistName}</td>
+                    <td>${appointment.serviceName}</td>
+                    <td>${new Date(appointment.appointmentStartUtc).toLocaleString()}</td>
+                    <td><span class="status-badge">${appointment.status} / ${appointment.paymentStatus}</span></td>
+                    <td>${actionHtml}</td>
+                </tr>`;
+            }).join('');
+        }
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl('/hubs/admin-dashboard')
+            .withAutomaticReconnect()
+            .build();
+
+        connection.on('metricsChanged', refreshMetrics);
+        connection.start().catch(() => {});
+    </script>
+}

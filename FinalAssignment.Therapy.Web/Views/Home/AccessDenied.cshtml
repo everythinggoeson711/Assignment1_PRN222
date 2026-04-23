@@ -1,0 +1,10 @@
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<section class="glass-panel">
+    <span class="eyebrow">Authorization</span>
+    <h1>Access denied</h1>
+    <p>Your current role does not have permission to open this route. Admin and Therapist workflows are protected using role-based authorization attributes.</p>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Back to home</a>
+</section>

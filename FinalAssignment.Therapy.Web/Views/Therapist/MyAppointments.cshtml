@@ -1,0 +1,61 @@
+@model IReadOnlyList<FinalAssignment.Therapy.Application.Models.AppointmentSummaryDto>
+@{
+    ViewData["Title"] = "My Appointments";
+}
+
+<section class="glass-panel dashboard-table">
+    <div class="section-heading mb-3">
+        <span class="eyebrow">Therapist Workflow</span>
+        <h1>Assigned appointments</h1>
+        <p>This page is role-protected and only shows appointments for the signed-in therapist profile.</p>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="empty-state">No appointments are assigned yet.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Patient</th>
+                        <th>Service</th>
+                        <th>When</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var appointment in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@appointment.PatientName</strong>
+                                <div class="small text-secondary">@appointment.PatientEmail</div>
+                            </td>
+                            <td>@appointment.ServiceName</td>
+                            <td>@appointment.AppointmentStartUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="status-badge">@appointment.Status / @appointment.PaymentStatus</span></td>
+                            <td>
+                                @if (appointment.Status == FinalAssignment.Therapy.Core.Enums.AppointmentStatus.Confirmed)
+                                {
+                                    <form asp-action="Complete" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@appointment.Id" />
+                                        <button type="submit" class="btn btn-sm btn-primary">Mark Completed</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <span class="text-secondary small">No action</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

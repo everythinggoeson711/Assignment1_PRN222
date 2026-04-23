@@ -1,0 +1,11 @@
+@{
+    ViewData["Title"] = "Booking Submitted";
+}
+
+<section class="glass-panel">
+    <span class="eyebrow">Success</span>
+    <h1>Your booking was created</h1>
+    <p>Appointment ID: <strong>#@ViewData["AppointmentId"]</strong></p>
+    <p>The record is currently waiting for payment confirmation. If it stays unpaid for more than 24 hours, the hosted background worker will automatically expire it.</p>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Back to overview</a>
+</section>

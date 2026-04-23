@@ -1,0 +1,62 @@
+@model TherapistFormViewModel
+@{
+    ViewData["Title"] = "Create Therapist";
+}
+
+<section class="glass-panel">
+    <div class="section-heading mb-4">
+        <span class="eyebrow">Admin / Create</span>
+        <h1>Create therapist</h1>
+        <p>This creates both the therapist profile and the linked staff login account.</p>
+    </div>
+
+    <form asp-action="CreateTherapist" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-warning mb-3"></div>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-warning"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Specialty" class="form-label"></label>
+                <input asp-for="Specialty" class="form-control" />
+                <span asp-validation-for="Specialty" class="text-warning"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-warning"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-warning"></span>
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="form-check mt-4 pt-2">
+                    <input asp-for="IsActive" class="form-check-input" />
+                    <label asp-for="IsActive" class="form-check-label"></label>
+                </div>
+            </div>
+            <div class="col-12">
+                <label asp-for="Bio" class="form-label"></label>
+                <textarea asp-for="Bio" rows="4" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Create Therapist</button>
+            <a class="btn btn-outline-light" asp-action="Therapists">Back</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
