@@ -18,5 +18,16 @@ public class TherapyServiceFormViewModel
     [Range(15, 480)]
     public int DurationMinutes { get; set; }
 
+    [StringLength(500)]
+    public string? ImageUrl { get; set; }
+
+    [StringLength(50)]
+    public string Category { get; set; } = "General";
+
+    public string? DetailedDescription { get; set; }
+
+    [StringLength(500)]
+    public string? Benefits { get; set; }
+
     public bool IsActive { get; set; } = true;
 }

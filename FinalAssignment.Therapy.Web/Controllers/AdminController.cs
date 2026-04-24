@@ -1,5 +1,6 @@
 using FinalAssignment.Therapy.Application.Services;
 using FinalAssignment.Therapy.Core.Common;
+using FinalAssignment.Therapy.Core.Interfaces;
 using FinalAssignment.Therapy.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,8 @@ namespace FinalAssignment.Therapy.Web.Controllers;
 public class AdminController(
     IDashboardService dashboardService,
     IAppointmentService appointmentService,
-    IAdminCatalogService adminCatalogService) : Controller
+    IAdminCatalogService adminCatalogService,
+    IChatService chatService) : Controller
 {
     public async Task<IActionResult> Dashboard(CancellationToken cancellationToken)
         => View(await dashboardService.GetMetricsAsync(cancellationToken));
@@ -217,9 +219,57 @@ public class AdminController(
     }
 
     [HttpGet]
-    public IActionResult ChatSessions()
+    public async Task<IActionResult> ChatSessions(CancellationToken cancellationToken)
     {
-        return View();
+        ViewData["Title"] = "Chat Sessions Management";
+        var sessions = await chatService.GetActiveSessions();
+        return View(sessions);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ChatSession(string sessionId, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(sessionId))
+        {
+            return BadRequest("SessionId is required.");
+        }
+
+        var session = await chatService.GetSessionByIdAsync(sessionId);
+        if (session is null)
+        {
+            return NotFound();
+        }
+
+        var messages = await chatService.GetSessionMessagesAsync(sessionId);
+        ViewBag.Messages = messages;
+        ViewData["Title"] = $"Chat Session - {session.CustomerName ?? "Customer"}";
+        return View(session);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EndChatSession(string sessionId, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(sessionId))
+        {
+            return BadRequest("SessionId is required.");
+        }
+
+        var succeeded = await chatService.EndSessionAsync(sessionId);
+        TempData[succeeded ? "Success" : "Error"] = succeeded
+            ? "Chat session ended successfully."
+            : "Unable to end chat session.";
+
+        return RedirectToAction(nameof(ChatSessions));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ClearAllSessions(CancellationToken cancellationToken)
+    {
+        await chatService.ClearAllSessionsAsync();
+        TempData["Success"] = "All chat sessions were cleared successfully.";
+        return RedirectToAction(nameof(ChatSessions));
     }
 
     [HttpGet]
@@ -233,5 +283,12 @@ public class AdminController(
         var result = await appointmentService.ConfirmPaymentAsync(id, cancellationToken);
         TempData[result.Succeeded ? "Success" : "Error"] = result.Message;
         return RedirectToAction(nameof(Dashboard));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Appointments(CancellationToken cancellationToken)
+    {
+        var appointments = await appointmentService.GetAllAppointmentsAsync(cancellationToken);
+        return View(appointments);
     }
 }

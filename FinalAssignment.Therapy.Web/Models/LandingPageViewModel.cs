@@ -7,4 +7,6 @@ public class LandingPageViewModel
     public IReadOnlyList<TherapistSummaryDto> Therapists { get; set; } = [];
 
     public IReadOnlyList<TherapyServiceSummaryDto> Services { get; set; } = [];
+
+    public IReadOnlyList<FinalAssignment.Therapy.Core.Entities.Testimonial> Testimonials { get; set; } = [];
 }

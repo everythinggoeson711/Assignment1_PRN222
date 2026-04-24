@@ -21,4 +21,5 @@ public class AppointmentSummaryDto
     public PaymentStatus PaymentStatus { get; set; }
 
     public decimal PriceSnapshot { get; set; }
+    public string TrackingCode { get; set; } = string.Empty;
 }

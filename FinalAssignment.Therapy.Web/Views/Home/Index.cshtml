@@ -1,4 +1,4 @@
-﻿@model LandingPageViewModel
+@model LandingPageViewModel
 @{
     ViewData["Title"] = "Therapy Final Assignment";
 }
@@ -17,6 +17,8 @@
             <div class="public-hero-actions">
                 <a class="public-primary-btn" asp-controller="Booking" asp-action="Create">Make a Booking</a>
                 <a class="public-secondary-btn" href="#services">View Services</a>
+                <a class="public-secondary-btn" href="#therapists">Meet Therapists</a>
+                <a class="public-secondary-btn" href="#resources">Resources & Blog</a>
             </div>
         </div>
     </section>
@@ -39,57 +41,269 @@
             </div>
         </div>
 
-        <div class="public-domains-card">
-            <h3>Domains of Evaluation</h3>
-            <ul>
-                <li><strong>Daily Living Skills</strong><span>Self-care, nutrition, and home management.</span></li>
-                <li><strong>Mobility &amp; Access</strong><span>Transfers, community navigation, and physical capacity.</span></li>
-                <li><strong>Cognitive Capacity</strong><span>Decision making, social interactions, and memory.</span></li>
-                <li><strong>Environmental Factors</strong><span>Home modifications and assistive technology needs.</span></li>
-            </ul>
+        <div class="public-domains-card" style="background: transparent; border: none; box-shadow: none; width: 100%; max-width: 700px;">
+            <h3 class="text-center mb-5 fw-bold" style="color: #1e3a8a;">Our Therapy Process</h3>
+            <div class="honeycomb-container">
+                <div class="hexagon-center">
+                    <span>6</span>
+                    <small>Steps</small>
+                </div>
+                
+                <!-- Step 1 -->
+                <div class="hexagon-item hex-1">01</div>
+                <div class="hexagon-label label-1">Discovery Call</div>
+                
+                <!-- Step 2 -->
+                <div class="hexagon-item hex-2">02</div>
+                <div class="hexagon-label label-2">Clinical Assessment</div>
+                
+                <!-- Step 3 -->
+                <div class="hexagon-item hex-3">03</div>
+                <div class="hexagon-label label-3">Care Planning</div>
+                
+                <!-- Step 4 -->
+                <div class="hexagon-item hex-4">04</div>
+                <div class="hexagon-label label-4">Therapy Sessions</div>
+                
+                <!-- Step 5 -->
+                <div class="hexagon-item hex-5">05</div>
+                <div class="hexagon-label label-5">Progress Review</div>
+                
+                <!-- Step 6 -->
+                <div class="hexagon-item hex-6">06</div>
+                <div class="hexagon-label label-6">Goal Achievement</div>
+            </div>
         </div>
     </section>
 
-    <section class="public-service-list">
-        @if (Model.Services.Count == 0)
-        {
-            <article class="public-service-card">
-                <span class="public-service-tag">Live data</span>
-                <h3>No active services yet</h3>
-                <p>Create active therapy services in the admin portal to publish bookable offerings on this page.</p>
-            </article>
-        }
-        else
-        {
-            @foreach (var service in Model.Services)
+    <section class="py-5" id="services">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary px-4 py-2 mb-3">Therapy Options</span>
+                <h2 class="display-5 fw-bold mb-3">Our Featured Services</h2>
+                <p class="lead text-muted mx-auto" style="max-width: 700px;">Explore our most popular therapy options designed to support your mental well-being and personal growth.</p>
+            </div>
+
+            @if (Model.Services.Count == 0)
             {
-                <article class="public-service-card">
-                    <span class="public-service-tag">Service</span>
-                    <h3>@service.Name</h3>
-                    <div class="public-service-meta">
-                        <span>@service.DurationMinutes mins</span>
-                        <strong>@service.Price.ToString("N0") VND</strong>
+                <div class="glass-panel text-center py-5">
+                    <i class="fas fa-layer-group fa-3x text-muted mb-3"></i>
+                    <h3>No active services yet</h3>
+                    <p>Admin needs to publish services to show them here.</p>
+                </div>
+            }
+            else
+            {
+                <div class="row g-4 justify-content-center">
+                    @foreach (var service in Model.Services.Take(3))
+                    {
+                        <div class="col-md-6 col-lg-4 d-flex">
+                            <div class="card flex-fill p-0 border-0 shadow-sm overflow-hidden" style="border-radius: 24px; transition: transform 0.3s ease;">
+                                <div class="position-relative" style="height: 240px;">
+                                    <img src="@(string.IsNullOrEmpty(service.ImageUrl) ? "https://images.unsplash.com/photo-1527689368864-3a821dbccc34?w=800" : service.ImageUrl)" class="w-100 h-100" style="object-fit: cover;" alt="@service.Name">
+                                    <div class="position-absolute top-0 end-0 m-3">
+                                        <span class="badge bg-white text-primary rounded-pill shadow-sm py-2 px-3">@service.Category</span>
+                                    </div>
+                                </div>
+                                <div class="card-body p-4 d-flex flex-column">
+                                    <h4 class="fw-bold mb-3">@service.Name</h4>
+                                    <p class="text-muted small mb-4">@service.Description</p>
+                                    <div class="d-flex align-items-center text-muted small mb-4 mt-auto">
+                                        <div class="me-3"><i class="far fa-clock me-2"></i>@service.DurationMinutes mins</div>
+                                        <div><i class="fas fa-tag me-2"></i>@service.Price.ToString("N0") VND</div>
+                                    </div>
+                                    <a asp-controller="Services" asp-action="Details" asp-route-id="@service.Id" class="btn btn-primary w-100 rounded-pill py-3 fw-bold">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+                <div class="text-center mt-5">
+                    <a asp-controller="Services" asp-action="Index" class="btn btn-outline-primary px-5 py-3 rounded-pill fw-bold">
+                        View all services <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="py-5 bg-light" id="therapists">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge rounded-pill bg-success bg-opacity-10 text-success px-4 py-2 mb-3">Expert Care</span>
+                <h2 class="display-5 fw-bold mb-3">Our Dedicated Clinicians</h2>
+                <p class="lead text-muted mx-auto" style="max-width: 700px;">Every therapy session is conducted by experts with exhaustive clinical experience.</p>
+            </div>
+
+            <div class="row g-4">
+                @foreach (var therapist in Model.Therapists.Take(4))
+                {
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card border-0 shadow-sm rounded-4 text-center p-4 h-100">
+                        <div class="mb-3">
+                            @if (!string.IsNullOrEmpty(therapist.AvatarUrl))
+                            {
+                                <img src="@therapist.AvatarUrl" alt="@therapist.Name" class="rounded-circle mx-auto d-block object-fit-cover shadow-sm" style="width: 100px; height: 100px; border: 3px solid #fff;">
+                            }
+                            else
+                            {
+                                <div class="bg-primary bg-opacity-10 rounded-circle mx-auto d-flex align-items-center justify-content-center text-primary fw-bold fs-3" style="width: 80px; height: 80px;">
+                                    @therapist.Name.Substring(0, 1)
+                                </div>
+                            }
+                        </div>
+                        <h4 class="fw-bold mb-1">@therapist.Name</h4>
+                        <p class="text-primary small fw-bold mb-2">@therapist.Specialty</p>
+                        <p class="text-muted small mb-0"><i class="fas fa-star text-warning"></i> 5.0 (Top Rated)</p>
                     </div>
-                </article>
+                </div>
             }
-        }
+        </div>
+    </section>
+    <!-- New How It Works Section -->
+    <section class="public-journey" id="how-it-works" style="margin-top: 64px;">
+        <div class="public-section-heading">
+            <h2>How It Works</h2>
+            <p>Your journey to better mental health starts here. It's simple and secure.</p>
+        </div>
+        <div class="row w-100 mt-4">
+            <div class="col-md-4">
+                <div class="step-card glass-panel">
+                    <div class="step-icon-wrapper">1</div>
+                    <div class="step-line"></div>
+                    <h3 class="mb-3">Choose a Service</h3>
+                    <p class="text-muted">Browse our comprehensive list of therapy services and pick what fits your needs.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="step-card glass-panel">
+                    <div class="step-icon-wrapper">2</div>
+                    <div class="step-line"></div>
+                    <h3 class="mb-3">Select a Therapist</h3>
+                    <p class="text-muted">Find an expert clinician with the right specialty and book a time slot.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="step-card glass-panel">
+                    <div class="step-icon-wrapper">3</div>
+                    <h3 class="mb-3">Start Healing</h3>
+                    <p class="text-muted">Join your session online or in-person and begin your journey to wellness.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="public-standards-section">
-        <div class="public-section-heading">
-            <h2>Our Dedicated Clinicians</h2>
-            <p>Every therapy session is conducted by experts with exhaustive clinical experience.</p>
+    <!-- Testimonials Section -->
+    <section class="public-testimonials w-100" style="margin-top: 80px; padding: 60px 0; background: linear-gradient(135deg, rgba(46, 204, 113, 0.05) 0%, rgba(26, 47, 75, 0.05) 100%);">
+        <div class="container">
+            <div class="public-section-heading mb-5 text-center">
+                <span class="text-primary fw-bold text-uppercase tracking-wide">Client Stories</span>
+                <h2>What Our Clients Say</h2>
+            </div>
+            
+            <div class="row g-4">
+                @foreach (var review in Model.Testimonials.Take(3))
+                {
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 bg-white position-relative">
+                            <i class="fas fa-quote-left fa-3x position-absolute top-0 start-0 text-primary opacity-10 translate-middle" style="margin-top: 20px; margin-left: 30px;"></i>
+                            <div class="d-flex text-warning mb-3">
+                                @for(int i = 0; i < review.Rating; i++)
+                                {
+                                    <i class="fas fa-star me-1"></i>
+                                }
+                            </div>
+                            <p class="fst-italic text-muted mb-4 fs-5" style="line-height: 1.6;">"@review.Content"</p>
+                            <div class="d-flex align-items-center mt-auto">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 45px; height: 45px;">
+                                    @review.CustomerName.Substring(0, 1)
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">@review.CustomerName</h6>
+                                    <small class="text-muted">Verified Client</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if(Model.Testimonials.Count == 0)
+                {
+                    <div class="col-12 text-center text-muted">
+                        <p>No testimonials available yet.</p>
+                    </div>
+                }
+            </div>
         </div>
+    </section>
 
-        <div class="public-standards-grid">
-            @foreach (var therapist in Model.Therapists)
-            {
-                <article class="public-standards-card">
-                    <span class="public-icon-square">👤</span>
-                    <h3>@therapist.Name</h3>
-                    <p class="text-muted mt-2">@therapist.Specialty</p>
-                </article>
-            }
+    <!-- FAQ Section -->
+    <section class="public-faq-section w-100" id="faq" style="margin-top: 80px; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <div class="public-section-heading mb-5">
+            <h2>Frequently Asked Questions</h2>
+            <p>Find answers to common questions about our platform.</p>
+        </div>
+        <div class="accordion faq-accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Is my information secure?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-muted">
+                        Absolutely. We use industry-standard encryption and follow strict healthcare data privacy regulations to ensure your data is always protected.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        How do I reschedule an appointment?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-muted">
+                        You can reschedule your appointment up to 24 hours in advance through your dashboard, or by contacting our Live Support.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        What if I need immediate help?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-muted">
+                        Please use our Live Support chat feature for immediate assistance, or call emergency services if you are in a crisis.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="public-resources-section" id="resources" style="margin-top: 80px;">
+        <div class="public-section-heading">
+            <h2>Resources & Blog</h2>
+            <p>Explore articles, guides, and tips to support your therapy journey and mental well-being.</p>
+        </div>
+        <div class="public-resources-grid">
+            <article class="public-resource-card">
+                <h4>How to Prepare for Your First Therapy Session</h4>
+                <p>Get practical advice on what to expect and how to make the most of your first appointment.</p>
+                <a href="#" class="public-resource-link">Read more →</a>
+            </article>
+            <article class="public-resource-card">
+                <h4>Understanding Different Therapy Approaches</h4>
+                <p>Learn about various therapy methods and which might be right for you.</p>
+                <a href="#" class="public-resource-link">Read more →</a>
+            </article>
+            <article class="public-resource-card">
+                <h4>Self-Care Tips for Mental Health</h4>
+                <p>Discover everyday strategies to support your mental health between sessions.</p>
+                <a href="#" class="public-resource-link">Read more →</a>
+            </article>
         </div>
     </section>
 </div>

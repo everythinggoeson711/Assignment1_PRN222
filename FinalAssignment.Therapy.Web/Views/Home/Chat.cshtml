@@ -76,15 +76,23 @@
                     .withAutomaticReconnect()
                     .build();
 
-                connection.on("SessionCreated", (sessionData) => {
+                connection.on("SessionCreated", async (sessionData) => {
                     console.log("Session created:", sessionData);
                     currentSessionId = sessionData.sessionId;
                     document.getElementById("chatSetup").style.display = "none";
                     document.getElementById("chatInterface").style.display = "block";
                     document.getElementById("sessionStatus").textContent = sessionData.message;
+
+                    // Ensure the customer is definitely joined to the session group
+                    try {
+                        await connection.invoke("JoinSessionGroup", currentSessionId);
+                        console.log("Customer joined session group:", currentSessionId);
+                    } catch (err) {
+                        console.warn("Could not join session group automatically:", err);
+                    }
                 });
 
-                connection.on("GroupTest", (message) => {
+                connection.on("groupTest", (message) => {
                     console.log("Group test received:", message);
                     // This confirms we're in the SignalR group
                 });
@@ -92,11 +100,13 @@
                 connection.on("StaffJoined", (staffData) => {
                     console.log("Staff joined:", staffData);
                     document.getElementById("sessionStatus").textContent = staffData.message;
+                    document.getElementById("sessionStatus").classList.remove("text-muted");
+                    document.getElementById("sessionStatus").classList.add("text-success");
                     document.getElementById("messageInput").disabled = false;
                     document.getElementById("sendButton").disabled = false;
                     
                     // Add system message
-                    addSystemMessage(`${staffData.staffName} đã tham gia cuộc trò chuyện`);
+                    addSystemMessage(`${staffData.staffName || 'Nhân viên hỗ trợ'} đã tham gia cuộc trò chuyện`);
                     
                     // Make sure we can send messages now
                     console.log("Customer input enabled - ready to chat");

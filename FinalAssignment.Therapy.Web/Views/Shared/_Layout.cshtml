@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FinalAssignment.Therapy.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         :root { --sidebar-bg: #1a2f4b; --accent: #2ecc71; }
         body { background: #f0f4f8; font-family: 'Segoe UI', sans-serif; }
@@ -50,7 +51,7 @@
 {
     <div class="sidebar">
         <div class="sidebar-brand">
-            <h5>🧠 Final Therapy</h5>
+            <h5>     Therapy</h5>
             <small>@(isAdmin ? "Admin" : isTherapist ? "Therapist" : "User")</small>
         </div>
         <nav class="nav flex-column pt-2">
@@ -96,20 +97,6 @@
     <div class="main-content">
         <div class="topbar">
             <h6 class="page-title">@ViewData["Title"]</h6>
-            @if (TempData["Success"] != null)
-            {
-                <div class="alert alert-success alert-dismissible py-1 px-3 mb-0 fade show" role="alert">
-                    ✅ @TempData["Success"]
-                    <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
-                </div>
-            }
-            @if (TempData["Error"] != null)
-            {
-                <div class="alert alert-danger alert-dismissible py-1 px-3 mb-0 fade show" role="alert">
-                    ❌ @TempData["Error"]
-                    <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
-                </div>
-            }
         </div>
         <div class="page-wrapper">
             <main role="main">
@@ -127,9 +114,9 @@ else if(isLogin)
 else
 {
     <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-4 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                <h5 class="mb-0">🧠 Final Therapy</h5>
+                <h4 class="mb-0 public-brand" style="color: var(--primary-color, #4F46E5);">Montra Therapy</h4>
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -145,23 +132,65 @@ else
     </div>
     <div class="container">
         <main role="main" class="pb-3">
-            @if (TempData["Success"] != null)
-            {
-                <div class="alert alert-success alert-dismissible py-2 px-3 mb-3 fade show" role="alert">
-                    ✅ @TempData["Success"]
-                    <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
-                </div>
-            }
-            @if (TempData["Error"] != null)
-            {
-                <div class="alert alert-danger alert-dismissible py-2 px-3 mb-3 fade show" role="alert">
-                    ❌ @TempData["Error"]
-                    <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
-                </div>
-            }
             @RenderBody()
         </main>
     </div>
+
+    <!-- Premium Footer -->
+    <footer class="bg-dark text-white pt-5 pb-4 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="fw-bold mb-4" style="color: #2ecc71;">Montra Therapy</h4>
+                    <p class="text-white-50 pe-lg-5">A modern platform dedicated to mental health and personal growth, providing expert counseling and support for individuals and families.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white-50 fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white-50 fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white-50 fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white-50 fs-5"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a asp-controller="Home" asp-action="Index" class="text-white-50 text-decoration-none">Overview</a></li>
+                        <li class="mb-2"><a asp-controller="Booking" asp-action="Create" class="text-white-50 text-decoration-none">Book Session</a></li>
+                        <li class="mb-2"><a href="#how-it-works" class="text-white-50 text-decoration-none">How It Works</a></li>
+                        <li class="mb-2"><a href="#faq" class="text-white-50 text-decoration-none">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold mb-4">Our Services</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Individual Therapy</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Couples Counseling</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Child Psychology</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Mindfulness Workshops</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold mb-4">Contact Us</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-3 d-flex align-items-center"><i class="fas fa-map-marker-alt me-3"></i> 123 Wellness Blvd, Heart City</li>
+                        <li class="mb-3 d-flex align-items-center"><i class="fas fa-phone-alt me-3"></i> +1 (555) 123-4567</li>
+                        <li class="mb-3 d-flex align-items-center"><i class="fas fa-envelope me-3"></i> contact@finaltherapy.local</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 opacity-10">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0 text-white-50">&copy; @DateTime.Now.Year Final Therapy. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <ul class="list-inline mb-0 small">
+                        <li class="list-inline-item me-4"><a href="#" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
+                        <li class="list-inline-item"><a href="#" class="text-white-50 text-decoration-none">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 }
 
 <partial name="_FloatingChatWidget" />
@@ -169,6 +198,40 @@ else
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+
+    @if (TempData["Success"] != null)
+    {
+        <text>
+        Toast.fire({
+            icon: 'success',
+            title: '@TempData["Success"]'
+        });
+        </text>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <text>
+        Toast.fire({
+            icon: 'error',
+            title: '@TempData["Error"]'
+        });
+        </text>
+    }
+</script>
 
 @await RenderSectionAsync("Scripts", required: false)
 </body>

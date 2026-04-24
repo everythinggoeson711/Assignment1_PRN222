@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalAssignment.Therapy.Infrastructure.Migrations
 {
     [DbContext(typeof(TherapyDbContext))]
-    [Migration("20260423044042_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260423233822_InitialReal")]
+    partial class InitialReal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,6 +121,11 @@ namespace FinalAssignment.Therapy.Infrastructure.Migrations
                     b.Property<int>("TherapyServiceId")
                         .HasColumnType("int");
 
+                    b.Property<string>("TrackingCode")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
                     b.Property<DateTime>("UpdatedAtUtc")
                         .HasColumnType("datetime2");
 
@@ -135,6 +140,121 @@ namespace FinalAssignment.Therapy.Infrastructure.Migrations
                     b.ToTable("Appointments");
                 });
 
+            modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.ChatMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChatSessionId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsFromStaff")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("SenderName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatSessionId");
+
+                    b.ToTable("ChatMessages");
+                });
+
+            modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.ChatSession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AssignedStaffId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerConnectionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerEmail")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("CustomerName")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("EndedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SessionId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("StaffConnectionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssignedStaffId");
+
+                    b.ToTable("ChatSessions");
+                });
+
+            modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.Testimonial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Testimonials");
+                });
+
             modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.TherapistProfile", b =>
                 {
                     b.Property<int>("Id")
@@ -143,10 +263,24 @@ namespace FinalAssignment.Therapy.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AvatarUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<string>("Bio")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("BreakBetweenSlots")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Education")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<TimeOnly?>("EndWorkTime")
+                        .HasColumnType("time");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -161,14 +295,67 @@ namespace FinalAssignment.Therapy.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
+
+                    b.Property<int>("SlotDurationMinutes")
+                        .HasColumnType("int");
+
                     b.Property<string>("Specialty")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<TimeOnly?>("StartWorkTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("WorkingDays")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("YearsOfExperience")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Therapists");
+                });
+
+            modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.TherapistSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeOnly>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<TimeOnly>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("TherapistProfileId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TherapistProfileId");
+
+                    b.ToTable("TherapistSchedule");
                 });
 
             modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.TherapyService", b =>
@@ -179,13 +366,29 @@ namespace FinalAssignment.Therapy.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Benefits")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
+                    b.Property<string>("DetailedDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("DurationMinutes")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -232,9 +435,47 @@ namespace FinalAssignment.Therapy.Infrastructure.Migrations
                     b.Navigation("TherapyService");
                 });
 
+            modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.ChatMessage", b =>
+                {
+                    b.HasOne("FinalAssignment.Therapy.Core.Entities.ChatSession", "ChatSession")
+                        .WithMany("Messages")
+                        .HasForeignKey("ChatSessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChatSession");
+                });
+
+            modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.ChatSession", b =>
+                {
+                    b.HasOne("FinalAssignment.Therapy.Core.Entities.AppUser", "AssignedStaff")
+                        .WithMany()
+                        .HasForeignKey("AssignedStaffId");
+
+                    b.Navigation("AssignedStaff");
+                });
+
+            modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.TherapistSchedule", b =>
+                {
+                    b.HasOne("FinalAssignment.Therapy.Core.Entities.TherapistProfile", "TherapistProfile")
+                        .WithMany("Schedules")
+                        .HasForeignKey("TherapistProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TherapistProfile");
+                });
+
+            modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.ChatSession", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
             modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.TherapistProfile", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("Schedules");
                 });
 
             modelBuilder.Entity("FinalAssignment.Therapy.Core.Entities.TherapyService", b =>

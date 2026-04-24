@@ -9,8 +9,27 @@
         <h1>Therapist management</h1>
         <p>Create therapist accounts, update profile information, and deactivate access when needed.</p>
     </div>
-    <a class="btn btn-primary" asp-action="CreateTherapist">Add Therapist</a>
+    <div class="d-flex align-items-center gap-3">
+        <div class="input-group" style="max-width: 300px;">
+            <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+            <input type="text" id="therapistSearch" class="form-control border-start-0 ps-0" placeholder="Search therapists...">
+        </div>
+        <a class="btn btn-primary" asp-action="CreateTherapist">Add Therapist</a>
+    </div>
 </section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#therapistSearch").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("table tbody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
 
 <section class="glass-panel dashboard-table">
     <div class="table-responsive">

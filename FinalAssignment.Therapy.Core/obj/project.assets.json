@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj",
+      "projectUniqueName": "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj",
       "projectName": "FinalAssignment.Therapy.Core",
-      "projectPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj",
+      "projectPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj",
       "packagesPath": "C:\\Users\\doanv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Core\\obj\\",
+      "outputPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

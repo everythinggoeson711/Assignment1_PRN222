@@ -1,0 +1,106 @@
+@model FinalAssignment.Therapy.Application.Models.AppointmentSummaryDto
+@{
+    ViewData["Title"] = "Confirm Your Appointment";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="section-heading text-center mb-5">
+                <span class="eyebrow">Step 2 of 3</span>
+                <h1 class="display-5 fw-bold">Review & Confirm</h1>
+                <p class="text-muted">Please double-check your session details before we finalize your booking.</p>
+            </div>
+
+            <div class="row g-5">
+                <!-- Left: Summary -->
+                <div class="col-lg-7">
+                    <div class="glass-panel h-100 p-5 border-0 shadow-lg" style="border-radius: 30px;">
+                        <h3 class="fw-bold mb-4 border-bottom pb-3">Session Summary</h3>
+                        
+                        <div class="mb-4">
+                            <label class="text-muted small fw-bold text-uppercase mb-2 d-block">Selected Service</label>
+                            <div class="d-flex align-items-center p-3 bg-light rounded-4">
+                                <div class="bg-primary bg-opacity-10 text-primary p-3 rounded-circle me-3">
+                                    <i class="fas fa-heartbeat fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-0">@Model.ServiceName</h5>
+                                    <span class="text-muted small">Standard Clinical Session</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-4 mb-4">
+                            <div class="col-sm-6">
+                                <label class="text-muted small fw-bold text-uppercase mb-2 d-block">Therapist</label>
+                                <div class="p-3 bg-light rounded-4">
+                                    <h6 class="fw-bold mb-0">@Model.TherapistName</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="text-muted small fw-bold text-uppercase mb-2 d-block">Time Slot</label>
+                                <div class="p-3 bg-light rounded-4">
+                                    <h6 class="fw-bold mb-0">@Model.AppointmentStartUtc.ToLocalTime().ToString("MMM dd, HH:mm")</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-0">
+                            <label class="text-muted small fw-bold text-uppercase mb-2 d-block">Patient Info</label>
+                            <div class="p-3 bg-light rounded-4">
+                                <h6 class="fw-bold mb-1">@Model.PatientName</h6>
+                                <span class="text-muted small">@Model.PatientEmail</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Payment -->
+                <div class="col-lg-5">
+                    <div class="card border-0 shadow-xl overflow-hidden h-100" style="border-radius: 30px; background: #fff;">
+                        <div class="bg-primary p-4 text-white text-center">
+                            <h4 class="fw-bold mb-0">Payment Total</h4>
+                        </div>
+                        <div class="card-body p-5">
+                            <div class="text-center mb-5">
+                                <span class="display-4 fw-bold text-primary">@Model.PriceSnapshot.ToString("N0")</span>
+                                <span class="fs-4 fw-bold text-primary">VND</span>
+                                <p class="text-muted mt-2">All taxes and fees included</p>
+                            </div>
+
+                            <hr class="my-4 opacity-10">
+
+                            <div class="d-grid gap-3">
+                                <form asp-action="SimulatePayment" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="appointmentId" value="@Model.Id" />
+                                    <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold py-3 shadow-lg">
+                                        <i class="fas fa-credit-card me-2"></i> Pay & Confirm Now
+                                    </button>
+                                </form>
+
+                                <form asp-action="PayLater" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="appointmentId" value="@Model.Id" />
+                                    <button type="submit" class="btn btn-outline-secondary btn-lg w-100 rounded-pill fw-bold py-3">
+                                        Pay Later (Pending)
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="mt-5 text-center">
+                                <div class="d-flex justify-content-center gap-3 mb-3">
+                                    <i class="fab fa-cc-visa fa-2x text-muted"></i>
+                                    <i class="fab fa-cc-mastercard fa-2x text-muted"></i>
+                                    <i class="fas fa-shield-alt fa-2x text-success"></i>
+                                </div>
+                                <p class="small text-muted mb-0">Secure encrypted transaction powered by Montra Pay.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

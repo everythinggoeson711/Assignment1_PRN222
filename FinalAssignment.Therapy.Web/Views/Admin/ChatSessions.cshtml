@@ -4,36 +4,16 @@
 }
 
 <section class="section-heading mb-4">
-    <span class="eyebrow">Admin / Chat Support</span>
-    <h1>Live Chat Sessions</h1>
-    <p>Quản lý tất cả các phiên chat hỗ trợ khách hàng đang hoạt động.</p>
-</section>
-
-<div class="row mb-4">
-    <div class="col-md-6">
-        <div class="stats-card">
-            <span class="eyebrow">Active Sessions</span>
-            <span class="metric-value">@Model.Count</span>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="stats-card">
-            <span class="eyebrow">Waiting for Staff</span>
-            <span class="metric-value">@Model.Count(s => s.AssignedStaffId == null)</span>
-        </div>
-    </div>
-</div>
-
-<section class="glass-panel">
-    <div class="section-heading mb-3 d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center w-100">
         <div>
-            <span class="eyebrow">Chat Management</span>
-            <h2>Active Sessions</h2>
+            <span class="eyebrow">Admin / Chat Support</span>
+            <h1>Live Chat Sessions</h1>
+            <p>Quản lý tất cả các phiên chat hỗ trợ khách hàng đang hoạt động.</p>
         </div>
         <div>
             @if (Model.Any())
             {
-                <form method="post" asp-action="ClearAllSessions" onsubmit="return confirm('🚨 Xóa tất cả sessions? Dùng để test 2 tab ẩn danh riêng biệt.');" style="display: inline;">
+                <form method="post" asp-action="ClearAllSessions" onsubmit="return confirm('🚨 Xóa tất cả sessions? Dùng để test 2 tab ẩn danh riêng biệt.');" class="d-inline">
                     @Html.AntiForgeryToken()
                     <button type="submit" class="btn btn-outline-warning btn-sm">
                         🧪 Clear All Sessions (Testing)
@@ -42,12 +22,31 @@
             }
         </div>
     </div>
+</section>
+
+<section class="metrics-grid mb-4">
+    <article class="stats-card">
+        <span class="eyebrow">Active Sessions</span>
+        <span class="metric-value">@Model.Count</span>
+    </article>
+    <article class="stats-card">
+        <span class="eyebrow">Waiting for Staff</span>
+        <span class="metric-value">@Model.Count(s => s.AssignedStaffId == null)</span>
+    </article>
+</section>
+
+<section class="glass-panel dashboard-table">
+    <div class="section-heading mb-3">
+        <span class="eyebrow">Chat Inbox</span>
+        <h2>Active Sessions Queue</h2>
+    </div>
 
     @if (!Model.Any())
     {
         <div class="text-center py-5">
+            <div class="mb-3 text-secondary"><i class="fas fa-inbox fa-3x"></i></div>
             <h5 class="text-secondary">Không có phiên chat nào đang hoạt động</h5>
-            <p class="text-secondary">Các phiên chat sẽ hiển thị ở đây khi khách hàng bắt đầu trò chuyện.</p>
+            <p class="text-muted">Các phiên chat sẽ hiển thị ở đây khi khách hàng bắt đầu trò chuyện.</p>
         </div>
     }
     else
@@ -64,8 +63,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var session in Model)
+                    @foreach (var session in Model.OrderByDescending(s => s.StartedAt))
                     {
+                        bool isWaiting = session.Status == FinalAssignment.Therapy.Core.Entities.ChatSessionStatus.WaitingForStaff;
                         <tr>
                             <td>
                                 <strong>@(session.CustomerName ?? "Unknown")</strong>
@@ -76,35 +76,43 @@
                             </td>
                             <td>@session.StartedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
                             <td>
-                                <span class="status-badge @(session.Status == FinalAssignment.Therapy.Core.Entities.ChatSessionStatus.WaitingForStaff ? "status-warning" : "status-success")">
-                                    @(session.Status == FinalAssignment.Therapy.Core.Entities.ChatSessionStatus.WaitingForStaff ? "Waiting" : 
-                                      session.Status == FinalAssignment.Therapy.Core.Entities.ChatSessionStatus.Active ? "Active" : "Ended")
-                                </span>
+                                @if (isWaiting)
+                                {
+                                    <span class="status-badge" style="background: #fff3cd; color: #856404;">Waiting</span>
+                                }
+                                else if (session.Status == FinalAssignment.Therapy.Core.Entities.ChatSessionStatus.Active)
+                                {
+                                    <span class="status-badge" style="background: #cff4fc; color: #055160;">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="status-badge">Ended</span>
+                                }
                             </td>
                             <td>
                                 @if (session.AssignedStaff != null)
                                 {
-                                    <span class="text-success">@session.AssignedStaff.FullName</span>
+                                    <span class="text-success fw-bold">@session.AssignedStaff.FullName</span>
                                 }
                                 else
                                 {
-                                    <span class="text-warning">Unassigned</span>
+                                    <span class="text-warning fw-bold">Unassigned</span>
                                 }
                             </td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <a href="@Url.Action("ChatSession", new { sessionId = session.SessionId })" 
                                        class="btn btn-sm btn-primary">
-                                        View Chat
+                                        @(isWaiting ? "Join Chat" : "View")
                                     </a>
                                     @if (session.IsActive)
                                     {
                                         <form asp-action="EndChatSession" method="post" style="display: inline;">
                                             @Html.AntiForgeryToken()
                                             <input type="hidden" name="sessionId" value="@session.SessionId" />
-                                            <button type="submit" class="btn btn-sm btn-danger" 
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" 
                                                     onclick="return confirm('Are you sure you want to end this chat session?')">
-                                                End Session
+                                                End
                                             </button>
                                         </form>
                                     }
@@ -132,13 +140,11 @@
 
         // Listen for new chat sessions
         connection.on("NewChatSession", (sessionInfo) => {
-            // Refresh page to show new session
             location.reload();
         });
 
         // Listen for assigned sessions
         connection.on("SessionAssigned", (sessionId) => {
-            // Refresh page to update status
             location.reload();
         });
     </script>

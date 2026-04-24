@@ -821,7 +821,8 @@
       "FinalAssignment.Therapy.Application/1.0.0": {
         "dependencies": {
           "FinalAssignment.Therapy.Core": "1.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "10.0.7"
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.7",
+          "Microsoft.Extensions.Options": "10.0.7"
         },
         "runtime": {
           "FinalAssignment.Therapy.Application.dll": {

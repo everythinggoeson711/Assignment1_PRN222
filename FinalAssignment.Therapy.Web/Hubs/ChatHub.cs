@@ -41,7 +41,7 @@ public class ChatHub : Hub
         Console.WriteLine("SessionCreated event sent to customer");
         
         // Test group membership
-        await Clients.Group(groupName).SendAsync("GroupTest", "Customer joined the group");
+        await Clients.Group(groupName).SendAsync("groupTest", "Customer joined the group");
     }
 
     public async Task JoinAsStaff()
@@ -100,7 +100,7 @@ public class ChatHub : Hub
             Console.WriteLine($"Staff DOUBLE-ADDED to group: {groupName}");
             
             // Test if staff is in group
-            await Clients.Group(groupName).SendAsync("GroupTest", "Staff assigned and joined the group");
+            await Clients.Group(groupName).SendAsync("groupTest", "Staff assigned and joined the group");
             
             // Notify customer that staff joined
             await Clients.Group(groupName).SendAsync("StaffJoined", new
@@ -178,10 +178,10 @@ public class ChatHub : Hub
         Console.WriteLine($"Connection {Context.ConnectionId} TRIPLE-ADDED to group: {groupName}");
         
         // Test group membership immediately
-        await Clients.Group(groupName).SendAsync("GroupTest", $"FORCE joined session group: {sessionId}");
+        await Clients.Group(groupName).SendAsync("groupTest", $"FORCE joined session group: {sessionId}");
         
         // Also send to caller to confirm
-        await Clients.Caller.SendAsync("GroupTest", $"You joined group {sessionId}");
+        await Clients.Caller.SendAsync("groupTest", $"You joined group {sessionId}");
     }
 
     public async Task EndSession(string sessionId)

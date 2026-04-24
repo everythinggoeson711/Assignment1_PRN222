@@ -17,8 +17,16 @@ public class TherapistFormViewModel
 
     [StringLength(1000)]
     public string Bio { get; set; } = string.Empty;
-
     public bool IsActive { get; set; } = true;
+
+    [StringLength(500)]
+    public string? AvatarUrl { get; set; }
+
+    [Range(0, 50)]
+    public int YearsOfExperience { get; set; }
+
+    [StringLength(200)]
+    public string? Education { get; set; }
 
     [EmailAddress]
     public string? Email { get; set; }

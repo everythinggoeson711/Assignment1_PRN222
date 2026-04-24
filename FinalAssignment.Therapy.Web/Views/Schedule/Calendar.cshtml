@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Doctor Schedule";
 }
 
@@ -50,30 +50,42 @@
     </div>
 
     <div id="scheduleContainer" class="mt-4" style="display: none;">
-        <h5 class="mb-3 text-success fw-bold"><i class="bi bi-clock-history"></i> Available Time Slots</h5>
-        <div class="row" id="slotsList">
-            <!-- Slots will be rendered here -->
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <h5 class="mb-3 text-success fw-bold"><i class="fas fa-calendar-check me-2"></i> Available Slots</h5>
+                <div class="row" id="slotsList">
+                    <!-- Available slots will be rendered here -->
+                </div>
+                <div id="noAvailableSlots" class="text-muted small d-none">No available slots for this combination.</div>
+            </div>
+            <div class="col-lg-6 mb-4 border-start ps-lg-4">
+                <h5 class="mb-3 text-primary fw-bold"><i class="fas fa-user-clock me-2"></i> Booked Sessions</h5>
+                <div id="bookedList" class="d-flex flex-column gap-3">
+                    <!-- Booked sessions will be rendered here -->
+                </div>
+                <div id="noBookedSlots" class="text-muted small d-none">No bookings for this date.</div>
+            </div>
         </div>
     </div>
 
     <div id="emptyState" class="text-center py-5 bg-light rounded-3 mt-4 border border-dashed">
-        <h5 class="text-muted">No slots available</h5>
-        <p class="text-muted small mb-0" id="emptyMessage">Please select a therapist, service, and date to view available time slots.</p>
+        <h5 class="text-muted">Selection Required</h5>
+        <p class="text-muted small mb-0" id="emptyMessage">Please select a therapist and date to view the full schedule.</p>
     </div>
 </div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            function loadSlots() {
+            function loadFullSchedule() {
                 var therapistId = $('#therapistSelect').val();
                 var serviceId = $('#serviceSelect').val();
                 var date = $('#datePicker').val();
 
-                if (!therapistId || !serviceId || !date) {
+                if (!therapistId || !date) {
                     $('#scheduleContainer').hide();
                     $('#emptyState').show();
-                    $('#emptyMessage').text('Please select a therapist, service, and date to view available time slots.');
+                    $('#emptyMessage').text('Please select a therapist and date to view the full schedule.');
                     return;
                 }
 
@@ -81,17 +93,40 @@
                 $('#emptyState').hide();
                 $('#loadingIndicator').show();
 
-                $.get(`/Schedule/GetAvailableSlots?therapistId=${therapistId}&serviceId=${serviceId}&date=${date}`, function (data) {
+                // 1. Load Available Slots (if service is selected)
+                var availablePromise = null;
+                if (serviceId) {
+                    availablePromise = $.get(`/Schedule/GetAvailableSlots?therapistId=${therapistId}&serviceId=${serviceId}&date=${date}`);
+                }
+
+                // 2. Load Booked Sessions
+                var detailedPromise = $.get(`/Schedule/GetDetailedSchedule?therapistId=${therapistId}&date=${date}`);
+
+                Promise.all([availablePromise, detailedPromise].filter(p => p !== null)).then(results => {
                     $('#loadingIndicator').hide();
-                    
-                    if (data.success && data.slots && data.slots.length > 0) {
-                        renderAvailableSlots(data.slots);
-                        $('#scheduleContainer').show();
+                    $('#scheduleContainer').show();
+
+                    var availableData = results.find(r => r.slots !== undefined);
+                    var detailedData = results.find(r => r.schedule !== undefined);
+
+                    // Render Available
+                    if (availableData && availableData.success && availableData.slots.length > 0) {
+                        renderAvailableSlots(availableData.slots);
+                        $('#noAvailableSlots').addClass('d-none');
                     } else {
-                        $('#emptyState').show();
-                        $('#emptyMessage').text('No available slots for the selected date. The therapist might be fully booked or off-duty.');
+                        $('#slotsList').empty();
+                        $('#noAvailableSlots').removeClass('d-none');
                     }
-                }).fail(function() {
+
+                    // Render Booked
+                    if (detailedData && detailedData.success && detailedData.schedule.length > 0) {
+                        renderBookedSessions(detailedData.schedule);
+                        $('#noBookedSlots').addClass('d-none');
+                    } else {
+                        $('#bookedList').empty();
+                        $('#noBookedSlots').removeClass('d-none');
+                    }
+                }).catch(err => {
                     $('#loadingIndicator').hide();
                     $('#emptyState').show();
                     $('#emptyMessage').text('Error loading schedule. Please try again.');
@@ -102,8 +137,8 @@
                 var html = '';
                 slots.forEach(function(slot) {
                     html += `
-                        <div class="col-auto mb-3">
-                            <span class="badge bg-success bg-gradient fs-6 px-3 py-2 shadow-sm">
+                        <div class="col-auto mb-2">
+                            <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 fs-6 px-3 py-2">
                                 ${slot.startTime} - ${slot.endTime}
                             </span>
                         </div>
@@ -112,11 +147,33 @@
                 $('#slotsList').html(html);
             }
 
-            $('#therapistSelect, #serviceSelect, #datePicker').change(loadSlots);
+            function renderBookedSessions(schedule) {
+                var html = '';
+                schedule.forEach(function(s) {
+                    var statusClass = s.status === 'Confirmed' ? 'bg-info' : 'bg-warning';
+                    html += `
+                        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                            <div class="card-body p-3 border-start border-4 ${s.status === 'Confirmed' ? 'border-info' : 'border-warning'}">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="fw-bold text-dark">${s.startTime} - ${s.endTime}</div>
+                                        <div class="small text-muted mb-1">${s.serviceName}</div>
+                                        <div class="small fw-bold"><i class="fas fa-user me-1"></i> ${s.patientName}</div>
+                                    </div>
+                                    <span class="badge ${statusClass} rounded-pill">${s.status}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                $('#bookedList').html(html);
+            }
+
+            $('#therapistSelect, #serviceSelect, #datePicker').change(loadFullSchedule);
             
-            // Initial load if all are selected
-            if ($('#therapistSelect').val() && $('#serviceSelect').val() && $('#datePicker').val()) {
-                loadSlots();
+            // Initial load if selected
+            if ($('#therapistSelect').val() && $('#datePicker').val()) {
+                loadFullSchedule();
             }
         });
     </script>

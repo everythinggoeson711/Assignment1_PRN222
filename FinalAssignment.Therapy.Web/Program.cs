@@ -53,11 +53,11 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseStaticFiles();
 app.MapStaticAssets();
 app.MapHub<AdminDashboardHub>("/hubs/admin-dashboard");
 app.MapHub<ChatHub>("/hubs/chat");

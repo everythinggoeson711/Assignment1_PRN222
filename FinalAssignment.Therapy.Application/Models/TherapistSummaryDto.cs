@@ -7,4 +7,5 @@ public class TherapistSummaryDto
     public string Name { get; set; } = string.Empty;
 
     public string Specialty { get; set; } = string.Empty;
+    public string AvatarUrl { get; set; } = string.Empty;
 }

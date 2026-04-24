@@ -20,5 +20,16 @@ public class TherapyService
 
     public bool IsActive { get; set; } = true;
 
+    [MaxLength(500)]
+    public string? ImageUrl { get; set; }
+
+    [MaxLength(50)]
+    public string Category { get; set; } = "General";
+
+    public string? DetailedDescription { get; set; }
+
+    [MaxLength(500)]
+    public string? Benefits { get; set; } // Comma separated list of benefits
+
     public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
 }

@@ -12,7 +12,8 @@ public class TherapyLookupService(IUnitOfWork unitOfWork) : ITherapyLookupServic
         {
             Id = therapist.Id,
             Name = therapist.Name,
-            Specialty = therapist.Specialty
+            Specialty = therapist.Specialty,
+            AvatarUrl = therapist.AvatarUrl
         }).ToList();
     }
 
@@ -24,7 +25,10 @@ public class TherapyLookupService(IUnitOfWork unitOfWork) : ITherapyLookupServic
             Id = service.Id,
             Name = service.Name,
             Price = service.Price,
-            DurationMinutes = service.DurationMinutes
+            DurationMinutes = service.DurationMinutes,
+            Category = service.Category,
+            ImageUrl = service.ImageUrl,
+            Description = service.Description
         }).ToList();
     }
 }

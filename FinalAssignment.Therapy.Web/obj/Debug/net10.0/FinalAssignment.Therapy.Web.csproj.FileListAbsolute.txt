@@ -399,7 +399,6 @@ C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debu
 C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\FinalAss.3998B420.Up2Date
 C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\FinalAssignment.Therapy.Web.genruntimeconfig.cache
 C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\ref\FinalAssignment.Therapy.Web.dll
-C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\compressed\jb6d12u4hn-{0}-8fc2reiguw-8fc2reiguw.gz
 C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\compressed\wlye3si88w-{0}-bqjiyaj88i-bqjiyaj88i.gz
 C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\compressed\1v4fg3l9bx-{0}-c2jlpeoesf-c2jlpeoesf.gz
 C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\compressed\el35tqxlop-{0}-erw9l3u2r3-erw9l3u2r3.gz
@@ -459,3 +458,5 @@ C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debu
 C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\compressed\hfs7431dwz-{0}-muycvpuwrr-muycvpuwrr.gz
 C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\compressed\gofvnfakgn-{0}-87fc7y1x7t-87fc7y1x7t.gz
 C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\compressed\tteff49kmy-{0}-mlv21k5csn-mlv21k5csn.gz
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Web\obj\Debug\net10.0\compressed\jb6d12u4hn-{0}-zx8807u2vs-zx8807u2vs.gz

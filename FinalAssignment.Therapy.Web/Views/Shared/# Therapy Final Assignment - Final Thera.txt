@@ -1,0 +1,78 @@
+# Therapy Final Assignment - Final Therapy
+
+[🧠 Final Therapy](http://localhost:5114/)
+
+##### 🧠 Final Therapy
+- [Overview](http://localhost:5114/)
+- [Book Session](http://localhost:5114/Booking/Create)
+- [Live Support](http://localhost:5114/)
+[Overview](http://localhost:5114/)
+[Book Session](http://localhost:5114/Booking/Create)
+[Live Support](http://localhost:5114/)
+[Login](http://localhost:5114/Auth/Login)
+
+# Therapy Booking Platform
+Clear, evidence-based assessments and therapy that support informed decisions and meaningful outcomes, tailored for your well-being.
+[Make a Booking](http://localhost:5114/Booking/Create)
+[View Services](http://localhost:5114/#services)
+[Meet Therapists](http://localhost:5114/#therapists)
+[Resources & Blog](http://localhost:5114/#resources)
+
+## A comprehensive evaluation of independence.
+Our platform handles async business flows, role-based security, SignalR real-time monitoring, and background tasks seamlessly.
+
+### Domains of Evaluation
+- Daily Living SkillsSelf-care, nutrition, and home management.
+- Mobility & AccessTransfers, community navigation, and physical capacity.
+- Cognitive CapacityDecision making, social interactions, and memory.
+- Environmental FactorsHome modifications and assistive technology needs.
+
+### Child Play Therapy
+
+### Couples Counseling
+
+### EMDR Trauma Session
+
+### Group Mindfulness Workshop
+
+### Initial Emotional Assessment
+
+### Standard Therapy Session
+
+## Our Dedicated Clinicians
+Every therapy session is conducted by experts with exhaustive clinical experience.
+
+### Dr. Anna Nguyen
+Trauma Recovery
+
+### Dr. Hoang Pham
+Couples Therapy
+
+### Dr. Liam Tran
+Mindfulness Coaching
+
+### Dr. Mai Le
+Child Psychology
+
+### Dr. Sarah Vu
+Cognitive Behavioral Therapy
+
+## Resources & Blog
+Explore articles, guides, and tips to support your therapy journey and mental well-being.
+
+#### How to Prepare for Your First Therapy Session
+Get practical advice on what to expect and how to make the most of your first appointment.
+[Read more →](http://localhost:5114/)
+
+#### Understanding Different Therapy Approaches
+Learn about various therapy methods and which might be right for you.
+[Read more →](http://localhost:5114/)
+
+#### Self-Care Tips for Mental Health
+Discover everyday strategies to support your mental health between sessions.
+[Read more →](http://localhost:5114/)
+
+###### Hỗ trợ Montra
+
+##### Xin chào! 👋
+Vui lòng cung cấp thông tin để chuyên gia của chúng tôi hỗ trợ bạn tốt nhất.

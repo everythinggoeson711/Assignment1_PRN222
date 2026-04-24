@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Bb5cU1TKtmk=",
+  "dgSpecHash": "wMAFX8PY86k=",
   "success": true,
-  "projectFilePath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Application\\FinalAssignment.Therapy.Application.csproj",
+  "projectFilePath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Application\\FinalAssignment.Therapy.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\doanv\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.7\\microsoft.extensions.dependencyinjection.abstractions.10.0.7.nupkg.sha512",
-    "C:\\Users\\doanv\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.7\\microsoft.extensions.logging.abstractions.10.0.7.nupkg.sha512"
+    "C:\\Users\\doanv\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.7\\microsoft.extensions.logging.abstractions.10.0.7.nupkg.sha512",
+    "C:\\Users\\doanv\\.nuget\\packages\\microsoft.extensions.options\\10.0.0\\microsoft.extensions.options.10.0.0.nupkg.sha512",
+    "C:\\Users\\doanv\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.0\\microsoft.extensions.primitives.10.0.0.nupkg.sha512"
   ],
   "logs": []
 }

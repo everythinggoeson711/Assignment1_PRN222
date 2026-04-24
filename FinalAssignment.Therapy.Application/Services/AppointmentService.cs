@@ -15,23 +15,28 @@ public class AppointmentService(
         var therapist = await unitOfWork.Therapists.GetByIdAsync(request.TherapistProfileId, cancellationToken);
         if (therapist is null || !therapist.IsActive)
         {
-            return ServiceResult.Failure("Therapist không tồn tại hoặc đã ngưng hoạt động.");
+            return ServiceResult.Failure("Therapist not found or inactive.");
         }
 
         var therapyService = await unitOfWork.TherapyServices.GetByIdAsync(request.TherapyServiceId, cancellationToken);
         if (therapyService is null || !therapyService.IsActive)
         {
-            return ServiceResult.Failure("Dịch vụ trị liệu không tồn tại.");
+            return ServiceResult.Failure("Therapy service not found.");
         }
 
         var appointmentStartUtc = request.AppointmentStartLocal.Kind == DateTimeKind.Utc
             ? request.AppointmentStartLocal
             : DateTime.SpecifyKind(request.AppointmentStartLocal, DateTimeKind.Local).ToUniversalTime();
 
+        if (appointmentStartUtc < clock.UtcNow)
+        {
+            return ServiceResult.Failure("Cannot book an appointment in the past.");
+        }
+
         var hasConflict = await unitOfWork.Appointments.HasConflictAsync(request.TherapistProfileId, appointmentStartUtc, cancellationToken);
         if (hasConflict)
         {
-            return ServiceResult.Failure("Khung giờ này đã được đặt. Vui lòng chọn thời gian khác.");
+            return ServiceResult.Failure("This time slot is already booked. Please choose another time.");
         }
 
         var appointment = new Appointment
@@ -54,7 +59,7 @@ public class AppointmentService(
         await unitOfWork.SaveChangesAsync(cancellationToken);
         await dashboardNotifier.BroadcastAsync(cancellationToken);
 
-        return ServiceResult.Success("Đặt lịch thành công. Hệ thống đang chờ xác nhận thanh toán.", appointment.Id);
+        return ServiceResult.Success("Booking successful. Waiting for payment confirmation.", appointment.Id);
     }
 
     public async Task<ServiceResult> ConfirmPaymentAsync(int appointmentId, CancellationToken cancellationToken = default)
@@ -62,7 +67,7 @@ public class AppointmentService(
         var appointment = await unitOfWork.Appointments.GetByIdAsync(appointmentId, cancellationToken);
         if (appointment is null)
         {
-            return ServiceResult.Failure("Không tìm thấy lịch hẹn.");
+            return ServiceResult.Failure("Appointment not found.");
         }
 
         appointment.PaymentStatus = PaymentStatus.Paid;
@@ -73,7 +78,7 @@ public class AppointmentService(
         await unitOfWork.SaveChangesAsync(cancellationToken);
         await dashboardNotifier.BroadcastAsync(cancellationToken);
 
-        return ServiceResult.Success("Lịch hẹn đã được xác nhận thanh toán.");
+        return ServiceResult.Success("Payment confirmed and appointment scheduled.");
     }
 
     public async Task<ServiceResult> CompleteAsync(int appointmentId, int therapistProfileId, CancellationToken cancellationToken = default)
@@ -81,12 +86,12 @@ public class AppointmentService(
         var appointment = await unitOfWork.Appointments.GetByIdAsync(appointmentId, cancellationToken);
         if (appointment is null)
         {
-            return ServiceResult.Failure("Không tìm thấy lịch hẹn.");
+            return ServiceResult.Failure("Appointment not found.");
         }
 
         if (appointment.TherapistProfileId != therapistProfileId)
         {
-            return ServiceResult.Failure("Bạn không có quyền thao tác trên lịch hẹn này.");
+            return ServiceResult.Failure("You do not have permission to manage this appointment.");
         }
 
         appointment.Status = AppointmentStatus.Completed;
@@ -96,7 +101,7 @@ public class AppointmentService(
         await unitOfWork.SaveChangesAsync(cancellationToken);
         await dashboardNotifier.BroadcastAsync(cancellationToken);
 
-        return ServiceResult.Success("Đã hoàn tất buổi trị liệu.");
+        return ServiceResult.Success("Therapy session marked as completed.");
     }
 
     public async Task<IReadOnlyList<AppointmentSummaryDto>> GetRecentAsync(int count, CancellationToken cancellationToken = default)
@@ -111,6 +116,18 @@ public class AppointmentService(
         return appointments.Select(MapToSummary).ToList();
     }
 
+    public async Task<AppointmentSummaryDto?> GetAppointmentDetailsAsync(int appointmentId, CancellationToken cancellationToken = default)
+    {
+        var appointment = await unitOfWork.Appointments.GetByIdAsync(appointmentId, cancellationToken);
+        return appointment is null ? null : MapToSummary(appointment);
+    }
+
+    public async Task<IReadOnlyList<AppointmentSummaryDto>> GetAllAppointmentsAsync(CancellationToken cancellationToken = default)
+    {
+        var appointments = await unitOfWork.Appointments.GetAllAsync(cancellationToken);
+        return appointments.Select(MapToSummary).ToList();
+    }
+
     private static AppointmentSummaryDto MapToSummary(Appointment appointment)
         => new()
         {
@@ -122,6 +139,7 @@ public class AppointmentService(
             AppointmentStartUtc = appointment.AppointmentStartUtc,
             Status = appointment.Status,
             PaymentStatus = appointment.PaymentStatus,
-            PriceSnapshot = appointment.PriceSnapshot
+            PriceSnapshot = appointment.PriceSnapshot,
+            TrackingCode = appointment.TrackingCode
         };
 }

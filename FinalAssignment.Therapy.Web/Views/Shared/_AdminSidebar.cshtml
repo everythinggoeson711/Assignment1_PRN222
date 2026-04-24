@@ -1,4 +1,4 @@
-@* Admin sidebar — rendered inside admin layout panels *@
+@* Admin sidebar â€” rendered inside admin layout panels *@
 <nav class="admin-sidebar d-flex flex-column gap-2 p-3">
     <a class="sidebar-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" ? "active" : "")"
        asp-controller="Admin" asp-action="Dashboard">
@@ -11,6 +11,10 @@
     <a class="sidebar-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Services" ? "active" : "")"
        asp-controller="Admin" asp-action="Services">
         <span>Services</span>
+    </a>
+    <a class="sidebar-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Appointments" ? "active" : "")"
+       asp-controller="Admin" asp-action="Appointments">
+        <span>Booked Sessions</span>
     </a>
     <a class="sidebar-link @(ViewContext.RouteData.Values["action"]?.ToString() == "ChatSessions" ? "active" : "")"
        asp-controller="Admin" asp-action="ChatSessions">

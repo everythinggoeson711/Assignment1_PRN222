@@ -9,3 +9,15 @@ C:\Users\doanv\source\repos\FinalAssignment.Therapy.Core\obj\Debug\net10.0\Final
 C:\Users\doanv\source\repos\FinalAssignment.Therapy.Core\obj\Debug\net10.0\refint\FinalAssignment.Therapy.Core.dll
 C:\Users\doanv\source\repos\FinalAssignment.Therapy.Core\obj\Debug\net10.0\FinalAssignment.Therapy.Core.pdb
 C:\Users\doanv\source\repos\FinalAssignment.Therapy.Core\obj\Debug\net10.0\ref\FinalAssignment.Therapy.Core.dll
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\bin\Debug\net10.0\FinalAssignment.Therapy.Core.deps.json
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\bin\Debug\net10.0\FinalAssignment.Therapy.Core.dll
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\bin\Debug\net10.0\FinalAssignment.Therapy.Core.pdb
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\obj\Debug\net10.0\FinalAssignment.Therapy.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\obj\Debug\net10.0\FinalAssignment.Therapy.Core.AssemblyInfoInputs.cache
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\obj\Debug\net10.0\FinalAssignment.Therapy.Core.AssemblyInfo.cs
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\obj\Debug\net10.0\FinalAssignment.Therapy.Core.csproj.CoreCompileInputs.cache
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\obj\Debug\net10.0\FinalAssignment.Therapy.Core.sourcelink.json
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\obj\Debug\net10.0\FinalAssignment.Therapy.Core.dll
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\obj\Debug\net10.0\refint\FinalAssignment.Therapy.Core.dll
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\obj\Debug\net10.0\FinalAssignment.Therapy.Core.pdb
+C:\Users\doanv\source\repos\FinalAssignment\FinalAssignment.Therapy.Core\obj\Debug\net10.0\ref\FinalAssignment.Therapy.Core.dll

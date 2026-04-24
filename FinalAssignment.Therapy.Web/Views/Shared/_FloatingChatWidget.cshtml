@@ -1,4 +1,4 @@
-﻿<div id="floating-chat-widget" class="floating-chat-widget">
+<div id="floating-chat-widget" class="floating-chat-widget">
     <!-- Chat Bubble -->
     <button id="fc-bubble" class="fc-bubble shadow-lg">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -240,7 +240,10 @@
         function setupSignalRHandlers() {
             fcConnection.on("SessionCreated", (data) => {
                 fcSessionId = data.sessionId;
-                document.getElementById("fc-setup").style.display = "none";
+                const setupEl = document.getElementById("fc-setup");
+                setupEl.classList.remove("d-flex");
+                setupEl.classList.add("d-none");
+                setupEl.style.display = "none";
                 document.getElementById("fc-interface").style.display = "flex";
                 document.getElementById("fc-input-area").style.display = "block";
                 
@@ -259,6 +262,10 @@
 
             fcConnection.on("ReceiveMessage", (data) => {
                 appendMessage(data.sender, data.message, data.isFromStaff, data.timestamp);
+            });
+
+            fcConnection.on("groupTest", (msg) => {
+                console.log("Widget Group Test:", msg);
             });
 
             fcConnection.on("SessionEnded", (msg) => {

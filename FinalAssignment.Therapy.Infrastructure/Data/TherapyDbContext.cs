@@ -13,6 +13,12 @@ public class TherapyDbContext(DbContextOptions<TherapyDbContext> options) : DbCo
 
     public DbSet<Appointment> Appointments => Set<Appointment>();
 
+    public DbSet<ChatSession> ChatSessions => Set<ChatSession>();
+
+    public DbSet<ChatMessage> ChatMessages => Set<ChatMessage>();
+
+    public DbSet<Testimonial> Testimonials => Set<Testimonial>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

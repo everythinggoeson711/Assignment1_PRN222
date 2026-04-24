@@ -1,0 +1,143 @@
+@model FinalAssignment.Therapy.Core.Entities.TherapyService
+@{
+    ViewData["Title"] = Model.Name;
+    var benefits = Model.Benefits?.Split(',') ?? Array.Empty<string>();
+}
+
+<div class="bg-light pb-5">
+    <!-- Hero Banner -->
+    <div class="position-relative" style="height: 400px;">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" alt="@Model.Name" class="w-100 h-100" style="object-fit: cover;">
+        }
+        else
+        {
+            <div class="w-100 h-100 bg-primary bg-opacity-75"></div>
+        }
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.6;"></div>
+        
+        <div class="position-absolute top-50 start-50 translate-middle text-center w-100 px-4">
+            <span class="badge bg-primary px-3 py-2 fs-6 mb-3 rounded-pill">@Model.Category</span>
+            <h1 class="display-3 fw-bold text-white mb-3">@Model.Name</h1>
+            <p class="lead text-white-50 mx-auto" style="max-width: 800px;">@Model.Description</p>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="container" style="margin-top: -80px;">
+        <div class="row gx-5">
+            <!-- Left Column: Details -->
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="card shadow-lg border-0 rounded-4 p-0 overflow-hidden">
+                    <div class="p-5">
+                        <h2 class="fw-bold mb-4">About this Service</h2>
+                        
+                        @if (!string.IsNullOrEmpty(Model.DetailedDescription))
+                        {
+                            <div class="fs-5 text-muted mb-5" style="line-height: 1.8;">
+                                @Html.Raw(Model.DetailedDescription.Replace("\n", "<br/>"))
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="fs-5 text-muted mb-5">@Model.Description</p>
+                        }
+
+                        <hr class="my-5 opacity-10">
+
+                        <h3 class="fw-bold mb-4">Key Benefits</h3>
+                        <div class="row g-4 mb-5">
+                            @foreach(var benefit in benefits)
+                            {
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start p-3 bg-light rounded-3 h-100">
+                                        <div class="text-primary me-3 fs-4"><i class="fas fa-check-circle"></i></div>
+                                        <p class="mb-0 fw-medium">@benefit.Trim()</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <h3 class="fw-bold mb-4">Treatment Process</h3>
+                        <div class="treatment-steps">
+                            <div class="d-flex mb-4">
+                                <div class="step-num me-4">01</div>
+                                <div>
+                                    <h5 class="fw-bold">Consultation</h5>
+                                    <p class="text-muted">An initial discussion to understand your needs and set the foundation for your journey.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4">
+                                <div class="step-num me-4">02</div>
+                                <div>
+                                    <h5 class="fw-bold">Assessment</h5>
+                                    <p class="text-muted">A deep dive into specific challenges using specialized clinical tools.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="step-num me-4">03</div>
+                                <div>
+                                    <h5 class="fw-bold">Implementation</h5>
+                                    <p class="text-muted">Regular sessions focused on achieving your therapy goals through evidence-based methods.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Booking Widget -->
+            <div class="col-lg-4">
+                <div class="card shadow-lg border-0 rounded-4 sticky-top overflow-hidden" style="top: 100px;">
+                    <div class="bg-primary p-4 text-white text-center">
+                        <h4 class="fw-bold mb-0">Booking Details</h4>
+                    </div>
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-center mb-4 pb-4 border-bottom">
+                            <div class="bg-primary bg-opacity-10 rounded-circle p-3 text-primary me-3" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-clock fa-lg"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">Duration</small>
+                                <span class="fs-5 fw-bold">@Model.DurationMinutes Minutes</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center mb-5">
+                            <div class="bg-success bg-opacity-10 rounded-circle p-3 text-success me-3" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-tag fa-lg"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">Price</small>
+                                <span class="fs-4 fw-bold text-success">@Model.Price.ToString("N0") <span class="fs-6">VND</span></span>
+                            </div>
+                        </div>
+
+                        <a asp-controller="Booking" asp-action="Create" asp-route-serviceId="@Model.Id" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold py-3 shadow-lg">
+                            Book This Service
+                        </a>
+                        <p class="text-center text-muted small mt-4 mb-0">
+                            <i class="fas fa-shield-alt me-1"></i> Secure Booking Portal
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .step-num {
+        width: 40px;
+        height: 40px;
+        background: #4F46E5;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+</style>

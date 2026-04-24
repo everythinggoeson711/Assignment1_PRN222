@@ -62,4 +62,36 @@ public class AppointmentRepository(TherapyDbContext dbContext) : IAppointmentRep
                 && appointment.Status != AppointmentStatus.Cancelled
                 && appointment.Status != AppointmentStatus.Expired,
             cancellationToken);
+
+    public async Task<IReadOnlyList<Appointment>> GetAllAsync(CancellationToken cancellationToken = default)
+        => await dbContext.Appointments
+            .Include(a => a.TherapistProfile)
+            .Include(a => a.TherapyService)
+            .OrderByDescending(a => a.AppointmentStartUtc)
+            .ToListAsync(cancellationToken);
+
+    public async Task<Appointment?> GetByTrackingCodeAsync(string trackingCode, CancellationToken cancellationToken = default)
+        => await dbContext.Appointments
+            .FirstOrDefaultAsync(a => a.TrackingCode == trackingCode, cancellationToken);
+
+    public async Task<bool> HasConflictInRangeAsync(int therapistId, DateTime startUtc, DateTime endUtc, CancellationToken cancellationToken)
+        => await dbContext.Appointments
+            .Include(a => a.TherapyService)
+            .AnyAsync(
+                a => a.TherapistProfileId == therapistId
+                     && a.Status != AppointmentStatus.Cancelled
+                     && a.Status != AppointmentStatus.Expired
+                     && a.AppointmentStartUtc < endUtc
+                     && a.AppointmentStartUtc.AddMinutes(a.TherapyService.DurationMinutes) > startUtc,
+                cancellationToken);
+
+    public async Task<IReadOnlyList<Appointment>> GetPendingPaymentPastDueAsync(DateTime threshold, CancellationToken cancellationToken = default)
+        => await dbContext.Appointments.Where(a => a.Status == AppointmentStatus.PendingPayment && a.CreatedAtUtc < threshold).ToListAsync(cancellationToken);
+
+
+    public async Task RemoveAsync(Appointment appointment, CancellationToken cancellationToken = default)
+    {
+        dbContext.Appointments.Remove(appointment);
+        await Task.CompletedTask;
+    }
 }

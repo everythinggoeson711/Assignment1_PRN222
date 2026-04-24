@@ -13,4 +13,8 @@ public interface IAppointmentService
     Task<IReadOnlyList<AppointmentSummaryDto>> GetRecentAsync(int count, CancellationToken cancellationToken = default);
 
     Task<IReadOnlyList<AppointmentSummaryDto>> GetForTherapistAsync(int therapistProfileId, CancellationToken cancellationToken = default);
+
+    Task<AppointmentSummaryDto?> GetAppointmentDetailsAsync(int appointmentId, CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<AppointmentSummaryDto>> GetAllAppointmentsAsync(CancellationToken cancellationToken = default);
 }

@@ -39,6 +39,9 @@ public class Appointment
     [Column(TypeName = "decimal(18,2)")]
     public decimal PriceSnapshot { get; set; }
 
+    [MaxLength(30)]
+    public string TrackingCode { get; set; } = string.Empty;
+
     public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
 
     public DateTime UpdatedAtUtc { get; set; } = DateTime.UtcNow;

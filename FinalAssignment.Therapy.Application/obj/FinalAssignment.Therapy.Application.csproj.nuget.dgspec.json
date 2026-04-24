@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Application\\FinalAssignment.Therapy.Application.csproj": {}
+    "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Application\\FinalAssignment.Therapy.Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Application\\FinalAssignment.Therapy.Application.csproj": {
+    "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Application\\FinalAssignment.Therapy.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Application\\FinalAssignment.Therapy.Application.csproj",
+        "projectUniqueName": "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Application\\FinalAssignment.Therapy.Application.csproj",
         "projectName": "FinalAssignment.Therapy.Application",
-        "projectPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Application\\FinalAssignment.Therapy.Application.csproj",
+        "projectPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Application\\FinalAssignment.Therapy.Application.csproj",
         "packagesPath": "C:\\Users\\doanv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Application\\obj\\",
+        "outputPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -30,10 +30,11 @@
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj": {
-                "projectPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj"
+              "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj": {
+                "projectPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj"
               }
             }
           }
@@ -52,11 +53,16 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "Microsoft.Extensions.Logging.Abstractions": {
               "target": "Package",
               "version": "[10.0.7, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[10.0.0, )"
             }
           },
           "imports": [
@@ -353,14 +359,14 @@
         }
       }
     },
-    "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj": {
+    "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj",
+        "projectUniqueName": "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj",
         "projectName": "FinalAssignment.Therapy.Core",
-        "projectPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj",
+        "projectPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Core\\FinalAssignment.Therapy.Core.csproj",
         "packagesPath": "C:\\Users\\doanv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment.Therapy.Core\\obj\\",
+        "outputPath": "C:\\Users\\doanv\\source\\repos\\FinalAssignment\\FinalAssignment.Therapy.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -379,6 +385,7 @@
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {}
           }
@@ -397,6 +404,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "imports": [
             "net461",

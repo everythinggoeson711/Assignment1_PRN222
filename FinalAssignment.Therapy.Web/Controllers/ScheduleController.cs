@@ -58,4 +58,32 @@ public class ScheduleController(IScheduleService scheduleService, ITherapyLookup
             });
         }
     }
+
+    [HttpGet("Schedule/GetDetailedSchedule")]
+    public async Task<IActionResult> GetDetailedSchedule(int therapistId, DateTime date, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var schedule = await scheduleService.GetDetailedScheduleAsync(therapistId, date, cancellationToken);
+            
+            return Json(new { 
+                success = true,
+                schedule = schedule.Select(s => new {
+                    startTime = s.StartTime.ToString("HH:mm"),
+                    endTime = s.EndTime.ToString("HH:mm"),
+                    isBooked = s.IsBooked,
+                    patientName = s.PatientName,
+                    serviceName = s.ServiceName,
+                    status = s.Status.ToString()
+                })
+            });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { 
+                success = false,
+                error = ex.Message
+            });
+        }
+    }
 }

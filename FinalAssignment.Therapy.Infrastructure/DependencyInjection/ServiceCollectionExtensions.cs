@@ -29,13 +29,17 @@ public static class ServiceCollectionExtensions
             connectionString = connectionString.Replace("{DB_PASSWORD}", databasePassword, StringComparison.Ordinal);
         }
 
-        services.AddDbContext<TherapyDbContext>(options => options.UseSqlServer(connectionString));
+        services.AddDbContext<TherapyDbContext>(options => 
+            options.UseSqlServer(connectionString, sqlOptions => sqlOptions.EnableRetryOnFailure()));
 
         services.AddScoped<IAppUserRepository, AppUserRepository>();
         services.AddScoped<ITherapistRepository, TherapistRepository>();
         services.AddScoped<ITherapyServiceRepository, TherapyServiceRepository>();
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        services.AddScoped<IScheduleService, ScheduleService>();
+        services.AddScoped<IChatService, ChatService>();
 
         services.AddSingleton<IClock, SystemClock>();
         services.AddSingleton<IPasswordHasher, Sha256PasswordHasher>();
